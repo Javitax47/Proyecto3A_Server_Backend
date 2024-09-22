@@ -28,6 +28,25 @@ app.get('/setup', async (req, res) => {
     }
 });
 
+// Routes
+app.get('/', async (req, res) => {
+    try {
+        const sensorsQuery = await pool.query('SELECT * FROM sensors');
+        const usersQuery = await pool.query('SELECT * FROM users');
+
+        const responseData = {
+            sensors: sensorsQuery.rows,
+            users: usersQuery.rows
+        };
+
+        res.status(200).send(responseData);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+
 // Insertar un sensor (medición) con un userId
 app.post('/', async (req, res) => {
     const { type, value, timestamp, userId } = req.body;
