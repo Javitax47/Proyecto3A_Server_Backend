@@ -28,3 +28,6 @@ DELETE http://localhost:13000/users/3
 
 ###
 DELETE http://localhost:13000/reset
+
+###
+DELETE http://localhost:13000/erase

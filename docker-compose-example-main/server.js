@@ -77,15 +77,12 @@ app.post('/users', async (req, res) => {
     }
 });
 
-// Eliminar un usuario y todas sus mediciones
-app.delete('/users/:id', async (req, res) => {
+// Eliminar todas las mediciones de un usuario
+app.delete('/users/:id/measurements', async (req, res) => {
     const { id } = req.params;
     try {
-        const result = await pool.query('DELETE FROM users WHERE id = $1', [id]);
-        if (result.rowCount === 0) {
-            return res.status(404).send({ message: "User not found" });
-        }
-        res.status(200).send({ message: "Successfully deleted user and their measurements" });
+        const result = await pool.query('DELETE FROM sensors WHERE user_id = $1', [id]);
+        res.status(200).send({ message: "Successfully deleted measurements for user" });
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
@@ -97,19 +94,44 @@ app.delete('/reset', async (req, res) => {
     try {
         await pool.query('DROP TABLE IF EXISTS sensors');
         await pool.query('DROP TABLE IF EXISTS users');
+
+        // Crear tablas
         await pool.query(`
             CREATE TABLE users (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(100) NOT NULL
+                                   id SERIAL PRIMARY KEY,
+                                   username VARCHAR(100) NOT NULL
             );
             CREATE TABLE sensors (
-                id SERIAL PRIMARY KEY,
-                type VARCHAR(100),
-                value FLOAT,
-                timestamp TIMESTAMP,
-                user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+                                     id SERIAL PRIMARY KEY,
+                                     type VARCHAR(100),
+                                     value FLOAT,
+                                     timestamp TIMESTAMP,
+                                     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
             );
         `);
+
+        // Insertar usuarios por defecto
+        await pool.query('INSERT INTO users (username) VALUES ($1), ($2)', ['user1', 'user2']);
+
+        // Insertar sensores por defecto
+        await pool.query(`
+            INSERT INTO sensors (type, value, timestamp, user_id) 
+            VALUES 
+            ($1, $2, $3, $4),
+            ($5, $6, $7, $8)
+        `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'humidity', 60.0, '2024-09-22T12:00:00Z', 2]);
+
+        res.status(200).send({ message: "Successfully reset users and sensors tables with default data" });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+app.delete('/erase', async (req, res) => {
+    try {
+        await pool.query('DROP TABLE IF EXISTS sensors');
+        await pool.query('DROP TABLE IF EXISTS users');
         res.status(200).send({ message: "Successfully reset users and sensors tables" });
     } catch (err) {
         console.log(err);
