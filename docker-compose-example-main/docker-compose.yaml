@@ -7,6 +7,6 @@ services:
       POSTGRES_USER: user123
       POSTGRES_DB: db123
   app:
-    image: my-node-app
+    image: server
     ports:
       - 13000:3000
