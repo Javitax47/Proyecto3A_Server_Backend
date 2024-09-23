@@ -5,6 +5,9 @@ GET http://localhost:13000/setup
 GET http://localhost:13000
 
 ###
+GET http://localhost:13000/latest
+
+###
 POST http://localhost:13000/
 Content-Type: application/json
 

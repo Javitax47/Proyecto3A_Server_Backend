@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const pool = require('./db');
 const port = 3000;
 
 const app = express();
+app.use(cors()); // Usar cors para permitir solicitudes de otros orígenes
 app.use(express.json());
 
 // Crear tablas (setup)
@@ -27,6 +29,34 @@ app.get('/setup', async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+app.get('/latest', async (req, res) => {
+    try {
+        const temperatureQuery = await pool.query(`
+            SELECT * FROM sensors 
+            WHERE type = 'temperature' 
+            ORDER BY timestamp DESC 
+            LIMIT 1
+        `);
+        const co2Query = await pool.query(`
+            SELECT * FROM sensors 
+            WHERE type = 'CO2' 
+            ORDER BY timestamp DESC 
+            LIMIT 1
+        `);
+
+        const responseData = {
+            temperature: temperatureQuery.rows[0] || null,
+            co2: co2Query.rows[0] || null
+        };
+
+        res.status(200).send(responseData);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
 
 // Routes
 app.get('/', async (req, res) => {
