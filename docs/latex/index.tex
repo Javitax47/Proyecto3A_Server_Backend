@@ -1,0 +1,96 @@
+\chapter{Sensor Management API}
+\hypertarget{index}{}\label{index}\index{Sensor Management API@{Sensor Management API}}
+\label{index_md__r_e_a_d_m_e}%
+\Hypertarget{index_md__r_e_a_d_m_e}%
+
+
+Este proyecto es una API para gestionar usuarios y sensores utilizando Node.\+js y Postgre\+SQL. Permite la creación, consulta, inserción y eliminación de datos de sensores, así como la administración de usuarios.\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Tabla de Contenidos}{Tabla de Contenidos}}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Características
+\item Tecnologías Usadas
+\item Estructura del Proyecto
+\item Requisitos Previos
+\item Configuración del Entorno
+\item Uso
+\item API Endpoints
+\item Contribuciones
+\item Licencia
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Características}{Características}}\label{index_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Gestión de usuarios\+: crear, listar y eliminar usuarios.
+\item Gestión de sensores\+: agregar, listar y eliminar mediciones de sensores.
+\item API RESTful para interactuar con los datos.
+\item Base de datos Postgre\+SQL para almacenamiento persistente.
+\item Contenerización con Docker.
+\end{DoxyItemize}\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{Tecnologías Usadas}{Tecnologías Usadas}}\label{index_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Node.\+js
+\item Express
+\item Postgre\+SQL
+\item Docker
+\item Docker Compose
+\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysection{\texorpdfstring{Estructura del Proyecto}{Estructura del Proyecto}}\label{index_autotoc_md4}
+\begin{DoxyVerb}```
+/docker-compose-example-main
+    - db.js # Configuración de la conexión a la base de datos.
+    - server.js # Código principal de la API.
+    - Dockerfile # Archivo para construir la imagen Docker de la aplicación.
+    - docker-compose.yml # Archivo de configuración para Docker Compose.
+    - package.json # Dependencias y scripts de la aplicación.
+    - README.md # Documentación del proyecto.
+```
+\end{DoxyVerb}
+\hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{Requisitos Previos}{Requisitos Previos}}\label{index_autotoc_md5}
+Antes de comenzar, asegúrate de tener instalados los siguientes programas\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://nodejs.org/}{\texttt{ Node.\+js}}
+\item \href{https://www.docker.com/}{\texttt{ Docker}}
+\item \href{https://docs.docker.com/compose/}{\texttt{ Docker Compose}}
+\end{DoxyItemize}\hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Configuración del Entorno}{Configuración del Entorno}}\label{index_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item Clona el repositorio\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/tu\_usuario/sensor-\/management-\/api.git}
+\DoxyCodeLine{cd\ sensor-\/management-\/api}
+
+\end{DoxyCode}
+
+\item Construye y ejecuta los contenedores\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{docker-\/compose\ up\ -\/-\/build}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+
+Esto levantará los contenedores para la base de datos y la aplicación.\hypertarget{index_autotoc_md7}{}\doxysection{\texorpdfstring{Uso}{Uso}}\label{index_autotoc_md7}
+Una vez que los contenedores estén en funcionamiento, la API estará disponible en \href{http://localhost:13000}{\texttt{ http\+://localhost\+:13000}}.\hypertarget{index_autotoc_md8}{}\doxysection{\texorpdfstring{API Endpoints}{API Endpoints}}\label{index_autotoc_md8}
+
+\begin{DoxyItemize}
+\item GET /setup\+: Crea las tablas de usuarios y sensores en la base de datos.
+\item GET /latest\+: Obtiene las últimas mediciones de temperatura y CO2.
+\item GET /\+: Devuelve todos los usuarios y sensores.
+\item POST /\+: Inserta un nuevo sensor.
+\begin{DoxyItemize}
+\item Body\+: \{ "{}type"{}\+: "{}temperature"{}, "{}value"{}\+: 25.\+5, "{}timestamp"{}\+: "{}2024-\/09-\/22\+T12\+:00\+:00\+Z"{}, "{}user\+Id"{}\+: 1 \}
+\end{DoxyItemize}
+\item POST /users\+: Crea un nuevo usuario.
+\begin{DoxyItemize}
+\item Body\+: \{ "{}username"{}\+: "{}nuevo\+\_\+usuario"{} \}
+\end{DoxyItemize}
+\item DELETE /users/\+:id/measurements\+: Elimina todas las mediciones de un usuario específico.
+\item DELETE /reset\+: Reinicia las tablas de la base de datos.
+\item DELETE /erase\+: Elimina todas las tablas.
+\end{DoxyItemize}\hypertarget{index_autotoc_md9}{}\doxysection{\texorpdfstring{Contribuciones}{Contribuciones}}\label{index_autotoc_md9}
+Las contribuciones son bienvenidas. Si deseas contribuir a este proyecto, por favor abre un issue o envía un pull request.\hypertarget{index_autotoc_md10}{}\doxysection{\texorpdfstring{Licencia}{Licencia}}\label{index_autotoc_md10}
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más información. 

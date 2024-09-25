@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto3A_Server_Backend: postgres-date &lt;a href=&quot;https://travis-ci.org/bendrucker/postgres-date&quot; &gt;&lt;img src=&quot;https://travis-ci.org/bendrucker/postgres-date.svg?branch=master&quot; alt=&quot;Build Status&quot;/&gt;&lt;/a&gt; &lt;a href=&quot;https://greenkeeper.io/&quot; &gt;&lt;img src=&quot;https://badges.greenkeeper.io/bendrucker/postgres-date.svg&quot; alt=&quot;Greenkeeper badge&quot;/&gt;&lt;/a&gt;</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Proyecto3A_Server_Backend
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content">
+<div><div class="header">
+  <div class="headertitle"><div class="title">postgres-date &lt;a href="https://travis-ci.org/bendrucker/postgres-date" &gt;&lt;img src="https://travis-ci.org/bendrucker/postgres-date.svg?branch=master" alt="Build Status"/&gt;&lt;/a&gt; &lt;a href="https://greenkeeper.io/" &gt;&lt;img src="https://badges.greenkeeper.io/bendrucker/postgres-date.svg" alt="Greenkeeper badge"/&gt;&lt;/a&gt;</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md1575"></a></p>
+<blockquote class="doxtable">
+<p>&zwj;Postgres date output parser </p>
+</blockquote>
+<p>This package parses <a href="https://www.postgresql.org/docs/current/datatype-datetime.html#DATATYPE-DATETIME-OUTPUT">date/time outputs</a> from Postgres into Javascript <code>Date</code> objects. Its goal is to match Postgres behavior and preserve data accuracy.</p>
+<p>If you find a case where a valid Postgres output results in incorrect parsing (including loss of precision), please <a href="https://github.com/bendrucker/postgres-date/compare">create a pull request</a> and provide a failing test.</p>
+<p><b>Supported Postgres Versions:</b> <code>&gt;= 9.6</code></p>
+<p>All prior versions of Postgres are likely compatible but not officially supported.</p>
+<h1><a class="anchor" id="autotoc_md1576"></a>
+Install</h1>
+<div class="fragment"><div class="line">$ npm install --save postgres-date</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1577"></a>
+Usage</h1>
+<div class="fragment"><div class="line">var parse = require(&#39;postgres-date&#39;)</div>
+<div class="line">parse(&#39;2011-01-23 22:15:51Z&#39;)</div>
+<div class="line">// =&gt; 2011-01-23T22:15:51.000Z</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md1578"></a>
+API</h1>
+<h3><a class="anchor" id="autotoc_md1579"></a>
+<code>parse(isoDate)</code> -&gt; <code>date</code></h3>
+<h4><a class="anchor" id="autotoc_md1580"></a>
+isoDate</h4>
+<p><em>Required</em> <br  />
+ Type: <code>string</code></p>
+<p>A date string from Postgres.</p>
+<h1><a class="anchor" id="autotoc_md1581"></a>
+Releases</h1>
+<p>The following semantic versioning increments will be used for changes:</p>
+<ul>
+<li><b>Major</b>: Removal of support for Node.js versions or Postgres versions (not expected)</li>
+<li><b>Minor</b>: Unused, since Postgres returns dates in standard ISO 8601 format</li>
+<li><b>Patch</b>: Any fix for parsing behavior</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1582"></a>
+License</h1>
+<p>MIT © <a href="http://bendrucker.me">Ben Drucker</a> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

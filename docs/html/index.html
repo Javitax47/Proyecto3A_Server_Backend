@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto3A_Server_Backend: Sensor Management API</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Proyecto3A_Server_Backend
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="doc-content">
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Sensor Management API </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
+<p>Este proyecto es una API para gestionar usuarios y sensores utilizando Node.js y PostgreSQL. Permite la creación, consulta, inserción y eliminación de datos de sensores, así como la administración de usuarios.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Tabla de Contenidos</h1>
+<ul>
+<li>Características</li>
+<li>Tecnologías Usadas</li>
+<li>Estructura del Proyecto</li>
+<li>Requisitos Previos</li>
+<li>Configuración del Entorno</li>
+<li>Uso</li>
+<li>API Endpoints</li>
+<li>Contribuciones</li>
+<li>Licencia</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Características</h1>
+<ul>
+<li>Gestión de usuarios: crear, listar y eliminar usuarios.</li>
+<li>Gestión de sensores: agregar, listar y eliminar mediciones de sensores.</li>
+<li>API RESTful para interactuar con los datos.</li>
+<li>Base de datos PostgreSQL para almacenamiento persistente.</li>
+<li>Contenerización con Docker.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Tecnologías Usadas</h1>
+<ul>
+<li>Node.js</li>
+<li>Express</li>
+<li>PostgreSQL</li>
+<li>Docker</li>
+<li>Docker Compose</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Estructura del Proyecto</h1>
+<pre class="fragment">```
+/docker-compose-example-main
+    - db.js # Configuración de la conexión a la base de datos.
+    - server.js # Código principal de la API.
+    - Dockerfile # Archivo para construir la imagen Docker de la aplicación.
+    - docker-compose.yml # Archivo de configuración para Docker Compose.
+    - package.json # Dependencias y scripts de la aplicación.
+    - README.md # Documentación del proyecto.
+```
+</pre><h1><a class="anchor" id="autotoc_md5"></a>
+Requisitos Previos</h1>
+<p>Antes de comenzar, asegúrate de tener instalados los siguientes programas:</p>
+<ul>
+<li><a href="https://nodejs.org/">Node.js</a></li>
+<li><a href="https://www.docker.com/">Docker</a></li>
+<li><a href="https://docs.docker.com/compose/">Docker Compose</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Configuración del Entorno</h1>
+<ol type="1">
+<li><p class="startli">Clona el repositorio:</p>
+<div class="fragment"><div class="line">git clone https://github.com/tu_usuario/sensor-management-api.git</div>
+<div class="line">cd sensor-management-api</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Construye y ejecuta los contenedores:</p>
+<div class="fragment"><div class="line">docker-compose up --build</div>
+</div><!-- fragment --></li>
+</ol>
+<p>Esto levantará los contenedores para la base de datos y la aplicación.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Uso</h1>
+<p>Una vez que los contenedores estén en funcionamiento, la API estará disponible en <a href="http://localhost:13000">http://localhost:13000</a>.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+API Endpoints</h1>
+<ul>
+<li>GET /setup: Crea las tablas de usuarios y sensores en la base de datos.</li>
+<li>GET /latest: Obtiene las últimas mediciones de temperatura y CO2.</li>
+<li>GET /: Devuelve todos los usuarios y sensores.</li>
+<li>POST /: Inserta un nuevo sensor.<ul>
+<li>Body: { "type": "temperature", "value": 25.5, "timestamp": "2024-09-22T12:00:00Z", "userId": 1 }</li>
+</ul>
+</li>
+<li>POST /users: Crea un nuevo usuario.<ul>
+<li>Body: { "username": "nuevo_usuario" }</li>
+</ul>
+</li>
+<li>DELETE /users/:id/measurements: Elimina todas las mediciones de un usuario específico.</li>
+<li>DELETE /reset: Reinicia las tablas de la base de datos.</li>
+<li>DELETE /erase: Elimina todas las tablas.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Contribuciones</h1>
+<p>Las contribuciones son bienvenidas. Si deseas contribuir a este proyecto, por favor abre un issue o envía un pull request.</p>
+<h1><a class="anchor" id="autotoc_md10"></a>
+Licencia</h1>
+<p>Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más información. </p>
+</div></div><!-- PageDoc -->
+<a href="doxygen_crawl.html"></a>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,38 @@
+\chapter{postgres-\/interval \texorpdfstring{$<$}{<}a href="{}https\+://travis-\/ci.\+org/bendrucker/postgres-\/interval"{} \texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}img src="{}https\+://travis-\/ci.\+org/bendrucker/postgres-\/interval.\+svg?branch=master"{} alt="{}\+Build Status"{}/\texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}/a\texorpdfstring{$>$}{>} \texorpdfstring{$<$}{<}a href="{}https\+://greenkeeper.\+io/"{} \texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}img src="{}https\+://badges.\+greenkeeper.\+io/bendrucker/postgres-\/interval.\+svg"{} alt="{}\+Greenkeeper badge"{}/\texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}/a\texorpdfstring{$>$}{>}}
+\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme}{}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme}\index{postgres-\/interval $<$a href="{}https://travis-\/ci.org/bendrucker/postgres-\/interval"{} $>$$<$img src="{}https://travis-\/ci.org/bendrucker/postgres-\/interval.svg?branch=master"{} alt="{}Build Status"{}/$>$$<$/a$>$ $<$a href="{}https://greenkeeper.io/"{} $>$$<$img src="{}https://badges.greenkeeper.io/bendrucker/postgres-\/interval.svg"{} alt="{}Greenkeeper badge"{}/$>$$<$/a$>$@{postgres-\/interval $<$a href=""https://travis-\/ci.org/bendrucker/postgres-\/interval"" $>$$<$img src=""https://travis-\/ci.org/bendrucker/postgres-\/interval.svg?branch=master"" alt=""Build Status""/$>$$<$/a$>$ $<$a href=""https://greenkeeper.io/"" $>$$<$img src=""https://badges.greenkeeper.io/bendrucker/postgres-\/interval.svg"" alt=""Greenkeeper badge""/$>$$<$/a$>$}}
+\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1583}%
+\Hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1583}%
+
+
+\begin{quote}
+Parse Postgres interval columns \end{quote}
+\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1584}{}\doxysection{\texorpdfstring{Install}{Install}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1584}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ npm\ install\ -\/-\/save\ postgres-\/interval}
+
+\end{DoxyCode}
+\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1585}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1585}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ parse\ =\ require('postgres-\/interval')}
+\DoxyCodeLine{var\ interval\ =\ parse('01:02:03')}
+\DoxyCodeLine{//=>\ \{hours:\ 1,\ minutes:\ 2,\ seconds:\ 3\}}
+\DoxyCodeLine{interval.toPostgres()}
+\DoxyCodeLine{//\ 3\ seconds\ 2\ minutes\ 1\ hours}
+\DoxyCodeLine{interval.toISO()}
+\DoxyCodeLine{//\ P0Y0M0DT1H2M3S}
+
+\end{DoxyCode}
+\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1586}{}\doxysection{\texorpdfstring{API}{API}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1586}
+\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1587}{}\doxysubsubsection{\texorpdfstring{{\ttfamily parse(pg\+Interval)} -\/\texorpdfstring{$>$}{>} {\ttfamily interval}}{{\ttfamily parse(pg\+Interval)} -\/\texorpdfstring{$>$}{>} {\ttfamily interval}}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1587}
+\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1588}{}\doxysubsubsubsection{\texorpdfstring{pg\+Interval}{pg\+Interval}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1588}
+{\itshape Required} ~\newline
+ Type\+: {\ttfamily string}
+
+A Postgres interval string.\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1589}{}\doxysubsubsection{\texorpdfstring{{\ttfamily interval.\+to\+Postgres()} -\/\texorpdfstring{$>$}{>} {\ttfamily string}}{{\ttfamily interval.\+to\+Postgres()} -\/\texorpdfstring{$>$}{>} {\ttfamily string}}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1589}
+Returns an interval string. This allows the interval object to be passed into prepared statements.\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1590}{}\doxysubsubsection{\texorpdfstring{{\ttfamily interval.\+to\+ISOString()} -\/\texorpdfstring{$>$}{>} {\ttfamily string}}{{\ttfamily interval.\+to\+ISOString()} -\/\texorpdfstring{$>$}{>} {\ttfamily string}}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1590}
+Returns an \href{https://en.wikipedia.org/wiki/ISO_8601\#Durations}{\texttt{ ISO 8601}} compliant string.
+
+Also available as {\ttfamily interval.\+to\+ISO()} for backwards compatibility.\hypertarget{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1591}{}\doxysection{\texorpdfstring{License}{License}}\label{md_docker-compose-example-main_2node__modules_2postgres-interval_2readme_autotoc_md1591}
+MIT © \href{http://bendrucker.me}{\texttt{ Ben Drucker}} 

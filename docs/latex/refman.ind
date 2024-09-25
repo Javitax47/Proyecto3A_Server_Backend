@@ -1,0 +1,76 @@
+\begin{theindex}
+
+  \item {app}
+    \subitem {server.js}, \hyperpage{14}
+
+  \indexspace
+
+  \item {const}
+    \subitem {db.js}, \hyperpage{7}
+  \item {cors}
+    \subitem {server.js}, \hyperpage{14}
+
+  \indexspace
+
+  \item {db.js}
+    \subitem {const}, \hyperpage{7}
+    \subitem {exports}, \hyperpage{7}
+    \subitem {pool}, \hyperpage{7}
+  \item {delete}
+    \subitem {server.js}, \hyperpage{10}
+  \item {docker-\/compose-\/example-\/main/db.js}, \hyperpage{7}
+  \item {docker-\/compose-\/example-\/main/README.md}, \hyperpage{14}
+  \item {docker-\/compose-\/example-\/main/server.js}, \hyperpage{8}
+
+  \indexspace
+
+  \item {exports}
+    \subitem {db.js}, \hyperpage{7}
+  \item {express}
+    \subitem {server.js}, \hyperpage{14}
+
+  \indexspace
+
+  \item {get}
+    \subitem {server.js}, \hyperpage{11}
+
+  \indexspace
+
+  \item {listen}
+    \subitem {server.js}, \hyperpage{12}
+
+  \indexspace
+
+  \item {pool}
+    \subitem {db.js}, \hyperpage{7}
+    \subitem {server.js}, \hyperpage{14}
+  \item {port}
+    \subitem {server.js}, \hyperpage{14}
+  \item {post}
+    \subitem {server.js}, \hyperpage{12, 13}
+
+  \indexspace
+
+  \item {README.md}, \hyperpage{14}
+
+  \indexspace
+
+  \item {Sensor Management API}, \hyperpage{1}
+  \item {server.js}
+    \subitem {app}, \hyperpage{14}
+    \subitem {cors}, \hyperpage{14}
+    \subitem {delete}, \hyperpage{10}
+    \subitem {express}, \hyperpage{14}
+    \subitem {get}, \hyperpage{11}
+    \subitem {listen}, \hyperpage{12}
+    \subitem {pool}, \hyperpage{14}
+    \subitem {port}, \hyperpage{14}
+    \subitem {post}, \hyperpage{12, 13}
+    \subitem {use}, \hyperpage{13}
+
+  \indexspace
+
+  \item {use}
+    \subitem {server.js}, \hyperpage{13}
+
+\end{theindex}
