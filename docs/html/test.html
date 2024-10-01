@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proyecto3A_Server_Backend: Miembros de los archivos</title>
+<title>Proyecto3A_Server_Backend: Lista de pruebas</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -55,8 +55,6 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="doc-content">
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
 $(function(){ initResizable(false); });
@@ -83,17 +81,22 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
+</div><!-- top -->
+<div id="doc-content">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Lista de pruebas</div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Lista de todas las funciones con enlaces a los archivos a los que corresponden:</div><ul>
-<li>delete()&#160;:&#160;<a class="el" href="server_8js.html#ade31ab42dea1017a8d2d44e862caa91c">server.js</a></li>
-<li>describe()&#160;:&#160;<a class="el" href="server_8test_8js.html#a70d1e546b373d9c07a6237b86b91d5f3">server.test.js</a></li>
-<li>get()&#160;:&#160;<a class="el" href="server_8js.html#af456caf07e1e5a2f26508522ebc3caa6">server.js</a></li>
-<li>listen()&#160;:&#160;<a class="el" href="server_8js.html#add27db5a76d22d45112f78c61b51a0f2">server.js</a></li>
-<li>mock()&#160;:&#160;<a class="el" href="server_8test_8js.html#a2e1c0d7e699088eb3e8a42d556940b9a">server.test.js</a></li>
-<li>post()&#160;:&#160;<a class="el" href="server_8js.html#ada627b72d50508e9ed4b456d3bf85e42">server.js</a></li>
-<li>use()&#160;:&#160;<a class="el" href="server_8js.html#af3729ef2340758cd7d2dbc4ccc451455">server.js</a></li>
-</ul>
-</div><!-- contents -->
+<div class="textblock"><dl class="reflist">
+<dt>Miembro <a class="el" href="server_8test_8js.html#a70d1e546b373d9c07a6237b86b91d5f3">describe</a>  ('API Routes',()=&gt; { beforeEach(()=&gt; { pool.query.mockClear();});it('should set up tables successfully', async()=&gt; { pool.query.mockResolvedValue({});const res=await <a class="el" href="server_8test_8js.html#a1dfca945900c6914dacaa64db845f664">request(app)</a>.get('/setup');expect(res.statusCode).toEqual(200);expect(res.body).toHaveProperty('message', "Successfully created users and sensors tables");});it('should create a new user', async()=&gt; { pool.query.mockResolvedValue({});const res=await <a class="el" href="server_8test_8js.html#a1dfca945900c6914dacaa64db845f664">request(app)</a> .post('/users') .send({ username:'testuser' });expect(res.statusCode).toEqual(200);expect(res.body).toHaveProperty('message', "Successfully added user");});it('should not insert sensor data if user does not exist', async()=&gt; { pool.query.mockResolvedValue({ rows:[] });const res=await <a class="el" href="server_8test_8js.html#a1dfca945900c6914dacaa64db845f664">request(app)</a> .post('/') .send({ type:'temperature', value:25, timestamp:new Date().toISOString(), userId:999 });expect(res.statusCode).toEqual(400);expect(res.body).toHaveProperty('message', "User does not exist");});it('should reset the tables successfully', async()=&gt; { pool.query.mockResolvedValue({});const res=await <a class="el" href="server_8test_8js.html#a1dfca945900c6914dacaa64db845f664">request(app)</a>.delete('/reset');expect(res.statusCode).toEqual(200);expect(res.body).toHaveProperty('message', "Successfully reset users and sensors tables with default data");});})</dt>
+<dd><p class="startdd"><a class="anchor" id="_test000001"></a> Prueba para la ruta GET /setup.</p>
+<p class="interdd"><a class="anchor" id="_test000002"></a> Prueba para la ruta POST /users.</p>
+<p class="interdd"><a class="anchor" id="_test000003"></a> Prueba para la ruta POST /.</p>
+<p class="enddd"><a class="anchor" id="_test000004"></a> Prueba para la ruta DELETE /reset.</p>
+</dd>
+</dl>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0

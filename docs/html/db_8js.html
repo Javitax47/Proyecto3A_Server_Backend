@@ -88,9 +88,95 @@ $(function(){ initResizable(false); });
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Referencia del archivo db.js</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Configuración de la conexión a la base de datos PostgreSQL.  
+<a href="#details">Más...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a92b303b76a3f942ea819498907d5e83c" id="r_a92b303b76a3f942ea819498907d5e83c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b303b76a3f942ea819498907d5e83c">const</a> { Pool } = require('pg')</td></tr>
+<tr class="separator:a92b303b76a3f942ea819498907d5e83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ab846d8317850d72512f720c6a05e2" id="r_ab7ab846d8317850d72512f720c6a05e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a></td></tr>
+<tr class="memdesc:ab7ab846d8317850d72512f720c6a05e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancia de conexión a la base de datos PostgreSQL.  <br /></td></tr>
+<tr class="separator:ab7ab846d8317850d72512f720c6a05e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4072ba4b6b56b0fb6f4801f17ab2b34" id="r_aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memItemLeft" align="right" valign="top">module&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">exports</a> = <a class="el" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a></td></tr>
+<tr class="memdesc:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exporta el pool de conexiones para que otros módulos lo utilicen.  <br /></td></tr>
+<tr class="separator:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Configuración de la conexión a la base de datos PostgreSQL. </p>
+<p>Este archivo configura y exporta un pool de conexiones a PostgreSQL utilizando el módulo <code>pg</code> para gestionar las interacciones con la base de datos. </p>
+</div><h2 class="groupheader">Documentación de variables</h2>
+<a id="a92b303b76a3f942ea819498907d5e83c" name="a92b303b76a3f942ea819498907d5e83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b303b76a3f942ea819498907d5e83c">&#9670;&#160;</a></span>const</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const { Pool } = require('pg')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4072ba4b6b56b0fb6f4801f17ab2b34" name="aa4072ba4b6b56b0fb6f4801f17ab2b34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">&#9670;&#160;</a></span>exports</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">module exports = <a class="el" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exporta el pool de conexiones para que otros módulos lo utilicen. </p>
+
+</div>
+</div>
+<a id="ab7ab846d8317850d72512f720c6a05e2" name="ab7ab846d8317850d72512f720c6a05e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7ab846d8317850d72512f720c6a05e2">&#9670;&#160;</a></span>pool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a92b303b76a3f942ea819498907d5e83c">const</a> pool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line">= <span class="keyword">new</span> Pool({</div>
+<div class="line">    host: <span class="stringliteral">&#39;db&#39;</span>, </div>
+<div class="line">    <a class="code hl_variable" href="server_8js.html#a33d36bbc039be3c3264e5df64b13df7f">port</a>: 5432, </div>
+<div class="line">    user: <span class="stringliteral">&#39;user123&#39;</span>, </div>
+<div class="line">    password: <span class="stringliteral">&#39;password123&#39;</span>, </div>
+<div class="line">    database: <span class="stringliteral">&#39;db123&#39;</span> </div>
+<div class="line">})</div>
+<div class="ttc" id="aserver_8js_html_a33d36bbc039be3c3264e5df64b13df7f"><div class="ttname"><a href="server_8js.html#a33d36bbc039be3c3264e5df64b13df7f">port</a></div><div class="ttdeci">const port</div><div class="ttdef"><b>Definition</b> server.js:12</div></div>
+</div><!-- fragment -->
+<p>Instancia de conexión a la base de datos PostgreSQL. </p>
+<p>El pool de conexiones permite reutilizar conexiones a la base de datos para mejorar el rendimiento. La configuración incluye el host, puerto, usuario, contraseña y nombre de la base de datos.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>host - Dirección del host de la base de datos. </td></tr>
+    <tr><td class="paramname">{number}</td><td>port - Puerto en el que escucha la base de datos. </td></tr>
+    <tr><td class="paramname">{string}</td><td>user - Nombre de usuario para la conexión. </td></tr>
+    <tr><td class="paramname">{string}</td><td>password - Contraseña para la conexión. </td></tr>
+    <tr><td class="paramname">{string}</td><td>database - Nombre de la base de datos. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

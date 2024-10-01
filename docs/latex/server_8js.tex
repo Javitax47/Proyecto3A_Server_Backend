@@ -1,2 +1,283 @@
 \doxysection{Referencia del archivo docker-\/compose-\/example-\/main/server.js}
 \hypertarget{server_8js}{}\label{server_8js}\index{docker-\/compose-\/example-\/main/server.js@{docker-\/compose-\/example-\/main/server.js}}
+
+
+API para gestionar usuarios y sensores, incluyendo funcionalidades de creación, consulta, inserción y eliminación de datos.  
+
+
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_af3729ef2340758cd7d2dbc4ccc451455}{use}} (\mbox{\hyperlink{server_8js_a2481c912250fa1495a111ba4e7a66d07}{cors}}())
+\begin{DoxyCompactList}\small\item\em Habilita CORS para permitir solicitudes desde diferentes dominios. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_abfd0671860b758693e8af1b7329092b3}{use}} (express.\+json())
+\begin{DoxyCompactList}\small\item\em Habilita el middleware para procesar JSON en las solicitudes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_af456caf07e1e5a2f26508522ebc3caa6}{get}} (\textquotesingle{}/setup\textquotesingle{}, async(req, res)=$>$ \{ try \{ await pool.\+query(\`{} CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});res.\+status(200).send(\{ message\+:"{}\+Successfully created users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para crear las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{} en la base de datos si no existen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ad58102be9bcb7f1ff2b7c6f5046c49ac}{get}} (\textquotesingle{}/latest\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} temperature\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}temperature\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} co2\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}CO2\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ temperature\+:temperature\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null, co2\+:co2\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para obtener las últimas mediciones de temperatura y CO2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ae07be55edee34cae9dc3696c6a351366}{get}} (\textquotesingle{}/\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} sensors\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM sensors\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} users\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ sensors\+:sensors\+Query.\+rows, users\+:users\+Query.\+rows \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta principal para obtener todos los sensores y usuarios. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ada627b72d50508e9ed4b456d3bf85e42}{post}} (\textquotesingle{}/\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ type, value, timestamp, user\+Id \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} user\+Exists=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users WHERE id=\$1\textquotesingle{}, \mbox{[}user\+Id\mbox{]});if(user\+Exists.\+rows.\+length===0) \{ return res.\+status(400).send(\{ message\+:"{}\+User does not exist"{} \});\} await pool.\+query(\textquotesingle{}INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4)\textquotesingle{}, \mbox{[}type, value, timestamp, user\+Id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added sensor data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para insertar datos de un sensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a34dc36f4b2dfd9a9ab83ebb3cc288fde}{post}} (\textquotesingle{}/users\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ username \}=req.\+body;try \{ await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1)\textquotesingle{}, \mbox{[}username\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para insertar un nuevo usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ade31ab42dea1017a8d2d44e862caa91c}{delete}} (\textquotesingle{}/users/\+:id/measurements\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ id \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await pool.\+query(\textquotesingle{}DELETE FROM sensors WHERE user\+\_\+id=\$1\textquotesingle{}, \mbox{[}id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully deleted measurements for user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para eliminar todas las mediciones asociadas a un usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_af640350ec6bd6015c65a7345cf2f179c}{delete}} (\textquotesingle{}/reset\textquotesingle{}, async(req, res)=$>$ \{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});await pool.\+query(\`{} CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1),(\$2)\textquotesingle{}, \mbox{[}\textquotesingle{}user1\textquotesingle{}, \textquotesingle{}user2\textquotesingle{}\mbox{]});await pool.\+query(\`{} INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4),(\$5, \$6, \$7, \$8) \`{}, \mbox{[}\textquotesingle{}temperature\textquotesingle{}, 25.\+5, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 1, \textquotesingle{}humidity\textquotesingle{}, 60.\+0, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 2\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables with default data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para reiniciar las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a01acdbc62169a3111492295809c917b9}{delete}} (\textquotesingle{}/erase\textquotesingle{}, async(req, res)=$>$ \{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
+\begin{DoxyCompactList}\small\item\em Ruta para borrar las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_add27db5a76d22d45112f78c61b51a0f2}{listen}} (\mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}},()=$>$ console.\+log(\`{}Server running on port\+:\$\{\mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}}\}\`{}))
+\begin{DoxyCompactList}\small\item\em Inicia el servidor en el puerto 3000. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}} = require(\textquotesingle{}express\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a2481c912250fa1495a111ba4e7a66d07}{cors}} = require(\textquotesingle{}cors\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}./db\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}} = 3000
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} = \mbox{\hyperlink{server_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}}()
+\item 
+module \mbox{\hyperlink{server_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+API para gestionar usuarios y sensores, incluyendo funcionalidades de creación, consulta, inserción y eliminación de datos. 
+
+Este servidor Express gestiona las tablas de usuarios y sensores, proporcionando rutas para agregar datos de sensores, obtener los datos más recientes y reiniciar las tablas en una base de datos Postgre\+SQL. 
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{server_8js_a01acdbc62169a3111492295809c917b9}\index{server.js@{server.js}!delete@{delete}}
+\index{delete@{delete}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{server_8js_a01acdbc62169a3111492295809c917b9} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/erase\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para borrar las tablas de la base de datos. 
+
+Borra las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{} si existen.
+
+@route DELETE /erase \begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Éxito al eliminar las tablas. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_af640350ec6bd6015c65a7345cf2f179c}\index{server.js@{server.js}!delete@{delete}}
+\index{delete@{delete}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{server_8js_af640350ec6bd6015c65a7345cf2f179c} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/reset\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});await pool.\+query(\`{} CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1),(\$2)\textquotesingle{}, \mbox{[}\textquotesingle{}user1\textquotesingle{}, \textquotesingle{}user2\textquotesingle{}\mbox{]});await pool.\+query(\`{} INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4),(\$5, \$6, \$7, \$8) \`{}, \mbox{[}\textquotesingle{}temperature\textquotesingle{}, 25.\+5, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 1, \textquotesingle{}humidity\textquotesingle{}, 60.\+0, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 2\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables with default data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para reiniciar las tablas de la base de datos. 
+
+Borra las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{}, y las recrea con datos predeterminados.
+
+@route DELETE /reset \begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Éxito al reiniciar las tablas. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_ade31ab42dea1017a8d2d44e862caa91c}\index{server.js@{server.js}!delete@{delete}}
+\index{delete@{delete}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{server_8js_ade31ab42dea1017a8d2d44e862caa91c} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/users/\+:id/measurements\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ id \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await pool.\+query(\textquotesingle{}DELETE FROM sensors WHERE user\+\_\+id=\$1\textquotesingle{}, \mbox{[}id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully deleted measurements for user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para eliminar todas las mediciones asociadas a un usuario. 
+
+Borra todas las entradas en la tabla \textquotesingle{}sensors\textquotesingle{} relacionadas con un usuario específico.
+
+@route DELETE /users/\+:id/measurements 
+\begin{DoxyParams}{Parámetros}
+{\em \{integer\}} & id -\/ ID del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Éxito al eliminar las mediciones del usuario. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_ae07be55edee34cae9dc3696c6a351366}\index{server.js@{server.js}!get@{get}}
+\index{get@{get}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{server_8js_ae07be55edee34cae9dc3696c6a351366} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} sensors\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM sensors\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} users\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ sensors\+:sensors\+Query.\+rows, users\+:users\+Query.\+rows \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta principal para obtener todos los sensores y usuarios. 
+
+Devuelve una lista de todos los sensores y usuarios registrados en la base de datos.
+
+@route GET / \begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Datos de todos los sensores y usuarios. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_ad58102be9bcb7f1ff2b7c6f5046c49ac}\index{server.js@{server.js}!get@{get}}
+\index{get@{get}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{server_8js_ad58102be9bcb7f1ff2b7c6f5046c49ac} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/latest\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} temperature\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}temperature\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} co2\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}CO2\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ temperature\+:temperature\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null, co2\+:co2\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para obtener las últimas mediciones de temperatura y CO2. 
+
+Retorna los valores más recientes de los sensores de tipo \textquotesingle{}temperature\textquotesingle{} y \textquotesingle{}CO2\textquotesingle{}.
+
+@route GET /latest \begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Datos de los sensores de temperatura y CO2. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_af456caf07e1e5a2f26508522ebc3caa6}\index{server.js@{server.js}!get@{get}}
+\index{get@{get}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{server_8js_af456caf07e1e5a2f26508522ebc3caa6} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/setup\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ await pool.\+query(\`{} CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});res.\+status(200).send(\{ message\+:"{}\+Successfully created users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para crear las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{} en la base de datos si no existen. 
+
+Esta ruta se usa para inicializar las tablas necesarias en la base de datos.
+
+@route GET /setup \begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Éxito en la creación de las tablas. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_add27db5a76d22d45112f78c61b51a0f2}\index{server.js@{server.js}!listen@{listen}}
+\index{listen@{listen}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{listen()}{listen()}}
+{\footnotesize\ttfamily \label{server_8js_add27db5a76d22d45112f78c61b51a0f2} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} listen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}}}]{}{, }\item[{()}]{}{, }\item[{console.}]{log}{\`{}\+Server running on port\+:\$\{port\}\`{}}\end{DoxyParamCaption})}
+
+
+
+Inicia el servidor en el puerto 3000. 
+
+Muestra un mensaje en la consola cuando el servidor está en funcionamiento. \Hypertarget{server_8js_ada627b72d50508e9ed4b456d3bf85e42}\index{server.js@{server.js}!post@{post}}
+\index{post@{post}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{post()}{post()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{server_8js_ada627b72d50508e9ed4b456d3bf85e42} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ type, value, timestamp, user\+Id \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} user\+Exists=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users WHERE id=\$1\textquotesingle{}, \mbox{[}user\+Id\mbox{]});if(user\+Exists.\+rows.\+length===0) \{ return res.\+status(400).send(\{ message\+:"{}\+User does not exist"{} \});\} await pool.\+query(\textquotesingle{}INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4)\textquotesingle{}, \mbox{[}type, value, timestamp, user\+Id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added sensor data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para insertar datos de un sensor. 
+
+Inserta una nueva medición de sensor asociada a un usuario en la base de datos.
+
+@route POST / 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & type -\/ Tipo de sensor (ej\+: \textquotesingle{}temperature\textquotesingle{}, \textquotesingle{}CO2\textquotesingle{}). \\
+\hline
+{\em \{float\}} & value -\/ Valor de la medición. \\
+\hline
+{\em \{string\}} & timestamp -\/ Marca de tiempo de la medición. \\
+\hline
+{\em \{integer\}} & user\+Id -\/ ID del usuario asociado. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Éxito al insertar la medición del sensor. 
+
+\{object\} 400 -\/ El usuario no existe. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_a34dc36f4b2dfd9a9ab83ebb3cc288fde}\index{server.js@{server.js}!post@{post}}
+\index{post@{post}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{post()}{post()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{server_8js_a34dc36f4b2dfd9a9ab83ebb3cc288fde} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/users\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ username \}=req.\+body;try \{ await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1)\textquotesingle{}, \mbox{[}username\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ruta para insertar un nuevo usuario. 
+
+Crea un nuevo usuario en la tabla \textquotesingle{}users\textquotesingle{}.
+
+@route POST /users 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & username -\/ Nombre de usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{object\} 200 -\/ Éxito al agregar el usuario. 
+
+\{object\} 500 -\/ Error interno del servidor. 
+\end{DoxyReturn}
+\Hypertarget{server_8js_af3729ef2340758cd7d2dbc4ccc451455}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{server_8js_af3729ef2340758cd7d2dbc4ccc451455} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{server_8js_a2481c912250fa1495a111ba4e7a66d07}{cors}}()}]{}{}\end{DoxyParamCaption})}
+
+
+
+Habilita CORS para permitir solicitudes desde diferentes dominios. 
+
+\Hypertarget{server_8js_abfd0671860b758693e8af1b7329092b3}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{server_8js_abfd0671860b758693e8af1b7329092b3} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{express.}]{json}{()}\end{DoxyParamCaption})}
+
+
+
+Habilita el middleware para procesar JSON en las solicitudes. 
+
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}\index{server.js@{server.js}!app@{app}}
+\index{app@{app}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily \label{server_8js_a61cd714f583f5ea8c02710a85ef32b9c} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} app = \mbox{\hyperlink{server_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}}()}
+
+\Hypertarget{server_8js_a2481c912250fa1495a111ba4e7a66d07}\index{server.js@{server.js}!cors@{cors}}
+\index{cors@{cors}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{cors}{cors}}
+{\footnotesize\ttfamily \label{server_8js_a2481c912250fa1495a111ba4e7a66d07} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} cors = require(\textquotesingle{}cors\textquotesingle{})}
+
+\Hypertarget{server_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{server.js@{server.js}!exports@{exports}}
+\index{exports@{exports}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{server_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}}
+
+\Hypertarget{server_8js_a81e570c198204c57e1ebcace4f4e6dad}\index{server.js@{server.js}!express@{express}}
+\index{express@{express}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{express}{express}}
+{\footnotesize\ttfamily \label{server_8js_a81e570c198204c57e1ebcace4f4e6dad} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} express = require(\textquotesingle{}express\textquotesingle{})}
+
+\Hypertarget{server_8js_ab7ab846d8317850d72512f720c6a05e2}\index{server.js@{server.js}!pool@{pool}}
+\index{pool@{pool}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{server_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}./db\textquotesingle{})}
+
+\Hypertarget{server_8js_a33d36bbc039be3c3264e5df64b13df7f}\index{server.js@{server.js}!port@{port}}
+\index{port@{port}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily \label{server_8js_a33d36bbc039be3c3264e5df64b13df7f} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} port = 3000}
+

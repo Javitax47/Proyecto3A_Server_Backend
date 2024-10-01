@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['post_0',['post',['../server_8js.html#ada627b72d50508e9ed4b456d3bf85e42',1,'post(&apos;/&apos;, async(req, res)=&gt; { const { type, value, timestamp, userId }=req.body;try { const userExists=await pool.query(&apos;SELECT *FROM users WHERE id=$1&apos;, [userId]);if(userExists.rows.length===0) { return res.status(400).send({ message:&quot;User does not exist&quot; });} await pool.query(&apos;INSERT INTO sensors(type, value, timestamp, user_id) VALUES($1, $2, $3, $4)&apos;, [type, value, timestamp, userId]);res.status(200).send({ message:&quot;Successfully added sensor data&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }):&#160;server.js'],['../server_8js.html#a34dc36f4b2dfd9a9ab83ebb3cc288fde',1,'post(&apos;/users&apos;, async(req, res)=&gt; { const { username }=req.body;try { await pool.query(&apos;INSERT INTO users(username) VALUES($1)&apos;, [username]);res.status(200).send({ message:&quot;Successfully added user&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }):&#160;server.js']]]
+  ['mock_0',['mock',['../server_8test_8js.html#a2e1c0d7e699088eb3e8a42d556940b9a',1,'server.test.js']]]
 ];

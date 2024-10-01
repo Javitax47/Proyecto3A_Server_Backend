@@ -258,3 +258,5 @@ app.delete('/erase', async (req, res) => {
  * Muestra un mensaje en la consola cuando el servidor está en funcionamiento.
  */
 app.listen(port, () => console.log(`Server running on port: ${port}`));
+
+module.exports = app; // Exportar el app para usarlo en las pruebas

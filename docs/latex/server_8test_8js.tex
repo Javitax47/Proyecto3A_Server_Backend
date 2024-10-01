@@ -1,0 +1,76 @@
+\doxysection{Referencia del archivo docker-\/compose-\/example-\/main/server.test.\+js}
+\hypertarget{server_8test_8js}{}\label{server_8test_8js}\index{docker-\/compose-\/example-\/main/server.test.js@{docker-\/compose-\/example-\/main/server.test.js}}
+
+
+Pruebas automáticas para las rutas de la API del servidor utilizando Supertest y Jest.  
+
+
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+jest \mbox{\hyperlink{server_8test_8js_a2e1c0d7e699088eb3e8a42d556940b9a}{mock}} (\textquotesingle{}./db\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Se crea un mock del módulo de la base de datos para evitar conexiones reales. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8test_8js_a70d1e546b373d9c07a6237b86b91d5f3}{describe}} (\textquotesingle{}API Routes\textquotesingle{},()=$>$ \{ before\+Each(()=$>$ \{ pool.\+query.\+mock\+Clear();\});it(\textquotesingle{}should set up tables successfully\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{\});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}).\mbox{\hyperlink{server_8js_af456caf07e1e5a2f26508522ebc3caa6}{get}}(\textquotesingle{}/setup\textquotesingle{});expect(res.\+status\+Code).to\+Equal(200);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}Successfully created users and sensors tables"{});\});it(\textquotesingle{}should create a new user\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{\});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}) .\mbox{\hyperlink{server_8js_ada627b72d50508e9ed4b456d3bf85e42}{post}}(\textquotesingle{}/users\textquotesingle{}) .send(\{ username\+:\textquotesingle{}testuser\textquotesingle{} \});expect(res.\+status\+Code).to\+Equal(200);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}Successfully added user"{});\});it(\textquotesingle{}should not insert sensor data if user does not exist\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{ rows\+:\mbox{[}$\,$\mbox{]} \});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}) .\mbox{\hyperlink{server_8js_ada627b72d50508e9ed4b456d3bf85e42}{post}}(\textquotesingle{}/\textquotesingle{}) .send(\{ type\+:\textquotesingle{}temperature\textquotesingle{}, value\+:25, timestamp\+:new Date().to\+ISOString(), user\+Id\+:999 \});expect(res.\+status\+Code).to\+Equal(400);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}User does not exist"{});\});it(\textquotesingle{}should reset the tables successfully\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{\});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}).\mbox{\hyperlink{server_8js_ade31ab42dea1017a8d2d44e862caa91c}{delete}}(\textquotesingle{}/reset\textquotesingle{});expect(res.\+status\+Code).to\+Equal(200);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}Successfully reset users and sensors tables with default data"{});\});\})
+\begin{DoxyCompactList}\small\item\em Conjunto de pruebas para las rutas de la API. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}} = require(\textquotesingle{}supertest\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8test_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} = require(\textquotesingle{}./server\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8test_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}./db\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Se simula el pool de la base de datos con un mock. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Pruebas automáticas para las rutas de la API del servidor utilizando Supertest y Jest. 
+
+Este archivo contiene una serie de pruebas unitarias que simulan las interacciones con las rutas de la API del servidor sin necesidad de conectarse a una base de datos real, utilizando mocks de Jest. 
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{server_8test_8js_a70d1e546b373d9c07a6237b86b91d5f3}\index{server.test.js@{server.test.js}!describe@{describe}}
+\index{describe@{describe}!server.test.js@{server.test.js}}
+\doxysubsubsection{\texorpdfstring{describe()}{describe()}}
+{\footnotesize\ttfamily \label{server_8test_8js_a70d1e546b373d9c07a6237b86b91d5f3} 
+describe (\begin{DoxyParamCaption}\item[{\textquotesingle{}API Routes\textquotesingle{}}]{}{, }\item[{()}]{}{, }\item[{\{ before\+Each(()=$>$ \{ pool.\+query.\+mock\+Clear();\});it(\textquotesingle{}should set up tables successfully\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{\});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}).\mbox{\hyperlink{server_8js_af456caf07e1e5a2f26508522ebc3caa6}{get}}(\textquotesingle{}/setup\textquotesingle{});expect(res.\+status\+Code).to\+Equal(200);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}Successfully created users and sensors tables"{});\});it(\textquotesingle{}should create a new user\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{\});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}) .\mbox{\hyperlink{server_8js_ada627b72d50508e9ed4b456d3bf85e42}{post}}(\textquotesingle{}/users\textquotesingle{}) .send(\{ username\+:\textquotesingle{}testuser\textquotesingle{} \});expect(res.\+status\+Code).to\+Equal(200);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}Successfully added user"{});\});it(\textquotesingle{}should not insert sensor data if user does not exist\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{ rows\+:\mbox{[}$\,$\mbox{]} \});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}) .\mbox{\hyperlink{server_8js_ada627b72d50508e9ed4b456d3bf85e42}{post}}(\textquotesingle{}/\textquotesingle{}) .send(\{ type\+:\textquotesingle{}temperature\textquotesingle{}, value\+:25, timestamp\+:new Date().to\+ISOString(), user\+Id\+:999 \});expect(res.\+status\+Code).to\+Equal(400);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}User does not exist"{});\});it(\textquotesingle{}should reset the tables successfully\textquotesingle{}, async()=$>$ \{ pool.\+query.\+mock\+Resolved\+Value(\{\});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} res=await \mbox{\hyperlink{server_8test_8js_a1dfca945900c6914dacaa64db845f664}{request}}(\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}).\mbox{\hyperlink{server_8js_ade31ab42dea1017a8d2d44e862caa91c}{delete}}(\textquotesingle{}/reset\textquotesingle{});expect(res.\+status\+Code).to\+Equal(200);expect(res.\+body).to\+Have\+Property(\textquotesingle{}message\textquotesingle{}, "{}Successfully reset users and sensors tables with default data"{});\});\}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Conjunto de pruebas para las rutas de la API. 
+
+Se describen diversas pruebas que comprueban el comportamiento de las rutas del servidor. \Hypertarget{server_8test_8js_a2e1c0d7e699088eb3e8a42d556940b9a}\index{server.test.js@{server.test.js}!mock@{mock}}
+\index{mock@{mock}!server.test.js@{server.test.js}}
+\doxysubsubsection{\texorpdfstring{mock()}{mock()}}
+{\footnotesize\ttfamily \label{server_8test_8js_a2e1c0d7e699088eb3e8a42d556940b9a} 
+jest mock (\begin{DoxyParamCaption}\item[{\textquotesingle{}./db\textquotesingle{}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Se crea un mock del módulo de la base de datos para evitar conexiones reales. 
+
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{server_8test_8js_a61cd714f583f5ea8c02710a85ef32b9c}\index{server.test.js@{server.test.js}!app@{app}}
+\index{app@{app}!server.test.js@{server.test.js}}
+\doxysubsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily \label{server_8test_8js_a61cd714f583f5ea8c02710a85ef32b9c} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} app = require(\textquotesingle{}./server\textquotesingle{})}
+
+\Hypertarget{server_8test_8js_ab7ab846d8317850d72512f720c6a05e2}\index{server.test.js@{server.test.js}!pool@{pool}}
+\index{pool@{pool}!server.test.js@{server.test.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{server_8test_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}./db\textquotesingle{})}
+
+
+
+Se simula el pool de la base de datos con un mock. 
+
+\Hypertarget{server_8test_8js_a1dfca945900c6914dacaa64db845f664}\index{server.test.js@{server.test.js}!request@{request}}
+\index{request@{request}!server.test.js@{server.test.js}}
+\doxysubsubsection{\texorpdfstring{request}{request}}
+{\footnotesize\ttfamily \label{server_8test_8js_a1dfca945900c6914dacaa64db845f664} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} request = require(\textquotesingle{}supertest\textquotesingle{})}
+
