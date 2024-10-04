@@ -33,7 +33,7 @@ jobs:
 
 
       # Paso 4: Ejecutar las pruebas con Jest
-      - name: Run tests
+      - name: Run tests --detectOpenHandles
         run: |
           cd backend 
           npm test
