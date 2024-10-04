@@ -1,6 +1,16 @@
 const request = require('supertest');
 const app = require('./server');  // Importamos la app del servidor
 
+beforeAll(() => {
+    // Iniciar el servidor antes de ejecutar las pruebas
+    server = app.listen(13000, () => console.log('Test server running on port 13000'));
+});
+
+afterAll((done) => {
+    // Cerrar el servidor después de todas las pruebas
+    server.close(done);
+});
+
 // Mock de la base de datos
 jest.mock('./db', () => ({
     query: jest.fn(),
