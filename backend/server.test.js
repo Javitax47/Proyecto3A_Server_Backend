@@ -6,9 +6,10 @@ beforeAll(() => {
     server = app.listen(13000, () => console.log('Test server running on port 13000'));
 });
 
-afterAll((done) => {
+afterAll(async (done) => {
     // Cerrar el servidor después de todas las pruebas
     server.close(done);
+    await pool.end();
 });
 
 // Mock de la base de datos
