@@ -1,0 +1,34 @@
+# Nombre de la acción
+name: Node.js CI
+
+# Cuándo debe ejecutarse
+on:
+  push:  # Ejecutar las pruebas en cada push
+    branches: 
+      - main  # O el nombre de la rama principal
+  pull_request:  # Ejecutar en cada pull request a main
+
+# Jobs que se ejecutarán
+jobs:
+  test:
+    runs-on: ubuntu-latest  # El entorno donde se ejecutarán las pruebas
+
+    # Definir los pasos
+    steps:
+      # Paso 1: Usar la acción de checkout para clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Paso 2: Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # O la versión de Node.js que estés utilizando
+
+      # Paso 3: Instalar las dependencias del proyecto
+      - name: Install dependencies
+        run: npm install
+
+      # Paso 4: Ejecutar las pruebas con Jest
+      - name: Run tests
+        run: npm test
