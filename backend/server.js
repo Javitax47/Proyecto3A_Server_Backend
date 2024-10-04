@@ -252,11 +252,13 @@ app.delete('/erase', async (req, res) => {
 });
 
 // Iniciar el servidor
-/**
- * @brief Inicia el servidor en el puerto 3000.
- *
- * Muestra un mensaje en la consola cuando el servidor está en funcionamiento.
- */
-app.listen(port, () => console.log(`Server running on port: ${port}`));
+if (require.main === module) {
+    /**
+     * @brief Inicia el servidor en el puerto 3000.
+     *
+     * Muestra un mensaje en la consola cuando el servidor está en funcionamiento.
+     */
+    app.listen(port, () => console.log(`Server running on port: ${port}`));
+}
 
 module.exports = app; // Exportar el app para usarlo en las pruebas

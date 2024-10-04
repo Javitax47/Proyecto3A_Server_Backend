@@ -1,6 +1,8 @@
 const request = require('supertest');
 const app = require('./server');  // Importamos la app del servidor
 
+let server;
+
 beforeAll(() => {
     // Iniciar el servidor antes de ejecutar las pruebas
     server = app.listen(13000, () => console.log('Test server running on port 13000'));
