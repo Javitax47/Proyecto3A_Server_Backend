@@ -27,7 +27,10 @@ jobs:
 
       # Paso 3: Instalar las dependencias del proyecto
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd backend
+          npm install
+
 
       # Paso 4: Ejecutar las pruebas con Jest
       - name: Run tests
