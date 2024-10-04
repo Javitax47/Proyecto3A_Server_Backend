@@ -34,4 +34,6 @@ jobs:
 
       # Paso 4: Ejecutar las pruebas con Jest
       - name: Run tests
-        run: npm test
+        run: |
+          cd backend 
+          npm test
