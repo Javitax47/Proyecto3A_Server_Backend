@@ -33,7 +33,7 @@ Este proyecto es una API para gestionar usuarios y sensores utilizando Node.js y
 ## Estructura del Proyecto
 
     ```
-    /docker-compose-example-main
+    /backend
         - db.js # Configuración de la conexión a la base de datos.
         - server.js # Código principal de la API.
         - Dockerfile # Archivo para construir la imagen Docker de la aplicación.
