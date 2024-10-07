@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.24)  1 OCT 2024 11:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.24)  7 OCT 2024 10:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -884,13 +884,7 @@ LaTeX Info: Redefining \. on input line 231.
 LaTeX Info: Redefining \% on input line 231.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 231.
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 231.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 23
-1.
- (c:/texlive/2024/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
+
 
 LaTeX Font Info:    Font shape `T1/phv/b/sc' will be
 (Font)              scaled to size 8.99994pt on input line 231.
@@ -898,7 +892,9 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 231.
 [1]
 
-[2]
+[2
+
+]
 Package hyperref Info: Option `pageanchor' set `true' on input line 234.
  (./index.tex
 Cap\'{\i }tulo 1.
@@ -917,546 +913,39 @@ File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
 (Font)              scaled to size 8.99994pt on input line 10.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 36.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 36
+.
 
+(c:/texlive/2024/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
 
 [1
-
 
 ]
 
 LaTeX Info: Redefining \. on input line 86.
 LaTeX Info: Redefining \% on input line 86.
-[2]) (./test.tex
+[2])
 
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
+LaTeX Info: Redefining \. on input line 239.
+LaTeX Info: Redefining \% on input line 239.
 [3]
 
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
+LaTeX Info: Redefining \. on input line 239.
+LaTeX Info: Redefining \% on input line 239.
 [4
 
-]
-Cap\'{\i }tulo 2.
-LaTeX Font Info:    Font shape `TS1/phv/b/n' will be
-(Font)              scaled to size 8.99994pt on input line 5.
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--5
-[]\T1/phv/b/n/10 Miembro [] (\TS1/phv/b/n/10 '\T1/phv/b/n/10 API Routes\TS1/phv
-/b/n/10 '\T1/phv/b/n/10 ,()=$\OML/cmm/m/it/10 >$ \T1/phv/b/n/10 { before[]Each(
-()=$\OML/cmm/m/it/10 >$ \T1/phv/b/n/10 { pool.[]query.[]mock[]Clear();});it(\TS
-1/phv/b/n/10 '\T1/phv/b/n/10 should
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--5
-\T1/phv/b/n/10 set up ta-bles suc-cess-fully\TS1/phv/b/n/10 '\T1/phv/b/n/10 , a
-sync()=$\OML/cmm/m/it/10 >$ \T1/phv/b/n/10 { pool.[]query.[]mock[]Resolved[]Val
-ue({});const res=await
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--5
-[]\T1/phv/b/n/10 .get(\TS1/phv/b/n/10 '\T1/phv/b/n/10 /setup\TS1/phv/b/n/10 '\T
-1/phv/b/n/10 );expect(res.[]status[]Code).to[]Equal(200);expect(res.[]body).to[
-]Have[]
- []
-
-
-Underfull \hbox (badness 1383) in paragraph at lines 5--5
-\T1/phv/b/n/10 Property(\TS1/phv/b/n/10 '\T1/phv/b/n/10 message\TS1/phv/b/n/10 
-'\T1/phv/b/n/10 , "[]Successfully crea-ted users and sen-sors ta-bles");});it(\
-TS1/phv/b/n/10 '\T1/phv/b/n/10 should crea-te a new
- []
-
-
-Underfull \hbox (badness 2181) in paragraph at lines 5--5
-\T1/phv/b/n/10 user\TS1/phv/b/n/10 '\T1/phv/b/n/10 , async()=$\OML/cmm/m/it/10 
->$ \T1/phv/b/n/10 { pool.[]query.[]mock[]Resolved[]Value({});const res=await []
- .post(\TS1/phv/b/n/10 '\T1/phv/b/n/10 /users\TS1/phv/b/n/10 '\T1/phv/b/n/10 )
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--5
-\T1/phv/b/n/10 .send({ username[]:\TS1/phv/b/n/10 '\T1/phv/b/n/10 testuser\TS1/
-phv/b/n/10 ' \T1/phv/b/n/10 });expect(res.[]status[]Code).to[]Equal(200);expect
-(res.[]body).to[]Have[]
- []
-
-
-Underfull \hbox (badness 1097) in paragraph at lines 5--5
-\T1/phv/b/n/10 Property(\TS1/phv/b/n/10 '\T1/phv/b/n/10 message\TS1/phv/b/n/10 
-'\T1/phv/b/n/10 , "[]Successfully ad-ded user");});it(\TS1/phv/b/n/10 '\T1/phv/
-b/n/10 should not in-sert sen-sor da-ta if user does
- []
-
-
-Underfull \hbox (badness 2134) in paragraph at lines 5--5
-\T1/phv/b/n/10 not exist\TS1/phv/b/n/10 '\T1/phv/b/n/10 , async()=$\OML/cmm/m/i
-t/10 >$ \T1/phv/b/n/10 { pool.[]query.[]mock[]Resolved[]Value({ rows[]:[][] });
-const res=await []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--5
-\T1/phv/b/n/10 .post(\TS1/phv/b/n/10 '\T1/phv/b/n/10 /\TS1/phv/b/n/10 '\T1/phv/
-b/n/10 ) .send({ type[]:\TS1/phv/b/n/10 '\T1/phv/b/n/10 temperature\TS1/phv/b/n
-/10 '\T1/phv/b/n/10 , value[]:25, timestamp[]:new Date().to[]ISOString(), user[
-]Id[]:999
- []
-
-
-Underfull \hbox (badness 4254) in paragraph at lines 5--5
-\T1/phv/b/n/10 });expect(res.[]status[]Code).to[]Equal(400);expect(res.[]body).
-to[]Have[]Property(\TS1/phv/b/n/10 '\T1/phv/b/n/10 message\TS1/phv/b/n/10 '\T1/
-phv/b/n/10 , "[]User does not
- []
-
-
-Underfull \hbox (badness 2393) in paragraph at lines 5--5
-\T1/phv/b/n/10 res=await [].delete(\TS1/phv/b/n/10 '\T1/phv/b/n/10 /reset\TS1/p
-hv/b/n/10 '\T1/phv/b/n/10 );expect(res.[]status[]Code).to[]Equal(200);expect(re
-s.[]body).to[]Have[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--9
-
- []
-
-)
-
-[5]
-
-LaTeX Info: Redefining \. on input line 238.
-LaTeX Info: Redefining \% on input line 238.
-[6
-
-]
-Cap\'{\i }tulo 3.
-(./files.tex)
-
-[7]
-
-LaTeX Info: Redefining \. on input line 240.
-LaTeX Info: Redefining \% on input line 240.
-[8
-
-]
-Cap\'{\i }tulo 4.
-(./db_8js.tex
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 14.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 14.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 14.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 14.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 14.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 19.
-LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 2
-9.
- (c:/texlive/2024/texmf-dist/tex/latex/psnfss/ts1pcr.fd
-File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-)
-
-[9]) (./server_8js.tex
-LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 16.
-LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 16.
-
-Underfull \hbox (badness 968) in paragraph at lines 17--18
-\T1/phv/m/n/10 sen-sors WHE-RE ty-pe=\TS1/phv/m/n/10 '\T1/phv/m/n/10 temperatur
-e\TS1/phv/m/n/10 ' \T1/phv/m/n/10 OR-DER BY ti-mes-tamp DESC LI-MIT 1 ^^@);[] c
-o2[]Query=await
- []
-
-
-Underfull \hbox (badness 1430) in paragraph at lines 17--18
-\T1/phv/m/n/10 pool.[]query(^^@ SE-LECT $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 FR
-OM sen-sors WHE-RE ty-pe=\TS1/phv/m/n/10 '\T1/phv/m/n/10 CO2\TS1/phv/m/n/10 ' \
-T1/phv/m/n/10 OR-DER BY ti-mes-tamp DESC LI-MIT 1
- []
-
-
-Underfull \hbox (badness 1221) in paragraph at lines 17--18
-\T1/phv/m/n/10 ^^@);[] response[]Data={ temperature[]:temperature[]Query.[]rows
-[]0[]$\OMS/cmsy/m/n/10 j$$j$\T1/phv/m/n/10 null, co2[]:co2[]Query.[]rows[]0[]$\
-OMS/cmsy/m/n/10 j$$j$\T1/phv/m/n/10 null };res.[]
- []
-
-
-Underfull \hbox (badness 940) in paragraph at lines 19--20
-\T1/phv/m/n/10 users[]Query=await pool.[]query(\TS1/phv/m/n/10 '\T1/phv/m/n/10 
-SELECT $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 FROM users\TS1/phv/m/n/10 '\T1/phv/
-m/n/10 );[] response[]Data={ sensors[]:sensors[]Query.[]
- []
-
-
-
-LaTeX Info: Redefining \. on input line 22.
-LaTeX Info: Redefining \% on input line 22.
-[10]
-Underfull \hbox (badness 1708) in paragraph at lines 25--26
-[][] [] \T1/phv/m/n/10 (\TS1/phv/m/n/10 '\T1/phv/m/n/10 /users/[]:id/measuremen
-ts\TS1/phv/m/n/10 '\T1/phv/m/n/10 , async(req, res)=$\OML/cmm/m/it/10 >$ \T1/ph
-v/m/n/10 { [] { id }=req.[]params;try { [] re-
- []
-
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 7.19995pt on input line 58.
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 60.
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
-|  \T1/pcr/m/n/8 { try { await pool.[]query(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 DROP 
-TABLE IF EXISTS sensors\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 );await pool.[]query(\TS1/
-pcr/m/n/8 '\T1/pcr/m/n/8 DROP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
-\T1/pcr/m/n/8 TABLE IF EXISTS users\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 );res.[]status
-(200).send({ message[]:"[]Successfully reset users and sensors
- []
-
-
-
-LaTeX Info: Redefining \. on input line 61.
-LaTeX Info: Redefining \% on input line 61.
-[11]
-Underfull \hbox (badness 10000) detected at line 68
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-|  \T1/pcr/m/n/8 { try { await pool.[]query(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 DROP 
-TABLE IF EXISTS sensors\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 );await pool.[]query(\TS1/
-pcr/m/n/8 '\T1/pcr/m/n/8 DROP
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 TABLE IF EXISTS users\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 );await pool.[
-]query(^^@ CREATE TABLE users(id SERIAL PRIMARY KEY, username
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY
-, type VARCHAR(100), value
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 FLOAT, timestamp TIMESTAMP, user[]_[]id INTEGER REFERENCES users(
-id) ON DELETE CASCADE);^^@);await
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 pool.[]query(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 INSERT INTO users(user
-name) VALUES($1),($2)\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , []\TS1/pcr/m/n/8 '\T1/pcr/
-m/n/8 user1\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , \TS1/pcr/m/n/8 '\T1/pcr/m/n/8 user2\
-TS1/pcr/m/n/8 '[]\T1/pcr/m/n/8 );await pool.[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 query(^^@ INSERT INTO sensors(type, value, timestamp, user[]_[]id
-) VALUES($1, $2, $3, $4),($5, $6,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 $7, $8) ^^@, []\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 temperature\TS1/pcr/
-m/n/8 '\T1/pcr/m/n/8 , 25.[]5, \TS1/pcr/m/n/8 '\T1/pcr/m/n/8 2024-09-22T12[]:00
-[]:00Z\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , 1, \TS1/pcr/m/n/8 '\T1/pcr/m/n/8 humidity
-\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , 60.[]0, \TS1/pcr/m/n/8 '\T1/pcr/m/n/8 2024-09-2
-2T12[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
-\T1/pcr/m/n/8 :00[]:00Z\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , 2[]);res.[]status(200).s
-end({ message[]:"[]Successfully reset users and sensors tables with
- []
-
-
-Underfull \hbox (badness 10000) detected at line 85
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
-\T1/pcr/m/n/8 WHERE user[]_[]id=$1\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , []id[]);res.[
-]status(200).send({ message[]:"[]Successfully deleted measurements for
- []
-
-
-
-LaTeX Info: Redefining \. on input line 106.
-LaTeX Info: Redefining \% on input line 106.
-[12]
-Underfull \hbox (badness 10000) detected at line 107
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
-|  \T1/pcr/m/n/8 { try { [] sensors[]Query=await pool.[]query(\TS1/pcr/m/n/8 '\
-T1/pcr/m/n/8 SELECT $\OMS/cmsy/m/n/8 ^^C$\T1/pcr/m/n/8 FROM sensors\TS1/pcr/m/n
-/8 '\T1/pcr/m/n/8 );[] users[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
-\T1/pcr/m/n/8 Query=await pool.[]query(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 SELECT $\O
-MS/cmsy/m/n/8 ^^C$\T1/pcr/m/n/8 FROM users\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 );[] re
-sponse[]Data={ sensors[]:sensors[]Query.[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 116--117
-\T1/pcr/m/n/8 rows, users[]:users[]Query.[]rows };res.[]status(200).send(respon
-se[]Data);} catch(err) { console.[]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 124
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-|  \T1/pcr/m/n/8 { try { [] temperature[]Query=await pool.[]query(^^@ SELECT $\
-OMS/cmsy/m/n/8 ^^C$\T1/pcr/m/n/8 FROM sensors WHERE
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-\T1/pcr/m/n/8 type=\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 temperature\TS1/pcr/m/n/8 ' \T
-1/pcr/m/n/8 ORDER BY timestamp DESC LIMIT 1 ^^@);[] co2[]Query=await pool.[]que
-ry(^^@ SELECT
- []
-
-
-Overfull \hbox (23.58775pt too wide) in paragraph at lines 133--134
-\OMS/cmsy/m/n/8 ^^C$\T1/pcr/m/n/8 FROM sensors WHERE type=\TS1/pcr/m/n/8 '\T1/p
-cr/m/n/8 CO2\TS1/pcr/m/n/8 ' \T1/pcr/m/n/8 ORDER BY timestamp DESC LIMIT 1 ^^@)
-;[] response[]Data={ temperature[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-\T1/pcr/m/n/8 :temperature[]Query.[]rows[]0[]$\OMS/cmsy/m/n/8 j$$j$\T1/pcr/m/n/
-8 null, co2[]:co2[]Query.[]rows[]0[]$\OMS/cmsy/m/n/8 j$$j$\T1/pcr/m/n/8 null };
-res.[]status(200).send(response[]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 141
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-|  \T1/pcr/m/n/8 { try { await pool.[]query(^^@ CREATE TABLE IF NOT EXISTS user
-s(id SERIAL PRIMARY
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-\T1/pcr/m/n/8 KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS s
-ensors(id SERIAL PRIMARY
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-\T1/pcr/m/n/8 KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user[]_
-[]id INTEGER REFERENCES users(id)
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-\T1/pcr/m/n/8 ON DELETE CASCADE);^^@);res.[]status(200).send({ message[]:"[]Suc
-cessfully created users and sensors
- []
-
-
-
-LaTeX Info: Redefining \. on input line 154.
-LaTeX Info: Redefining \% on input line 154.
-[13]
-Underfull \hbox (badness 10000) detected at line 158
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-|  \T1/pcr/m/n/8 { [] { type, value, timestamp, user[]Id }=req.[]body;try { [] 
-user[]Exists=await
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-\T1/pcr/m/n/8 pool.[]query(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 SELECT $\OMS/cmsy/m/n/
-8 ^^C$\T1/pcr/m/n/8 FROM users WHERE id=$1\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , []use
-r[]Id[]);if(user[]Exists.[]rows.[]length===0) { return
- []
-
-
-Overfull \hbox (29.5562pt too wide) in paragraph at lines 177--178
-\T1/pcr/m/n/8 res.[]status(400).send({ message[]:"[]User does not exist" });} a
-wait pool.[]query(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 INSERT INTO sensors(type,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-\T1/pcr/m/n/8 value, timestamp, user[]_[]id) VALUES($1, $2, $3, $4)\TS1/pcr/m/n
-/8 '\T1/pcr/m/n/8 , []type, value, timestamp, user[]Id[]);res.[]
- []
-
-
-Overfull \hbox (28.9377pt too wide) in paragraph at lines 177--178
-\T1/pcr/m/n/8 status(200).send({ message[]:"[]Successfully added sensor data" }
-);} catch(err) { console.[]log(err);res.[]
- []
-
-
-
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
-[14]
-Underfull \hbox (badness 10000) detected at line 196
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
-|  \T1/pcr/m/n/8 { [] { username }=req.[]body;try { await pool.[]query(\TS1/pcr
-/m/n/8 '\T1/pcr/m/n/8 INSERT INTO users(username)
- []
-
-
-Underfull \hbox (badness 10000) detected at line 220
-[][][]
- []
-
-
-
-LaTeX Info: Redefining \. on input line 262.
-LaTeX Info: Redefining \% on input line 262.
-[15]) (./server_8test_8js.tex
-Overfull \hbox (68.2225pt too wide) in paragraph at lines 13--14
-\T1/phv/m/n/10 ta-bles suc-cess-fully\TS1/phv/m/n/10 '\T1/phv/m/n/10 , async()=
-$\OML/cmm/m/it/10 >$ \T1/phv/m/n/10 { pool.[]query.[]mock[]Resolved[]Value({});
-[] res=await []([]).[](\TS1/phv/m/n/10 '\T1/phv/m/n/10 /reset\TS1/phv/m/n/10 '\
-T1/phv/m/n/10 );expect(res.[]
- []
-
-
-
-LaTeX Info: Redefining \. on input line 29.
-LaTeX Info: Redefining \% on input line 29.
-[16]
-Overfull \hbox (16.27286pt too wide) in paragraph at lines 36--37
-|  \T1/pcr/m/n/8 { before[]Each(()=$\OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 { pool.[]q
-uery.[]mock[]Clear();});it(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 should set up tables s
-uccessfully\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 ,
- []
-
-
-Overfull \hbox (30.7489pt too wide) in paragraph at lines 36--37
-\T1/pcr/m/n/8 async()=$\OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 { pool.[]query.[]mock[]
-Resolved[]Value({});[] res=await []([]).[](\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 /setup
-\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 );expect(res.[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 status[]Code).to[]Equal(200);expect(res.[]body).to[]Have[]Propert
-y(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 message\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , "Success
-fully created
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 users and sensors tables");});it(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 sh
-ould create a new user\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , async()=$\OML/cmm/m/it/8 
->$ \T1/pcr/m/n/8 { pool.[]query.[]mock[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 Resolved[]Value({});[] res=await []([]) .[](\TS1/pcr/m/n/8 '\T1/p
-cr/m/n/8 /users\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 ) .send({ username[]:\TS1/pcr/m/n/
-8 '\T1/pcr/m/n/8 testuser\TS1/pcr/m/n/8 '
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 added user");});it(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 should not inser
-t sensor data if user does not exist\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , async()=$\O
-ML/cmm/m/it/8 >$ \T1/pcr/m/n/8 { pool.[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 query.[]mock[]Resolved[]Value({ rows[]:[]$ $[] });[] res=await []
-([]) .[](\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 /\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 ) .send({
- type[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 :\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 temperature\TS1/pcr/m/n/8 '\T1/pcr
-/m/n/8 , value[]:25, timestamp[]:new Date().to[]ISOString(), user[]Id[]:999 });
-expect(res.[]
- []
-
-
-Overfull \hbox (43.9562pt too wide) in paragraph at lines 36--37
-\T1/pcr/m/n/8 status[]Code).to[]Equal(400);expect(res.[]body).to[]Have[]Propert
-y(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 message\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , "User do
-es not exist");});it(\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 should
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-\T1/pcr/m/n/8 reset the tables successfully\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 , asyn
-c()=$\OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 { pool.[]query.[]mock[]Resolved[]Value({}
-);[] res=await
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-[]\T1/pcr/m/n/8 ([]).[](\TS1/pcr/m/n/8 '\T1/pcr/m/n/8 /reset\TS1/pcr/m/n/8 '\T1
-/pcr/m/n/8 );expect(res.[]status[]Code).to[]Equal(200);expect(res.[]body).to[]H
-ave[]
- []
-
-) (./docker-compose-example-main_2_r_e_a_d_m_e_8md.tex
-
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-[17]) (./_r_e_a_d_m_e_8md.tex)
-
-LaTeX Info: Redefining \. on input line 248.
-LaTeX Info: Redefining \% on input line 248.
-[18] (./refman.ind
+] (./refman.ind
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 22.39185pt on input line 1.
 
 
 
 
-[19
+[5
 
 
 
@@ -1469,31 +958,25 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-30>
  ***********
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: E9A5E5DE66359FB67258AD76139CEC80;10162.
+(rerunfilecheck)             Checksum: 6C20CB9E4F4189AE172195868AEDB75E;1900.
  ) 
 Here is how much of TeX's memory you used:
- 19479 strings out of 473579
- 311536 string characters out of 5732263
- 753072 words of memory out of 5000000
- 41881 multiletter control sequences out of 15000+600000
- 620322 words of font info for 110 fonts, out of 8000000 for 9000
+ 19121 strings out of 473579
+ 303943 string characters out of 5732263
+ 740643 words of memory out of 5000000
+ 41666 multiletter control sequences out of 15000+600000
+ 597809 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,15n,117p,3116b,769s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/tex
-live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2024/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2024/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy8.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrb
-8a.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texli
-ve/2024/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb><c:/texlive/2024/texmf-d
-ist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2024/texmf-dist/fonts/type1
-/urw/helvetic/uhvb8ac.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/
-uhvr8a.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (23 pages, 173477 bytes).
+ 101i,12n,117p,410b,676s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texl
+ive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2024/t
+exmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2024/texmf-dist/fonts/
+type1/urw/helvetic/uhvb8a.pfb><c:/texlive/2024/texmf-dist/fonts/type1/urw/helve
+tic/uhvr8a.pfb>
+Output written on refman.pdf (9 pages, 64329 bytes).
 PDF statistics:
- 729 PDF objects out of 1000 (max. 8388607)
- 666 compressed objects within 7 object streams
- 133 named destinations out of 1000 (max. 500000)
- 433 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 158 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
+ 33 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 
