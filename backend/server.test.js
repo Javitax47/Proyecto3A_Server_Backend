@@ -24,12 +24,12 @@ describe('Servidor API', () => {
         jest.clearAllMocks(); // Limpia los mocks después de cada test
     });
 
-    test('GET /latest debe retornar los últimos datos de temperatura y CO2', async () => {
+    test('GET /latest debe retornar los últimos datos de temperatura y ozono', async () => {
         // Mock de la respuesta de la base de datos para los sensores
         pool.query.mockResolvedValueOnce({
             rows: [{ id: 1, type: 'temperature', value: 23.5, timestamp: '2024-09-22T12:00:00Z' }],
         }).mockResolvedValueOnce({
-            rows: [{ id: 2, type: 'CO2', value: 500, timestamp: '2024-09-22T12:01:00Z' }],
+            rows: [{ id: 2, type: 'ozono', value: 500, timestamp: '2024-09-22T12:01:00Z' }],
         });
 
         const response = await request(app).get('/latest');
@@ -37,7 +37,7 @@ describe('Servidor API', () => {
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual({
             temperature: { id: 1, type: 'temperature', value: 23.5, timestamp: '2024-09-22T12:00:00Z' },
-            co2: { id: 2, type: 'CO2', value: 500, timestamp: '2024-09-22T12:01:00Z' }
+            ozono: { id: 2, type: 'ozono', value: 500, timestamp: '2024-09-22T12:01:00Z' }
         });
     });
 

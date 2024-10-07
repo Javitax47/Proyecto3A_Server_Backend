@@ -48,12 +48,12 @@ app.get('/setup', async (req, res) => {
 });
 
 /**
- * @brief Ruta para obtener las últimas mediciones de temperatura y CO2.
+ * @brief Ruta para obtener las últimas mediciones de temperatura y ozono.
  *
- * Retorna los valores más recientes de los sensores de tipo 'temperature' y 'CO2'.
+ * Retorna los valores más recientes de los sensores de tipo 'temperature' y 'ozono'.
  *
  * @route GET /latest
- * @return {object} 200 - Datos de los sensores de temperatura y CO2.
+ * @return {object} 200 - Datos de los sensores de temperatura y ozono.
  * @return {object} 500 - Error interno del servidor.
  */
 app.get('/latest', async (req, res) => {
@@ -64,16 +64,16 @@ app.get('/latest', async (req, res) => {
             ORDER BY timestamp DESC
                 LIMIT 1
         `);
-        const co2Query = await pool.query(`
+        const ozonoQuery = await pool.query(`
             SELECT * FROM sensors
-            WHERE type = 'CO2'
+            WHERE type = 'ozono'
             ORDER BY timestamp DESC
                 LIMIT 1
         `);
 
         const responseData = {
             temperature: temperatureQuery.rows[0] || null,
-            co2: co2Query.rows[0] || null
+            ozono: ozonoQuery.rows[0] || null
         };
 
         res.status(200).send(responseData);
@@ -117,7 +117,7 @@ app.get('/', async (req, res) => {
  * Inserta una nueva medición de sensor asociada a un usuario en la base de datos.
  *
  * @route POST /
- * @param {string} type - Tipo de sensor (ej: 'temperature', 'CO2').
+ * @param {string} type - Tipo de sensor (ej: 'temperature', 'ozono').
  * @param {float} value - Valor de la medición.
  * @param {string} timestamp - Marca de tiempo de la medición.
  * @param {integer} userId - ID del usuario asociado.
@@ -221,7 +221,7 @@ app.delete('/reset', async (req, res) => {
             VALUES 
             ($1, $2, $3, $4),
             ($5, $6, $7, $8)
-        `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'humidity', 60.0, '2024-09-22T12:00:00Z', 2]);
+        `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'ozono', 60.0, '2024-09-22T12:00:00Z', 2]);
 
         res.status(200).send({ message: "Successfully reset users and sensors tables with default data" });
     } catch (err) {

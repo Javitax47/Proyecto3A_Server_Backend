@@ -74,7 +74,7 @@ Una vez que los contenedores estén en funcionamiento, la API estará disponible
  ## API Endpoints
 
 - GET /setup: Crea las tablas de usuarios y sensores en la base de datos.
-- GET /latest: Obtiene las últimas mediciones de temperatura y CO2.
+- GET /latest: Obtiene las últimas mediciones de temperatura y Ozono.
 - GET /: Devuelve todos los usuarios y sensores.
 - POST /: Inserta un nuevo sensor.
     - Body: { "type": "temperature", "value": 25.5, "timestamp": "2024-09-22T12:00:00Z", "userId": 1 }
