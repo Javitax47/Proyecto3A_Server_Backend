@@ -221,7 +221,7 @@ app.delete('/reset', async (req, res) => {
             VALUES 
             ($1, $2, $3, $4),
             ($5, $6, $7, $8)
-        `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'ozono', 60.0, '2024-09-22T12:00:00Z', 2]);
+        `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'ozono', 3.5, '2024-09-22T12:00:00Z', 2]);
 
         res.status(200).send({ message: "Successfully reset users and sensors tables with default data" });
     } catch (err) {
