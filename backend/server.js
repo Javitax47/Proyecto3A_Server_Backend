@@ -9,11 +9,15 @@
 const express = require('express');
 const cors = require('cors');
 const pool = require('./db');
+const { startAlertas } = require('./alertas');
 const port = 3000;
 
 const app = express();
 app.use(cors()); ///< @brief Habilita CORS para permitir solicitudes desde diferentes dominios.
 app.use(express.json()); ///< @brief Habilita el middleware para procesar JSON en las solicitudes.
+
+// Inicia la comprobación de alertas
+startAlertas(pool);
 
 /**
  * @brief Crea las tablas 'sensores', 'mediciones', 'usuarios', 'actividad' y 'alertas' en la base de datos.
@@ -26,40 +30,50 @@ app.use(express.json()); ///< @brief Habilita el middleware para procesar JSON e
  */
 app.get('/setup', async (req, res) => {
     try {
+        // Creando las tablas
         await pool.query(`
-            CREATE TABLE IF NOT EXISTS tipos (
-                id SERIAL PRIMARY KEY,
-                tipo VARCHAR(100) NOT NULL
+            CREATE TABLE tipos (
+                                   id SERIAL PRIMARY KEY,
+                                   tipo VARCHAR(100) NOT NULL
             );
-            CREATE TABLE IF NOT EXISTS sensores (
-                id SERIAL PRIMARY KEY,
-                uuid VARCHAR(100) UNIQUE
+            CREATE TABLE sensores (
+                                      id SERIAL PRIMARY KEY,
+                                      uuid VARCHAR(100) NOT NULL UNIQUE
             );
-            CREATE TABLE IF NOT EXISTS mediciones (
-                id SERIAL PRIMARY KEY,
-                sensorId VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
-                valor FLOAT NOT NULL,
-                timestamp TIMESTAMP NOT NULL,
-                tipo INTEGER REFERENCES tipos(id)
+            CREATE TABLE mediciones (
+                                        id SERIAL PRIMARY KEY,
+                                        sensor_id VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
+                                        valor FLOAT NOT NULL,
+                                        timestamp TIMESTAMP NOT NULL,
+                                        tipo INTEGER REFERENCES tipos(id),
+                                        location POINT
             );
-            CREATE TABLE IF NOT EXISTS actividad (
-                id SERIAL PRIMARY KEY,
-                horas FLOAT[],
-                distancia FLOAT[]
+            CREATE TABLE actividad (
+                                       id SERIAL PRIMARY KEY,
+                                       horas FLOAT[],
+                                       distancia FLOAT[]
             );
-            CREATE TABLE IF NOT EXISTS usuarios (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                password VARCHAR(100) NOT NULL,
-                actividad_id INTEGER REFERENCES actividad(id),
-                nodo_id INTEGER[],
-                alertas INTEGER[]
+            CREATE TABLE alertas (
+                                     id SERIAL PRIMARY KEY,
+                                     timestamp TIMESTAMP NOT NULL,
+                                     location POINT,
+                                     codigo INTEGER
+            );
+            CREATE TABLE usuarios (
+                                      username VARCHAR(100) NOT NULL,
+                                      email VARCHAR(100) PRIMARY KEY,
+                                      password VARCHAR(100) NOT NULL,
+                                      actividad_id INTEGER REFERENCES actividad(id)
             );
             CREATE TABLE usuario_sensores (
-                usuario_id INTEGER REFERENCES usuarios(id) ON DELETE CASCADE,
-                sensor_uuid VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
-                PRIMARY KEY (usuario_id, sensor_uuid)
+                                              usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE,
+                                              sensor_uuid VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
+                                              PRIMARY KEY (usuario_email, sensor_uuid)
+            );
+            CREATE TABLE alertas_usuarios (
+                                              usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE,
+                                              alerta_id INTEGER REFERENCES alertas(id) ON DELETE CASCADE,
+                                              PRIMARY KEY (usuario_email, alerta_id)
             );
         `);
         res.status(200).send({ message: "Successfully created all tables" });
@@ -117,24 +131,24 @@ app.post('/sensores', async (req, res) => {
 /**
  * @brief Inserta una nueva medición en la base de datos.
  *
- * Esta ruta permite registrar una medición asociada a un sensor específico y un usuario.
+ * Esta ruta permite registrar una medición asociada a un sensor específico.
  *
  * @route POST /mediciones
  * @param {string} sensorId - El ID del sensor asociado a la medición.
  * @param {float} valor - El valor de la medición.
  * @param {string} timestamp - Marca de tiempo en formato ISO 8601.
  * @param {int} tipo - El ID del tipo de medición.
- * @param {int} userId - El ID del usuario que realiza la medición.
+ * @param {object} location - Las coordenadas de la ubicación (opcional, formato { x: float, y: float }).
  * @return {object} 200 - Medición agregada exitosamente.
  * @return {object} 400 - Faltan parámetros necesarios.
- * @return {object} 404 - Usuario o sensor no encontrado.
+ * @return {object} 404 - Sensor no encontrado.
  * @return {object} 500 - Error interno del servidor.
  */
 app.post('/mediciones', async (req, res) => {
-    const { sensorId, valor, timestamp, tipo, userId } = req.body;
+    const { sensorId, valor, timestamp, tipo, location } = req.body;
 
     // Validar el cuerpo de la solicitud
-    if (!sensorId || !valor || !timestamp || !tipo || !userId) {
+    if (!sensorId || !valor || !timestamp || !tipo) {
         return res.status(400).send({ message: "Faltan parámetros necesarios" });
     }
 
@@ -145,16 +159,10 @@ app.post('/mediciones', async (req, res) => {
             return res.status(404).send({ message: "Sensor no encontrado" });
         }
 
-        // Verificar si el usuario existe
-        const userResult = await pool.query('SELECT * FROM usuarios WHERE id = $1', [userId]);
-        if (userResult.rows.length === 0) {
-            return res.status(404).send({ message: "Usuario no encontrado" });
-        }
-
         // Insertar la medición
         await pool.query(
-            'INSERT INTO mediciones (sensorId, valor, timestamp, tipo) VALUES ($1, $2, $3, $4)',
-            [sensorId, valor, timestamp, tipo]
+            'INSERT INTO mediciones (sensor_id, valor, timestamp, tipo, location) VALUES ($1, $2, $3, $4, $5)',
+            [sensorId, valor, timestamp, tipo, location ? `(${location.x}, ${location.y})` : null]
         );
 
         res.status(200).send({ message: "Medición agregada exitosamente" });
@@ -163,7 +171,6 @@ app.post('/mediciones', async (req, res) => {
         res.sendStatus(500);
     }
 });
-
 
 /**
  * @brief Obtiene las mediciones más recientes de los sensores.
@@ -182,7 +189,6 @@ app.get('/latest/:uuid', async (req, res) => {
         if (sensorQuery.rows.length === 0) {
             return res.status(404).send({ message: "Sensor not found" });
         }
-        const sensorId = sensorQuery.rows[0].id;
 
         // Obtener la última medición del sensor
         const latestMeasurement = await pool.query(`
@@ -222,6 +228,8 @@ app.get('/', async (req, res) => {
         const usuariosQuery = await pool.query('SELECT * FROM usuarios');
         const actividadQuery = await pool.query('SELECT * FROM actividad');
         const usrSensQuery = await pool.query('SELECT * FROM usuario_sensores');
+        const usrAlertsQuery = await pool.query('SELECT * FROM alertas_usuarios');
+        const alertasQuery = await pool.query('SELECT * FROM alertas');
 
         const responseData = {
             tipos: tiposQuery.rows,
@@ -229,7 +237,9 @@ app.get('/', async (req, res) => {
             sensores: sensoresQuery.rows,
             usuarios: usuariosQuery.rows,
             actividad: actividadQuery.rows,
-            usuario_sensores: usrSensQuery.rows
+            usuario_sensores: usrSensQuery.rows,
+            alertas_usuarios: usrAlertsQuery.rows,
+            alertas: alertasQuery.rows
         };
 
         res.status(200).send(responseData);
@@ -249,12 +259,17 @@ app.get('/', async (req, res) => {
  * @param {string} username - Nombre de usuario.
  * @param {string} email - Correo electrónico del usuario.
  * @param {string} password - Contraseña del usuario.
- * @param {array} sensorUuids - Lista de UUID de sensores a asignar al usuario.
  * @return {object} 201 - Usuario agregado exitosamente.
+ * @return {object} 400 - Solicitud incorrecta (datos inválidos).
  * @return {object} 500 - Error interno del servidor.
  */
 app.post('/users', async (req, res) => {
-    const { username, email, password, sensorUuids } = req.body;
+    const { username, email, password } = req.body;
+
+    // Validar los datos de entrada
+    if (!username || !email || !password) {
+        return res.status(400).send({ message: "Faltan campos requeridos" });
+    }
 
     try {
         // 1. Crear una entrada de actividad
@@ -267,30 +282,127 @@ app.post('/users', async (req, res) => {
         // 2. Crear el nuevo usuario con la actividad y alerta asociadas
         const newUserResult = await pool.query(`
             INSERT INTO usuarios (username, email, password, actividad_id)
-            VALUES ($1, $2, $3, $4) RETURNING id
+            VALUES ($1, $2, $3, $4) RETURNING email
         `, [username, email, password, actividadId]);
 
-        const newUserId = newUserResult.rows[0].id;
+        // 3. Creando primero el registro en alertas_usuarios para obtener el ID
+        await pool.query(`
+                INSERT INTO alertas_usuarios (usuario_email) VALUES ($1) RETURNING id
+            `, [email]);
 
-        // 3. Asignar sensores al nuevo usuario en la tabla intermedia
-        if (Array.isArray(sensorUuids) && sensorUuids.length > 0) {
-            const sensorAssignments = sensorUuids.map(async (uuid) => {
-                if (uuid) { // Verifica que uuid no sea null o vacío
-                    // Inserta el sensor en la tabla 'sensores' si es válido
-                    await pool.query('INSERT INTO sensores (uuid) VALUES ($1) ON CONFLICT (uuid) DO NOTHING', [uuid]);
+        // 4. Asignar sensores al nuevo usuario en la tabla intermedia
+        const newUserEmail = newUserResult.rows[0].email;
 
-                    // Asigna el sensor al usuario
-                    return pool.query(`
-                        INSERT INTO usuario_sensores (usuario_id, sensor_uuid) 
-                        VALUES ($1, $2)
-                    `, [newUserId, uuid]);
-                }
-            });
+        res.status(201).send({ message: "User created successfully", email: newUserEmail });
+    } catch (err) {
+        console.error(err); // Mejora del logging de errores
+        res.sendStatus(500);
+    }
+});
 
-            await Promise.all(sensorAssignments);
+/**
+ * @brief Obtiene las alertas de un usuario específico.
+ *
+ * Este método permite recuperar todas las alertas asociadas a un usuario
+ * utilizando su correo electrónico.
+ *
+ * @param email Correo electrónico del usuario cuyas alertas se desean obtener.
+ * @return JSON array de alertas con detalles como id, timestamp, location y codigo.
+ * @throws 404 Si no se encuentran alertas para el usuario.
+ * @throws 500 Si ocurre un error en la consulta a la base de datos.
+ */
+app.get('/alertas/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        const result = await pool.query(`
+            SELECT a.id, a.timestamp, a.location, a.codigo
+            FROM alertas a
+            JOIN alertas_usuarios au ON a.alertas_usuarios_id = au.id
+            WHERE au.usuario_email = $1
+        `, [email]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).send({ message: "No alerts found for this user." });
         }
 
-        res.status(201).send({ message: "User created successfully", userId: newUserId });
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * @brief Elimina todas las alertas de la base de datos.
+ *
+ * Este método permite eliminar todas las alertas sin restricciones.
+ *
+ * @return Mensaje de éxito en la eliminación de alertas.
+ * @throws 500 Si ocurre un error en la consulta a la base de datos.
+ */
+app.delete('/alertas', async (req, res) => {
+    try {
+        await pool.query(`DELETE FROM alertas`);
+        res.status(200).send({ message: "All alerts have been deleted." });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * @brief Elimina todas las alertas de un usuario específico.
+ *
+ * Este método permite eliminar todas las alertas asociadas a un usuario
+ * utilizando su correo electrónico.
+ *
+ * @param email Correo electrónico del usuario cuyas alertas se desean eliminar.
+ * @return Mensaje de éxito en la eliminación de alertas para el usuario.
+ * @throws 500 Si ocurre un error en la consulta a la base de datos.
+ */
+app.delete('/alertas/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        await pool.query(`
+            DELETE FROM alertas
+            WHERE alertas_usuarios_id IN (
+                SELECT id FROM alertas_usuarios WHERE usuario_email = $1
+            )
+        `, [email]);
+        res.status(200).send({ message: `All alerts for user ${email} have been deleted.` });
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * @brief Elimina una alerta específica de un usuario.
+ *
+ * Este método permite eliminar una alerta específica utilizando su ID
+ * y el correo electrónico del usuario al que pertenece.
+ *
+ * @param email Correo electrónico del usuario cuyas alertas se desean eliminar.
+ * @param alertaId ID de la alerta que se desea eliminar.
+ * @return Mensaje de éxito en la eliminación de la alerta.
+ * @throws 404 Si la alerta no se encuentra o no pertenece al usuario.
+ * @throws 500 Si ocurre un error en la consulta a la base de datos.
+ */
+app.delete('/alertas/:email/:alertaId', async (req, res) => {
+    const { email, alertaId } = req.params;
+    try {
+        const result = await pool.query(`
+            DELETE FROM alertas
+            WHERE id = $1 AND alertas_usuarios_id IN (
+                SELECT id FROM alertas_usuarios WHERE usuario_email = $2
+            )
+        `, [alertaId, email]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).send({ message: "Alert not found or does not belong to this user." });
+        }
+
+        res.status(200).send({ message: `Alert with ID ${alertaId} has been deleted for user ${email}.` });
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
@@ -299,13 +411,30 @@ app.post('/users', async (req, res) => {
 
 // Resetear (eliminar todas las tablas y recrearlas)
 /**
- * @brief Reinicia las tablas de la base de datos con datos predeterminados.
- *
- * Borra las tablas existentes y las recrea con datos predeterminados para usuarios y sensores.
- *
  * @route DELETE /reset
- * @return {object} 200 - Tablas reiniciadas exitosamente con datos predeterminados.
- * @return {object} 500 - Error interno del servidor.
+ * @group Reset - Operaciones para reiniciar la base de datos
+ * @returns {object} 200 - Mensaje de éxito al reiniciar las tablas con datos por defecto
+ * @returns {Error} 500 - Error interno del servidor si ocurre un problema durante el proceso
+ *
+ * @description
+ * Esta ruta elimina todas las tablas existentes en la base de datos y las recrea con la estructura inicial.
+ * Se insertan datos por defecto en las tablas `tipos` y `sensores`. Además, se crean usuarios con
+ * actividad única, así como alertas y asignaciones de sensores a usuarios.
+ *
+ * **Estructura de las tablas creadas:**
+ * - `tipos`: Contiene los tipos de mediciones (ej. temperatura, ozono).
+ * - `sensores`: Almacena los sensores disponibles con su UUID.
+ * - `mediciones`: Guarda las mediciones tomadas por los sensores.
+ * - `actividad`: Almacena información sobre la actividad de los usuarios.
+ * - `usuarios`: Contiene la información de los usuarios registrados.
+ * - `alertas_usuarios`: Relaciona usuarios con alertas.
+ * - `alertas`: Almacena las alertas generadas para los usuarios.
+ * - `usuario_sensores`: Relaciona usuarios con los sensores asignados.
+ *
+ * **Datos por defecto insertados:**
+ * - Tipos: 'temperature', 'ozono'.
+ * - Sensores: 'sensor-uuid-1', 'sensor-uuid-2', 'sensorJavier'.
+ * - Tres usuarios con sus respectivas actividades y alertas.
  */
 app.delete('/reset', async (req, res) => {
     try {
@@ -313,6 +442,7 @@ app.delete('/reset', async (req, res) => {
         await pool.query(`
             DROP TABLE IF EXISTS mediciones CASCADE;
             DROP TABLE IF EXISTS usuario_sensores CASCADE;
+            DROP TABLE IF EXISTS alertas_usuarios CASCADE;
             DROP TABLE IF EXISTS sensores CASCADE;
             DROP TABLE IF EXISTS actividad CASCADE;
             DROP TABLE IF EXISTS usuarios CASCADE;
@@ -323,37 +453,54 @@ app.delete('/reset', async (req, res) => {
         // Creando las tablas
         await pool.query(`
             CREATE TABLE tipos (
-                id SERIAL PRIMARY KEY,
-                tipo VARCHAR(100) NOT NULL
+                                   id SERIAL PRIMARY KEY,
+                                   tipo VARCHAR(100) NOT NULL
             );
+
             CREATE TABLE sensores (
-                id SERIAL PRIMARY KEY,
-                uuid VARCHAR(100) NOT NULL UNIQUE
+                                      id SERIAL PRIMARY KEY,
+                                      uuid VARCHAR(100) NOT NULL UNIQUE
             );
+
             CREATE TABLE mediciones (
-                id SERIAL PRIMARY KEY,
-                sensorId VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
-                valor FLOAT NOT NULL,
-                timestamp TIMESTAMP NOT NULL,
-                tipo INTEGER REFERENCES tipos(id)
+                                        id SERIAL PRIMARY KEY,
+                                        sensor_id VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
+                                        valor FLOAT NOT NULL,
+                                        timestamp TIMESTAMP NOT NULL,
+                                        tipo INTEGER REFERENCES tipos(id),
+                                        location POINT
             );
+
             CREATE TABLE actividad (
-                id SERIAL PRIMARY KEY,
-                horas FLOAT[],
-                distancia FLOAT[]
+                                       id SERIAL PRIMARY KEY,
+                                       horas FLOAT[],
+                                       distancia FLOAT[]
             );
+
             CREATE TABLE usuarios (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                password VARCHAR(100) NOT NULL,
-                actividad_id INTEGER REFERENCES actividad(id),
-                alertas INTEGER[]
+                                      username VARCHAR(100) NOT NULL,
+                                      email VARCHAR(100) PRIMARY KEY,
+                                      password VARCHAR(100) NOT NULL,
+                                      actividad_id INTEGER REFERENCES actividad(id)
             );
+
+            CREATE TABLE alertas_usuarios (
+                                              id SERIAL PRIMARY KEY,
+                                              usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE
+            );
+
+            CREATE TABLE alertas (
+                                     id SERIAL PRIMARY KEY,
+                                     alertas_usuarios_id INTEGER REFERENCES alertas_usuarios(id) ON DELETE CASCADE,
+                                     timestamp TIMESTAMP NOT NULL,
+                                     location POINT,
+                                     codigo INTEGER
+            );
+
             CREATE TABLE usuario_sensores (
-                usuario_id INTEGER REFERENCES usuarios(id) ON DELETE CASCADE,
-                sensor_uuid VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
-                PRIMARY KEY (usuario_id, sensor_uuid)
+                                              usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE,
+                                              sensor_uuid VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
+                                              PRIMARY KEY (usuario_email, sensor_uuid)
             );
         `);
 
@@ -362,41 +509,55 @@ app.delete('/reset', async (req, res) => {
             INSERT INTO tipos (tipo) VALUES ('temperature'), ('ozono');
         `);
 
-        // Insertando datos por defecto en la tabla sensores
+// Insertando datos por defecto en la tabla sensores
         await pool.query(`
-            INSERT INTO sensores (uuid) VALUES 
-            ('sensor-uuid-1'), 
-            ('sensor-uuid-2');
+            INSERT INTO sensores (uuid) VALUES
+                                            ('sensor-uuid-1'),
+                                            ('sensor-uuid-2'),
+                                            ('sensorJavier');
         `);
 
-        // Insertando datos por defecto en la tabla actividad
-        const actividadResult = await pool.query(`
-            INSERT INTO actividad (horas, distancia) 
-            VALUES (ARRAY[1.5, 2.0, 3.0], ARRAY[100.0, 200.0, 300.0]) RETURNING id
-        `);
-        const actividadId = actividadResult.rows[0].id;
+// Creando usuarios con actividad_id únicos
+        const userData = [
+            { username: 'user1', email: 'user1@example.com', password: 'pass1' },
+            { username: 'user2', email: 'user2@example.com', password: 'pass2' },
+            { username: 'Javier', email: 'correo@gmail.com', password: '123' }
+        ];
 
-        // Insertando usuarios y asignando actividad_id y alertas
-        const user1Result = await pool.query(`
-            INSERT INTO usuarios (username, email, password, actividad_id) VALUES 
-            ('user1', 'user1@example.com', 'pass1', $1) RETURNING id
-        `, [actividadId]);
+        for (const user of userData) {
+            // Insertando una nueva actividad para cada usuario
+            const actividadResult = await pool.query(`
+                INSERT INTO actividad (horas, distancia) 
+                VALUES (ARRAY[1.5, 2.0, 3.0], ARRAY[100.0, 200.0, 300.0]) RETURNING id
+            `);
+            const actividadId = actividadResult.rows[0].id;
 
-        const user1Id = user1Result.rows[0].id;
+            // Insertando usuario con el id único de actividad
+            await pool.query(`
+                INSERT INTO usuarios (username, email, password, actividad_id) VALUES 
+                ($1, $2, $3, $4)
+            `, [user.username, user.email, user.password, actividadId]);
 
-        const user2Result = await pool.query(`
-            INSERT INTO usuarios (username, email, password, actividad_id, alertas) VALUES 
-            ('user2', 'user2@example.com', 'pass2', $1, Array[202]::integer[]) RETURNING id
-        `, [actividadId]);
+            // Creando primero el registro en alertas_usuarios para obtener el ID
+            const alertasUsuariosResult = await pool.query(`
+                INSERT INTO alertas_usuarios (usuario_email) VALUES ($1) RETURNING id
+            `, [user.email]);
+            const alertaId = alertasUsuariosResult.rows[0].id;
 
-        const user2Id = user2Result.rows[0].id;
+            // Usando el mismo ID para crear la alerta
+            await pool.query(`
+                INSERT INTO alertas (alertas_usuarios_id, timestamp, location, codigo) 
+                VALUES ($1, CURRENT_TIMESTAMP, POINT(1.0, 2.0), 120)
+            `, [alertaId]);
+        }
 
         // Asignando sensores a usuarios en la tabla intermedia
         await pool.query(`
-            INSERT INTO usuario_sensores (usuario_id, sensor_uuid) VALUES 
-            ($1, 'sensor-uuid-1'), 
-            ($2, 'sensor-uuid-2');
-        `, [user1Id, user2Id]);
+            INSERT INTO usuario_sensores (usuario_email, sensor_uuid) VALUES
+                                                                          ('user1@example.com', 'sensor-uuid-1'),
+                                                                          ('user2@example.com', 'sensor-uuid-2'),
+                                                                          ('correo@gmail.com', 'sensorJavier');
+        `);
 
         res.status(200).send({ message: "Successfully reset tables with default data" });
     } catch (err) {
@@ -420,9 +581,12 @@ app.delete('/erase', async (req, res) => {
     try {
         await pool.query(`
             DROP TABLE IF EXISTS mediciones CASCADE;
+            DROP TABLE IF EXISTS usuario_sensores CASCADE;
+            DROP TABLE IF EXISTS alertas_usuarios CASCADE;
             DROP TABLE IF EXISTS sensores CASCADE;
             DROP TABLE IF EXISTS actividad CASCADE;
             DROP TABLE IF EXISTS usuarios CASCADE;
+            DROP TABLE IF EXISTS alertas CASCADE;
             DROP TABLE IF EXISTS tipos CASCADE;
         `);
         res.status(200).send({ message: "Successfully erased all tables" });
