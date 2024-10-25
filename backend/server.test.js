@@ -24,58 +24,121 @@ describe('Servidor API', () => {
         jest.clearAllMocks(); // Limpia los mocks después de cada test
     });
 
-    test('GET /latest debe retornar los últimos datos de temperatura y ozono', async () => {
-        // Mock de la respuesta de la base de datos para los sensores
-        pool.query.mockResolvedValueOnce({
-            rows: [{ id: 1, type: 'temperature', value: 23.5, timestamp: '2024-09-22T12:00:00Z' }],
-        }).mockResolvedValueOnce({
-            rows: [{ id: 2, type: 'ozono', value: 500, timestamp: '2024-09-22T12:01:00Z' }],
-        });
+    test('GET /latest/:uuid debe retornar los últimos datos de medición para un sensor específico', async () => {
+        const uuid = 'test-uuid'; // UUID simulado
+        pool.query
+            .mockResolvedValueOnce({
+                rows: [{ id: 1 }], // Simulación de búsqueda del sensor por UUID
+            })
+            .mockResolvedValueOnce({
+                rows: [{ valor: 23.5, timestamp: '2024-09-22T12:00:00Z' }], // Simulación de la última medición
+            });
 
-        const response = await request(app).get('/latest');
+        const response = await request(app).get(`/latest/${uuid}`);
 
         expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual({
-            temperature: { id: 1, type: 'temperature', value: 23.5, timestamp: '2024-09-22T12:00:00Z' },
-            ozono: { id: 2, type: 'ozono', value: 500, timestamp: '2024-09-22T12:01:00Z' }
-        });
+        expect(response.body).toEqual({ valor: 23.5, timestamp: '2024-09-22T12:00:00Z' });
     });
 
     test('POST /users debe insertar un nuevo usuario', async () => {
-        // Mock de la respuesta de la base de datos para insertar un usuario
         pool.query.mockResolvedValueOnce({
             rows: [],
         });
 
         const response = await request(app)
             .post('/users')
-            .send({ username: 'new_user' });
+            .send({
+                username: 'new_user',
+                email: 'new_user@example.com',
+                password: 'password123'
+            });
 
         expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual({ message: 'Successfully added user' });
+        expect(response.body).toEqual({ message: "User created successfully" });
     });
 
-    test('POST / debe insertar un nuevo sensor', async () => {
-        // Mock para comprobar si el usuario existe
-        pool.query.mockResolvedValueOnce({
-            rows: [{ id: 1, username: 'user1' }],
-        });
-
-        // Mock para insertar el sensor
+    test('POST /tipos debe insertar un nuevo tipo de sensor', async () => {
         pool.query.mockResolvedValueOnce({
             rows: [],
         });
 
         const response = await request(app)
-            .post('/')
+            .post('/tipos')
             .send({
-                type: 'temperature',
-                value: 22.5,
-                timestamp: '2024-10-05T12:00:00Z',
-                userId: 1
+                tipo: 'ozono',
             });
 
         expect(response.statusCode).toBe(200);
-        expect(response.body).toEqual({ message: 'Successfully added sensor data' });
+        expect(response.body).toEqual({ message: "Sensor type created successfully" });
+    });
+
+    test('POST /sensores debe insertar un nuevo sensor', async () => {
+        const uuid = 'test-uuid'; // UUID simulado
+        const tipo = 'temperature'; // Tipo simulado
+        pool.query
+            .mockResolvedValueOnce({ rows: [{ id: 1 }] }) // Simulación de búsqueda del tipo
+            .mockResolvedValueOnce({ rows: [] }); // Simulación de inserción
+
+        const response = await request(app)
+            .post('/sensores')
+            .send({
+                uuid: uuid,
+                tipo: tipo,
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({ message: "Sensor created successfully" });
+    });
+
+    test('POST /mediciones debe insertar una nueva medición', async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [],
+        });
+
+        const response = await request(app)
+            .post('/mediciones')
+            .send({
+                sensorId: "RIGOEN59-WLX5LP6",
+                valor: 500,
+                timestamp: '2024-09-22T12:00:00Z',
+                tipo: 1
+            });
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({ message: "Medición agregada exitosamente" });
+    });
+
+    test('DELETE /users/:id/measurements debe eliminar las mediciones de un usuario', async () => {
+        const userId = 1; // ID del usuario simulado
+        pool.query.mockResolvedValueOnce({
+            rows: [],
+        });
+
+        const response = await request(app).delete(`/users/${userId}/measurements`);
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({ message: "Successfully deleted measurements for user" });
+    });
+
+    test('DELETE /reset debe reiniciar las tablas con datos predeterminados', async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [],
+        });
+
+        const response = await request(app).delete('/reset');
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({ message: "Successfully reset tables with default data" });
+    });
+
+    test('DELETE /erase debe eliminar todas las tablas', async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [],
+        });
+
+        const response = await request(app).delete('/erase');
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({ message: "Successfully erased all tables" });
     });
 });
