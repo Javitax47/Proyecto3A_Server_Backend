@@ -125,9 +125,10 @@ app.post('/tipos', async (req, res) => {
  * @return {object} 500 - Error interno del servidor.
  */
 app.post('/sensores', async (req, res) => {
-    const { uuid } = req.body; // uuid incluido
+    const { uuid, email } = req.body;
     try {
         await pool.query('INSERT INTO sensores (uuid) VALUES ($1)', [uuid]);
+        await pool.query(`INSERT INTO usuario_sensores (usuario_email, sensor_uuid) VALUES ($1, $2)`, [email, uuid]);
         res.status(200).send({ message: "Sensor created successfully" });
     } catch (err) {
         console.log(err);
@@ -272,7 +273,7 @@ app.get('/', async (req, res) => {
  * @return {object} 500 - Error interno del servidor.
  */
 
-app.post('/users', async (req, res) => {
+app.post('/usuarios', async (req, res) => {
     const { username, email, password } = req.body;
 
     // Validar los datos de entrada
@@ -312,8 +313,42 @@ app.post('/users', async (req, res) => {
     }
 });
 
+/**
+ * @route GET /usuarios/:email/sensores
+ * @group Sensores - Operaciones relacionadas con los sensores
+ * @param {string} email.path.required - El correo electrónico del usuario
+ * @returns {Array.<Sensor>} 200 - Lista de sensores asignados al usuario
+ * @returns {Error} 404 - Usuario no encontrado
+ * @returns {Error} 500 - Error interno del servidor si ocurre un problema durante el proceso
+ *
+ * @description
+ * Esta ruta devuelve los sensores asignados a un usuario específico utilizando su correo electrónico.
+ */
+app.get('/usuarios/:email/sensores', async (req, res) => {
+    const { email } = req.params;
+    try {
+        const result = await pool.query(`
+            SELECT s.uuid, s.id 
+            FROM sensores s
+            JOIN usuario_sensores us ON s.uuid = us.sensor_uuid
+            WHERE us.usuario_email = $1
+        `, [email]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).send({ message: "Usuario no encontrado o sin sensores asignados" });
+        }
+
+        res.status(200).send(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
+
+
 // Método para autenticar a un usuario
-app.get('/users/login/:email/:password', async (req, res) => {
+app.get('/usuarios/login/:email/:password', async (req, res) => {
     const { email, password } = req.params;
 
     try {
