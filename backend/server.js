@@ -671,6 +671,38 @@ app.delete('/erase', async (req, res) => {
     }
 });
 
+/**
+ * @brief Actualiza el perfil de usuario en la base de datos.
+ *
+ * Permite actualizar los datos de un usuario existente.
+ *
+ * @route PUT /users/update
+ * @param {string} username - Nombre de usuario actualizado.
+ * @param {string} email - Correo electrónico actualizado.
+ * @param {string} password - Contraseña actualizada.
+ * @return {object} 200 - Perfil actualizado exitosamente.
+ * @return {object} 500 - Error interno del servidor.
+ */
+app.put('/users/update', async (req, res) => {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).send({ message: "Todos los campos son obligatorios" });
+    }
+
+    try {
+        await pool.query(
+            'UPDATE usuarios SET email = $1, password = $2 WHERE username = $3',
+            [email, password, username]
+        );
+        res.status(200).send({ message: "Perfil actualizado correctamente" });
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
+
 
 // Iniciar el servidor
 if (require.main === module) {
