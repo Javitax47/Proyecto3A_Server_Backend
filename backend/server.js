@@ -9,6 +9,7 @@
 const express = require('express');
 const cors = require('cors');
 const pool = require('./db');
+const { hashPassword, verifyPassword} = require('./security');
 const { startAlertas } = require('./alertas');
 const port = 3000;
 
@@ -36,10 +37,12 @@ app.get('/setup', async (req, res) => {
                                    id SERIAL PRIMARY KEY,
                                    tipo VARCHAR(100) NOT NULL
             );
+
             CREATE TABLE sensores (
                                       id SERIAL PRIMARY KEY,
                                       uuid VARCHAR(100) NOT NULL UNIQUE
             );
+
             CREATE TABLE mediciones (
                                         id SERIAL PRIMARY KEY,
                                         sensor_id VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
@@ -48,32 +51,37 @@ app.get('/setup', async (req, res) => {
                                         tipo INTEGER REFERENCES tipos(id),
                                         location POINT
             );
+
             CREATE TABLE actividad (
                                        id SERIAL PRIMARY KEY,
                                        horas FLOAT[],
                                        distancia FLOAT[]
             );
-            CREATE TABLE alertas (
-                                     id SERIAL PRIMARY KEY,
-                                     timestamp TIMESTAMP NOT NULL,
-                                     location POINT,
-                                     codigo INTEGER
-            );
+
             CREATE TABLE usuarios (
                                       username VARCHAR(100) NOT NULL,
                                       email VARCHAR(100) PRIMARY KEY,
                                       password VARCHAR(100) NOT NULL,
                                       actividad_id INTEGER REFERENCES actividad(id)
             );
+
+            CREATE TABLE alertas_usuarios (
+                                              id SERIAL PRIMARY KEY,
+                                              usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE
+            );
+
+            CREATE TABLE alertas (
+                                     id SERIAL PRIMARY KEY,
+                                     alertas_usuarios_id INTEGER REFERENCES alertas_usuarios(id) ON DELETE CASCADE,
+                                     timestamp TIMESTAMP NOT NULL,
+                                     location POINT,
+                                     codigo INTEGER
+            );
+
             CREATE TABLE usuario_sensores (
                                               usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE,
                                               sensor_uuid VARCHAR(100) REFERENCES sensores(uuid) ON DELETE CASCADE,
                                               PRIMARY KEY (usuario_email, sensor_uuid)
-            );
-            CREATE TABLE alertas_usuarios (
-                                              usuario_email VARCHAR(100) REFERENCES usuarios(email) ON DELETE CASCADE,
-                                              alerta_id INTEGER REFERENCES alertas(id) ON DELETE CASCADE,
-                                              PRIMARY KEY (usuario_email, alerta_id)
             );
         `);
         res.status(200).send({ message: "Successfully created all tables" });
@@ -263,6 +271,7 @@ app.get('/', async (req, res) => {
  * @return {object} 400 - Solicitud incorrecta (datos inválidos).
  * @return {object} 500 - Error interno del servidor.
  */
+
 app.post('/users', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -279,18 +288,21 @@ app.post('/users', async (req, res) => {
         `);
         const actividadId = actividadResult.rows[0].id;
 
-        // 2. Crear el nuevo usuario con la actividad y alerta asociadas
+        // 2. Encriptar la contraseña
+        const hashedPassword = await hashPassword(password);
+
+        // 3. Crear el nuevo usuario con la actividad y alerta asociadas
         const newUserResult = await pool.query(`
             INSERT INTO usuarios (username, email, password, actividad_id)
             VALUES ($1, $2, $3, $4) RETURNING email
-        `, [username, email, password, actividadId]);
+        `, [username, email, hashedPassword, actividadId]);
 
-        // 3. Creando primero el registro en alertas_usuarios para obtener el ID
+        // 4. Creando primero el registro en alertas_usuarios para obtener el ID
         await pool.query(`
-                INSERT INTO alertas_usuarios (usuario_email) VALUES ($1) RETURNING id
-            `, [email]);
+            INSERT INTO alertas_usuarios (usuario_email) VALUES ($1) RETURNING id
+        `, [email]);
 
-        // 4. Asignar sensores al nuevo usuario en la tabla intermedia
+        // 5. Asignar sensores al nuevo usuario en la tabla intermedia
         const newUserEmail = newUserResult.rows[0].email;
 
         res.status(201).send({ message: "User created successfully", email: newUserEmail });
@@ -299,6 +311,34 @@ app.post('/users', async (req, res) => {
         res.sendStatus(500);
     }
 });
+
+// Método para autenticar a un usuario
+app.get('/users/login/:email/:password', async (req, res) => {
+    const { email, password } = req.params;
+
+    try {
+        // Obtener el usuario de la base de datos
+        const userResult = await pool.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+        if (userResult.rows.length === 0) {
+            return res.status(401).send({ message: "Email o contraseña incorrectos." });
+        }
+
+        const user = userResult.rows[0];
+
+        // Verificar la contraseña
+        const isPasswordValid = await verifyPassword(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).send({ message: "Email o contraseña incorrectos." });
+        }
+
+        // Enviar respuesta exitosa
+        res.status(200).send({ message: "Inicio de sesión exitoso", user });
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
+});
+
 
 /**
  * @brief Obtiene las alertas de un usuario específico.
