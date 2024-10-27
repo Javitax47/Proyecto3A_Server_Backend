@@ -172,43 +172,79 @@ app.post('/mediciones', async (req, res) => {
     }
 });
 
+
+
 /**
- * @brief Obtiene las mediciones más recientes de los sensores.
+ * @brief Obtiene las mediciones más recientes de los sensores a partir del correo del usuario.
  *
  * Retorna los últimos valores registrados.
  *
- * @route GET /latest/:uuid
+ * @route GET /latestByEmail/:email
  * @return {object} 200 - Datos de las mediciones más recientes.
+ * @return {object} 404 - Sensor no encontrado o no hay mediciones.
  * @return {object} 500 - Error interno del servidor.
  */
-app.get('/latest/:uuid', async (req, res) => {
-    const { uuid } = req.params;
+app.get('/latestByEmail/:email', async (req, res) => {
+    const { email } = req.params;
     try {
-        // Buscar el sensor por UUID
-        const sensorQuery = await pool.query('SELECT id FROM sensores WHERE uuid = $1', [uuid]);
-        if (sensorQuery.rows.length === 0) {
-            return res.status(404).send({ message: "Sensor not found" });
+        // Obtener el UUID del usuario basado en el correo electrónico
+        const userQuery = await pool.query('SELECT sensor_uuid FROM usuario_sensores WHERE usuario_email = $1', [email]);
+
+        if (userQuery.rows.length === 0) {
+            return res.status(404).send({ message: "User not found" });
         }
 
-        // Obtener la última medición del sensor
-        const latestMeasurement = await pool.query(`
-            SELECT valor, timestamp 
-            FROM mediciones 
-            WHERE sensorId = $1 
-            ORDER BY timestamp DESC 
-            LIMIT 1
-        `, [uuid]); // Usar el UUID directamente en la consulta
+        // Inicializar objeto para almacenar las mediciones
+        const latestData = {
+            ozono: null,
+            temperature: null
+        };
 
-        if (latestMeasurement.rows.length === 0) {
-            return res.status(404).send({ message: "No measurements found for this sensor" });
+        // Crear una consulta para obtener las últimas mediciones de temperatura y ozono
+        const sensorUUIDs = userQuery.rows.map(row => row.sensor_uuid);
+        
+        if (sensorUUIDs.length > 0) {
+            const latestMeasurements = await pool.query(`
+                SELECT valor, timestamp, tipo 
+                FROM mediciones 
+                WHERE sensor_id = ANY($1::text[]) 
+                ORDER BY timestamp DESC
+            `, [sensorUUIDs]);
+
+            // Procesar las mediciones obtenidas
+            for (const measurement of latestMeasurements.rows) {
+                if (measurement.tipo === 1 && !latestData.temperature) { // 1 para temperatura
+                    latestData.temperature = {
+                        value: measurement.valor,
+                        timestamp: measurement.timestamp
+                    };
+                } else if (measurement.tipo === 2 && !latestData.ozono) { // 2 para ozono
+                    latestData.ozono = {
+                        value: measurement.valor,
+                        timestamp: measurement.timestamp
+                    };
+                }
+                // Salir del bucle si ambas mediciones han sido encontradas
+                if (latestData.temperature && latestData.ozono) {
+                    break;
+                }
+            }
         }
 
-        res.status(200).send(latestMeasurement.rows[0]);
+        // Verifica si se encontraron las mediciones
+        if (!latestData.temperature && !latestData.ozono) {
+            return res.status(404).send({ message: "No measurements found for this user" });
+        }
+
+        res.status(200).send(latestData);
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
     }
 });
+
+
+
 
 // Routes
 /**
