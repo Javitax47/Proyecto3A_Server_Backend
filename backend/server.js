@@ -157,7 +157,7 @@ app.post('/mediciones', async (req, res) => {
     const { sensorId, valor, timestamp, tipo, location } = req.body;
 
     // Validar el cuerpo de la solicitud
-    if (!sensorId || !valor || !timestamp || !tipo) {
+    if (!sensorId || !valor || !timestamp || !tipo || !location) {
         return res.status(400).send({ message: "Faltan parámetros necesarios" });
     }
 
@@ -691,16 +691,24 @@ app.put('/users/update', async (req, res) => {
     }
 
     try {
-        await pool.query(
-            'UPDATE usuarios SET email = $1, password = $2 WHERE username = $3',
-            [email, password, username]
+        const hashedPassword = await hashPassword(password);
+
+        const result = await pool.query(
+            'UPDATE usuarios SET username = $1, password = $2 WHERE email = $3',
+            [username, hashedPassword, email]
         );
+
+        if (result.rowCount === 0) {
+            return res.status(404).send({ message: "Usuario no encontrado" });
+        }
+
         res.status(200).send({ message: "Perfil actualizado correctamente" });
     } catch (err) {
         console.error(err);
-        res.sendStatus(500);
+        res.status(500).send({ message: "Error interno del servidor" });
     }
 });
+
 
 
 
