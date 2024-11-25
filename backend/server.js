@@ -94,10 +94,10 @@ app.get('/setup', async (req, res) => {
 /**
  * @brief Crea un nuevo tipo de sensor en la base de datos.
  *
- * Esta ruta permite agregar un nuevo tipo de sensor en la tabla `Tipos`. El tipo de sensor
+ * Esta ruta permite agregar un nuevo tipo de sensor en la tabla Tipos. El tipo de sensor
  * debe proporcionarse en el cuerpo de la solicitud en formato JSON.
  *
- * @param req Solicitud HTTP que contiene un JSON con el campo `tipo`, que es el tipo de sensor a agregar.
+ * @param req Solicitud HTTP que contiene un JSON con el campo tipo, que es el tipo de sensor a agregar.
  * @param res Respuesta HTTP que devolverá un mensaje indicando si la creación fue exitosa o no.
  *
  * @return Devuelve un código de estado 200 si el tipo se creó correctamente, o 500 si hubo un error.
@@ -128,7 +128,7 @@ app.post('/sensores', async (req, res) => {
     const { uuid, email } = req.body;
     try {
         await pool.query('INSERT INTO sensores (uuid) VALUES ($1)', [uuid]);
-        await pool.query(`INSERT INTO usuario_sensores (usuario_email, sensor_uuid) VALUES ($1, $2)`, [email, uuid]);
+        await pool.query('INSERT INTO usuario_sensores (usuario_email, sensor_uuid) VALUES ($1, $2)', [email, uuid]);
         res.status(200).send({ message: "Sensor created successfully" });
     } catch (err) {
         console.log(err);
@@ -172,7 +172,7 @@ app.post('/mediciones', async (req, res) => {
         await pool.query(
             'INSERT INTO mediciones (sensor_id, valor, timestamp, tipo, location) VALUES ($1, $2, $3, $4, $5)',
             [sensorId, valor, timestamp, tipo, location ? `(${location.x}, ${location.y})` : null]
-        );
+    );
 
         res.status(200).send({ message: "Medición agregada exitosamente" });
     } catch (err) {
@@ -211,12 +211,12 @@ app.get('/latestByEmail/:email', async (req, res) => {
 
         // Crear una consulta para obtener las últimas mediciones de temperatura y ozono
         const sensorUUIDs = userQuery.rows.map(row => row.sensor_uuid);
-        
+
         if (sensorUUIDs.length > 0) {
             const latestMeasurements = await pool.query(`
-                SELECT valor, timestamp, tipo 
-                FROM mediciones 
-                WHERE sensor_id = ANY($1::text[]) 
+                SELECT valor, timestamp, tipo
+                FROM mediciones
+                WHERE sensor_id = ANY($1::text[])
                 ORDER BY timestamp DESC
             `, [sensorUUIDs]);
 
@@ -320,7 +320,7 @@ app.post('/usuarios', async (req, res) => {
     try {
         // 1. Crear una entrada de actividad
         const actividadResult = await pool.query(`
-            INSERT INTO actividad (horas, distancia) 
+            INSERT INTO actividad (horas, distancia)
             VALUES (ARRAY[0], ARRAY[0]) RETURNING id
         `);
         const actividadId = actividadResult.rows[0].id;
@@ -453,7 +453,7 @@ app.get('/alertas/:email', async (req, res) => {
  */
 app.delete('/alertas', async (req, res) => {
     try {
-        await pool.query(`DELETE FROM alertas`);
+        await pool.query('DELETE FROM alertas');
         res.status(200).send({ message: "All alerts have been deleted." });
     } catch (err) {
         console.log(err);
@@ -520,6 +520,45 @@ app.delete('/alertas/:email/:alertaId', async (req, res) => {
     }
 });
 
+app.get('/alertas/:email', async (req, res) => {
+    const { email } = req.params;
+
+    try {
+        // Consulta para obtener las alertas del usuario por email
+        const query = `
+            SELECT 
+                alertas.codigo,
+                alertas.timestamp,
+                alertas.location,
+                alertas_usuarios.usuario_email
+            FROM alertas
+            JOIN alertas_usuarios ON alertas.alertas_usuarios_id = alertas_usuarios.id
+            WHERE alertas_usuarios.usuario_email = $1
+        `;
+
+        const result = await pool.query(query, [email]);
+
+        // Verificar si hay resultados
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "No se encontraron alertas para este usuario." });
+        }
+
+        // Mapear resultados
+        const alertas = result.rows.map((row) => ({
+            codigo: row.codigo,
+            timestamp: row.timestamp,
+            location: row.location,
+            usuario_email: row.usuario_email,
+        }));
+
+        res.status(200).json(alertas);
+    } catch (err) {
+        console.error("Error al obtener las alertas:", err);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
+});
+
+
 // Resetear (eliminar todas las tablas y recrearlas)
 /**
  * @route DELETE /reset
@@ -529,20 +568,20 @@ app.delete('/alertas/:email/:alertaId', async (req, res) => {
  *
  * @description
  * Esta ruta elimina todas las tablas existentes en la base de datos y las recrea con la estructura inicial.
- * Se insertan datos por defecto en las tablas `tipos` y `sensores`. Además, se crean usuarios con
+ * Se insertan datos por defecto en las tablas tipos y sensores. Además, se crean usuarios con
  * actividad única, así como alertas y asignaciones de sensores a usuarios.
  *
- * **Estructura de las tablas creadas:**
- * - `tipos`: Contiene los tipos de mediciones (ej. temperatura, ozono).
- * - `sensores`: Almacena los sensores disponibles con su UUID.
- * - `mediciones`: Guarda las mediciones tomadas por los sensores.
- * - `actividad`: Almacena información sobre la actividad de los usuarios.
- * - `usuarios`: Contiene la información de los usuarios registrados.
- * - `alertas_usuarios`: Relaciona usuarios con alertas.
- * - `alertas`: Almacena las alertas generadas para los usuarios.
- * - `usuario_sensores`: Relaciona usuarios con los sensores asignados.
+ * *Estructura de las tablas creadas:*
+ * - tipos: Contiene los tipos de mediciones (ej. temperatura, ozono).
+ * - sensores: Almacena los sensores disponibles con su UUID.
+ * - mediciones: Guarda las mediciones tomadas por los sensores.
+ * - actividad: Almacena información sobre la actividad de los usuarios.
+ * - usuarios: Contiene la información de los usuarios registrados.
+ * - alertas_usuarios: Relaciona usuarios con alertas.
+ * - alertas: Almacena las alertas generadas para los usuarios.
+ * - usuario_sensores: Relaciona usuarios con los sensores asignados.
  *
- * **Datos por defecto insertados:**
+ * *Datos por defecto insertados:*
  * - Tipos: 'temperature', 'ozono'.
  * - Sensores: 'sensor-uuid-1', 'sensor-uuid-2', 'sensorJavier'.
  * - Tres usuarios con sus respectivas actividades y alertas.
@@ -638,15 +677,15 @@ app.delete('/reset', async (req, res) => {
         for (const user of userData) {
             // Insertando una nueva actividad para cada usuario
             const actividadResult = await pool.query(`
-                INSERT INTO actividad (horas, distancia) 
+                INSERT INTO actividad (horas, distancia)
                 VALUES (ARRAY[1.5, 2.0, 3.0], ARRAY[100.0, 200.0, 300.0]) RETURNING id
             `);
             const actividadId = actividadResult.rows[0].id;
 
             // Insertando usuario con el id único de actividad
             await pool.query(`
-                INSERT INTO usuarios (username, email, password, actividad_id) VALUES 
-                ($1, $2, $3, $4)
+                INSERT INTO usuarios (username, email, password, actividad_id) VALUES
+                    ($1, $2, $3, $4)
             `, [user.username, user.email, user.password, actividadId]);
 
             // Creando primero el registro en alertas_usuarios para obtener el ID
@@ -657,7 +696,7 @@ app.delete('/reset', async (req, res) => {
 
             // Usando el mismo ID para crear la alerta
             await pool.query(`
-                INSERT INTO alertas (alertas_usuarios_id, timestamp, location, codigo) 
+                INSERT INTO alertas (alertas_usuarios_id, timestamp, location, codigo)
                 VALUES ($1, CURRENT_TIMESTAMP, POINT(1.0, 2.0), 120)
             `, [alertaId]);
         }
