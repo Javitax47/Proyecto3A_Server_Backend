@@ -1,6 +1,6 @@
 const request = require('supertest');
-const app = require('./server');  // Importamos la app del servidor
-const pool = require('./db'); // Mockeamos el pool de la base de datos
+const app = require('../server');  // Importamos la app del servidor
+const pool = require('../db'); // Mockeamos el pool de la base de datos
 
 let server;
 

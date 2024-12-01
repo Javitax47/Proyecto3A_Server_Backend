@@ -40,7 +40,7 @@ const startAlertas = (pool) => {
 
                         // Verificar el cooldown solo para el usuario actual
                         if (currentTime - lastAlertTime >= 60000) {
-                            console.log('Valor fuera de rango: ${valor} para el tipo ${tipoMedicion}. Creando alerta con código ${alertaCodigo}...');
+                            console.log(`Valor fuera de rango: ${valor} para el tipo ${tipoMedicion}. Creando alerta con código ${alertaCodigo}...`);
 
                             try {
                                 // Obtener el ID de alertas_usuarios correspondiente al usuario
@@ -61,19 +61,19 @@ const startAlertas = (pool) => {
                                     lastAlertTimes[email] = currentTime; // Actualizar el tiempo de la última alerta para este usuario
                                     processedMeasurementIds.add(id);
 
-                                    console.log('Alerta creada para el usuario ${email} asociada al sensor ${sensor_id} con código ${alertaCodigo}');
+                                    console.log(`Alerta creada para el usuario ${email} asociada al sensor ${sensor_id} con código ${alertaCodigo}`);
                                 } else {
-                                    console.error('No se encontró el ID de alertas_usuarios para el email: ${email}');
+                                    console.error(`No se encontró el ID de alertas_usuarios para el email: ${email}`);
                                 }
                             } catch (err) {
                                 console.error(`Error al crear alerta para el usuario ${email}: `, err);
                             }
                         } else {
-                            console.log('Alerta ya enviada a ${email} recientemente, esperando para enviar otra.');
+                            console.log(`Alerta ya enviada a ${email} recientemente, esperando para enviar otra.`);
                         }
                     }
                 } else {
-                    console.log('Medición con ID ${id} ya procesada.');
+                    console.log(`Medición con ID ${id} ya procesada.`);
                 }
             }
         } catch (err) {

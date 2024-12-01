@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./server');
+const app = require('../server');
 
 let server;
 
@@ -17,7 +17,7 @@ jest.mock('./db', () => ({
     query: jest.fn(),
 }));
 
-const pool = require('./db'); // Importamos el pool para mockear las consultas
+const pool = require('../db'); // Importamos el pool para mockear las consultas
 
 describe('Servidor API', () => {
     afterEach(() => {
