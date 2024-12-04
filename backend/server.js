@@ -26,9 +26,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-resetTables();
-startAlertas();
-official_data();
+
 
 app.use('/', rutabbdd);
 app.use('/sensores', rutaSensores);

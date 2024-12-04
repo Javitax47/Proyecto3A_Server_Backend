@@ -1,5 +1,5 @@
 const express = require('express');
-const { medicion, latest } = require('../servicios/mediciones');
+const { medicion, latest, getMediciones} = require('../servicios/mediciones');
 const router = express.Router();
 
 
@@ -25,5 +25,14 @@ router.get('/latestByEmail/:email', async (req, res) => {
     }
 });
 
+router.get('/mediciones', async (req, res) => {
+    try {
+        const result = await getMediciones();
+        res.status(200).send(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: err.message });
+    }
+});
 
 module.exports = router;

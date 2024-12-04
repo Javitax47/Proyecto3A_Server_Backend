@@ -83,4 +83,15 @@ const latest = async (email) => {
     }
 };
 
-module.exports = { medicion, latest };
+const getMediciones = async () => {
+    try {
+        const medicionesQuery = await pool.query('SELECT * FROM mediciones');
+
+        return medicionesQuery.rows;
+    } catch (err) {
+        console.log(err);
+        throw new Error("Error al devolver las tablas: " + err);
+    }
+};
+
+module.exports = { medicion, latest, getMediciones };

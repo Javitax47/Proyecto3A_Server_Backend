@@ -144,7 +144,7 @@ const resetTables = async () => {
             INSERT INTO tipos (tipo) VALUES ('temperature'), ('ozono');
         `);
 
-// Insertando datos por defecto en la tabla sensores
+        // Insertando datos por defecto en la tabla sensores
         await pool.query(`
             INSERT INTO sensores (uuid) VALUES
                                             ('sensor-uuid-1'),
@@ -153,7 +153,48 @@ const resetTables = async () => {
                                             ('OFFICIAL');
         `);
 
-// Creando usuarios con actividad_id únicos
+        // Insertando mediciones por defecto
+        const medicionData = [
+            // Mediciones para sensor-uuid-1
+            { sensor_id: 'sensor-uuid-1', valor: 22.5, timestamp: '2024-12-04 10:00:00', tipo: 1, location: '(40.4168, -3.7038)' },
+            { sensor_id: 'sensor-uuid-1', valor: 23.1, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(40.4169, -3.7039)' },
+            { sensor_id: 'sensor-uuid-1', valor: 22.9, timestamp: '2024-12-04 12:00:00', tipo: 1, location: '(40.4170, -3.7040)' },
+            { sensor_id: 'sensor-uuid-1', valor: 121.3, timestamp: '2024-12-04 13:00:00', tipo: 2, location: '(40.4180, -3.7045)' },
+
+            // Mediciones para sensor-uuid-2
+            { sensor_id: 'sensor-uuid-2', valor: 110.0, timestamp: '2024-12-04 10:15:00', tipo: 2, location: '(39.4699, -0.3763)' },
+            { sensor_id: 'sensor-uuid-2', valor: 19.8, timestamp: '2024-12-04 11:15:00', tipo: 1, location: '(39.4700, -0.3765)' },
+            { sensor_id: 'sensor-uuid-2', valor: 112.5, timestamp: '2024-12-04 12:15:00', tipo: 2, location: '(39.4701, -0.3767)' },
+            { sensor_id: 'sensor-uuid-2', valor: 20.4, timestamp: '2024-12-04 13:15:00', tipo: 1, location: '(39.4702, -0.3769)' },
+
+            // Mediciones para sensorJavier
+            { sensor_id: 'sensorJavier', valor: 72.0, timestamp: '2024-12-04 09:30:00', tipo: 2, location: '(41.3879, 2.16992)' },
+            { sensor_id: 'sensorJavier', valor: 18.7, timestamp: '2024-12-04 10:30:00', tipo: 1, location: '(41.3880, 2.17000)' },
+            { sensor_id: 'sensorJavier', valor: 75.5, timestamp: '2024-12-04 11:30:00', tipo: 2, location: '(41.3885, 2.17010)' },
+            { sensor_id: 'sensorJavier', valor: 19.2, timestamp: '2024-12-04 12:30:00', tipo: 1, location: '(41.3890, 2.17020)' },
+
+            // Mediciones para OFFICIAL
+            { sensor_id: 'OFFICIAL', valor: 18.0, timestamp: '2024-12-04 08:00:00', tipo: 1, location: '(37.7749, -122.4194)' },
+            { sensor_id: 'OFFICIAL', valor: 115.0, timestamp: '2024-12-04 09:00:00', tipo: 2, location: '(37.7750, -122.4196)' },
+            { sensor_id: 'OFFICIAL', valor: 19.5, timestamp: '2024-12-04 10:00:00', tipo: 1, location: '(37.7755, -122.4198)' },
+            { sensor_id: 'OFFICIAL', valor: 120.8, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(37.7760, -122.4200)' }
+        ];
+
+        for (const medicion of medicionData) {
+            await pool.query(`
+                INSERT INTO mediciones (sensor_id, valor, timestamp, tipo, location)
+                VALUES ($1, $2, $3, $4, $5)
+            `, [medicion.sensor_id, medicion.valor, medicion.timestamp, medicion.tipo, medicion.location]);
+        }
+
+        for (const medicion of medicionData) {
+            await pool.query(`
+                INSERT INTO mediciones (sensor_id, valor, timestamp, tipo, location)
+                VALUES ($1, $2, $3, $4, $5)
+            `, [medicion.sensor_id, medicion.valor, medicion.timestamp, medicion.tipo, medicion.location]);
+        }
+
+        // Creando usuarios con actividad_id únicos
         const userData = [
             { username: 'user1', email: 'user1@example.com', password: 'pass1' },
             { username: 'user2', email: 'user2@example.com', password: 'pass2' },
@@ -202,6 +243,7 @@ const resetTables = async () => {
         throw new Error("Error reseteando las tablas: " + err);
     }
 };
+
 const getTables = async () => {
     try {
         const tiposQuery = await pool.query('SELECT * FROM tipos');
