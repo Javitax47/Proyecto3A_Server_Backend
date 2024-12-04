@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API de AIRMONITOR
-  description: API para la base de datos del proyecto irmonitor.
+  description: API para la base de datos del proyecto Airmonitor.
   version: 1.0.0
 servers:
   - url: http://localhost:13000
@@ -321,7 +321,6 @@ components:
         username: "JohnDoe"
         email: "johndoe@example.com"
         password: "hashedpassword"
-        actividad_id: 1
     AlertaUsuario:
       type: object
       properties:

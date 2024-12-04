@@ -149,14 +149,16 @@ const resetTables = async () => {
             INSERT INTO sensores (uuid) VALUES
                                             ('sensor-uuid-1'),
                                             ('sensor-uuid-2'),
-                                            ('sensorJavier');
+                                            ('sensorJavier'),
+                                            ('OFFICIAL');
         `);
 
 // Creando usuarios con actividad_id únicos
         const userData = [
             { username: 'user1', email: 'user1@example.com', password: 'pass1' },
             { username: 'user2', email: 'user2@example.com', password: 'pass2' },
-            { username: 'Javier', email: 'correo@gmail.com', password: '123' }
+            { username: 'Javier', email: 'correo@gmail.com', password: '123' },
+            { username: 'AEMET', email: 'aemet@gmail.com', password: '123' }
         ];
 
         for (const user of userData) {
@@ -191,7 +193,8 @@ const resetTables = async () => {
             INSERT INTO usuario_sensores (usuario_email, sensor_uuid) VALUES
                                                                           ('user1@example.com', 'sensor-uuid-1'),
                                                                           ('user2@example.com', 'sensor-uuid-2'),
-                                                                          ('correo@gmail.com', 'sensorJavier');
+                                                                          ('correo@gmail.com', 'sensorJavier'),
+                                                                          ('aemet@gmail.com', 'OFFICIAL');
         `);
         return { message: "Successfully reset tables with default data" };
     } catch (err) {
@@ -247,8 +250,4 @@ const eraseTables = async () => {
     }
 };
 
-module.exports = { resetTables };
-module.exports = { setupTables };
-module.exports = { createSensorType };
-module.exports = { getTables };
-module.exports = { eraseTables };
+module.exports = { createSensorType, setupTables, resetTables, getTables, eraseTables };

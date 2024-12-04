@@ -10,6 +10,8 @@ const express = require('express');
 const cors = require('cors');
 const { startAlertas } = require('./emitirAlertas');
 const { official_data } = require('./official_data');
+const { resetTables } = require('./servicios/bbdd');
+
 
 const rutabbdd = require('./rutas/bbdd');
 const rutaSensores = require('./rutas/sensores');
@@ -24,6 +26,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+resetTables();
 startAlertas();
 official_data();
 

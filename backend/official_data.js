@@ -1,9 +1,9 @@
 const axios = require('axios');
+const { medicion } = require('./servicios/mediciones');
 
 const official_data = () => {
     // Configuración de la API
     const API_URL = 'https://api.waqi.info/feed/here/?token=e30e80ec8de604abfaa0689bac8eb50e8c772706';
-    const SERVER_URL = 'http://localhost:3000/mediciones';
 
     // Función para consultar la API y enviar datos al servidor
     const fetchAirQuality = async () => {
@@ -16,7 +16,7 @@ const official_data = () => {
                 const { aqi, iaqi, city, time } = data.data;
 
                 // Estructura de la medición
-                const medicion = {
+                const medicion_oficial = {
                     sensor_id: 'OFFICIAL', // Cambia al UUID real si aplica
                     valor: iaqi.o3?.v || 0, // Valor de ozono, default 0 si no está presente
                     timestamp: time.iso,
@@ -25,8 +25,8 @@ const official_data = () => {
                 };
 
                 // Enviar medición al servidor
-                await axios.post(SERVER_URL, medicion);
-                console.log('Medición enviada:', medicion);
+                await medicion('OFFICIAL', iaqi.o3?.v || 0, time.iso, 2, `(${city.geo[0]}, ${city.geo[1]})`);
+                console.log('Medición enviada:', medicion_oficial);
             } else {
                 console.error('Error en los datos de la API:', data.data);
             }

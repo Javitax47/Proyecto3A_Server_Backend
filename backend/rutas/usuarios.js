@@ -1,7 +1,6 @@
 const express = require('express');
 const { usuarios, sensoresDeUsuarios, usuariosAutent, actualizarUsuarios } = require('../servicios/usuarios');
 
-ç
 const router = express.Router();
 
 router.post('/usuarios', async (req, res) => {

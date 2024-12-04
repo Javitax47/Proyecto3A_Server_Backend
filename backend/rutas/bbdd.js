@@ -2,6 +2,16 @@ const express = require('express');
 const { createSensorType, setupTables, resetTables, getTables, eraseTables } = require('../servicios/bbdd');
 const router = express.Router();
 
+
+
+
+
+
+
+
+
+
+
 router.post('/tipos', async (req, res) => {
     const { tipo } = req.body;
     try {

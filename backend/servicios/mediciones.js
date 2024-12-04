@@ -13,12 +13,11 @@ const medicion = async (sensorId, valor, timestamp, tipo, location) => {
             throw new Error("Sensor no encontrado");
         }
 
-        // Insertar la medición
-        const formattedLocation = `POINT(${location.x} ${location.y})`; // Formato requerido para POINT
         await pool.query(
             'INSERT INTO mediciones (sensor_id, valor, timestamp, tipo, location) VALUES ($1, $2, $3, $4, $5)',
-            [sensorId, valor, timestamp, tipo, formattedLocation]
+            [sensorId, valor, timestamp, tipo, location]
         );
+
 
         return { message: "Medición agregada exitosamente" };
     } catch (err) {
@@ -84,5 +83,4 @@ const latest = async (email) => {
     }
 };
 
-module.exports = { medicion };
-module.exports = { latest };
+module.exports = { medicion, latest };
