@@ -1,4 +1,6 @@
-const startAlertas = (pool) => {
+const pool = require('./db');
+
+const startAlertas = () => {
     const NORMAL_LIMITS = {
         temperature: { min: 0, max: 40 },
         ozono: { min: 0, max: 300 }

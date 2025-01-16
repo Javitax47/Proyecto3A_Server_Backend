@@ -9,7 +9,7 @@
 const express = require('express');
 const cors = require('cors');
 const { startAlertas } = require('./emitirAlertas');
-const { official_data } = require('./official_data');
+const { official_data, fetchAirQuality} = require('./official_data');
 const { resetTables } = require('./servicios/bbdd');
 
 
@@ -26,7 +26,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+startAlertas();
 
+fetchAirQuality();
+official_data();
+
+resetTables();
 
 app.use('/', rutabbdd);
 app.use('/sensores', rutaSensores);

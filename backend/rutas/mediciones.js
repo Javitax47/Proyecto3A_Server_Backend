@@ -25,9 +25,10 @@ router.get('/latestByEmail/:email', async (req, res) => {
     }
 });
 
-router.get('/mediciones', async (req, res) => {
+router.get('/mediciones/:fecha', async (req, res) => {
+    const { fecha } = req.params;
     try {
-        const result = await getMediciones();
+        const result = await getMediciones(fecha);
         res.status(200).send(result);
     } catch (err) {
         console.error(err);

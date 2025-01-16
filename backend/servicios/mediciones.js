@@ -83,9 +83,13 @@ const latest = async (email) => {
     }
 };
 
-const getMediciones = async () => {
+const getMediciones = async (fecha) => {
     try {
-        const medicionesQuery = await pool.query('SELECT * FROM mediciones');
+        // Filtra las mediciones por el mismo día (ignora la hora)
+        const query = 'SELECT * FROM mediciones WHERE CAST(timestamp AS DATE) = CAST($1 AS DATE)';
+
+        // Ejecuta la consulta con la fecha como parámetro
+        const medicionesQuery = await pool.query(query, [fecha]);
 
         return medicionesQuery.rows;
     } catch (err) {
@@ -93,5 +97,7 @@ const getMediciones = async () => {
         throw new Error("Error al devolver las tablas: " + err);
     }
 };
+
+
 
 module.exports = { medicion, latest, getMediciones };

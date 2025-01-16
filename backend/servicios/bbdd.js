@@ -42,7 +42,11 @@ const setupTables = async () => {
                                       username VARCHAR(100) NOT NULL,
                                       email VARCHAR(100) PRIMARY KEY,
                                       password VARCHAR(100) NOT NULL,
-                                      actividad_id INTEGER REFERENCES actividad(id)
+                                      actividad_id INTEGER REFERENCES actividad(id),
+                                      verification_token VARCHAR(255),
+                                      is_verified BOOLEAN DEFAULT FALSE,
+                                      admin BOOLEAN DEFAULT FALSE,
+                                      active BOOLEAN DEFAULT TRUE
             );
 
             CREATE TABLE alertas_usuarios (
@@ -116,7 +120,11 @@ const resetTables = async () => {
                                       username VARCHAR(100) NOT NULL,
                                       email VARCHAR(100) PRIMARY KEY,
                                       password VARCHAR(100) NOT NULL,
-                                      actividad_id INTEGER REFERENCES actividad(id)
+                                      actividad_id INTEGER REFERENCES actividad(id),
+                                      verification_token VARCHAR(255),
+                                      is_verified BOOLEAN DEFAULT FALSE,
+                                      admin BOOLEAN DEFAULT FALSE,
+                                      active BOOLEAN DEFAULT TRUE
             );
 
             CREATE TABLE alertas_usuarios (
@@ -156,36 +164,29 @@ const resetTables = async () => {
         // Insertando mediciones por defecto
         const medicionData = [
             // Mediciones para sensor-uuid-1
-            { sensor_id: 'sensor-uuid-1', valor: 22.5, timestamp: '2024-12-04 10:00:00', tipo: 1, location: '(40.4168, -3.7038)' },
-            { sensor_id: 'sensor-uuid-1', valor: 23.1, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(40.4169, -3.7039)' },
-            { sensor_id: 'sensor-uuid-1', valor: 22.9, timestamp: '2024-12-04 12:00:00', tipo: 1, location: '(40.4170, -3.7040)' },
-            { sensor_id: 'sensor-uuid-1', valor: 121.3, timestamp: '2024-12-04 13:00:00', tipo: 2, location: '(40.4180, -3.7045)' },
+            { sensor_id: 'sensor-uuid-1', valor: 22.5, timestamp: '2024-9-04 10:00:00', tipo: 1, location: '(38.9958, -0.1651)' },
+            { sensor_id: 'sensor-uuid-1', valor: 23.1, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(38.9959, -0.1652)' },
+            { sensor_id: 'sensor-uuid-1', valor: 22.9, timestamp: '2024-11-04 12:00:00', tipo: 1, location: '(38.9960, -0.1653)' },
+            { sensor_id: 'sensor-uuid-1', valor: 121.3, timestamp: '2024-12-04 13:00:00', tipo: 2, location: '(38.9961, -0.1654)' },
 
             // Mediciones para sensor-uuid-2
-            { sensor_id: 'sensor-uuid-2', valor: 110.0, timestamp: '2024-12-04 10:15:00', tipo: 2, location: '(39.4699, -0.3763)' },
-            { sensor_id: 'sensor-uuid-2', valor: 19.8, timestamp: '2024-12-04 11:15:00', tipo: 1, location: '(39.4700, -0.3765)' },
-            { sensor_id: 'sensor-uuid-2', valor: 112.5, timestamp: '2024-12-04 12:15:00', tipo: 2, location: '(39.4701, -0.3767)' },
-            { sensor_id: 'sensor-uuid-2', valor: 20.4, timestamp: '2024-12-04 13:15:00', tipo: 1, location: '(39.4702, -0.3769)' },
+            { sensor_id: 'sensor-uuid-2', valor: 110.0, timestamp: '2024-12-04 10:15:00', tipo: 2, location: '(38.9957, -0.1650)' },
+            { sensor_id: 'sensor-uuid-2', valor: 19.8, timestamp: '2024-10-04 11:15:00', tipo: 1, location: '(38.9956, -0.1649)' },
+            { sensor_id: 'sensor-uuid-2', valor: 112.5, timestamp: '2024-12-04 12:15:00', tipo: 2, location: '(38.9955, -0.1648)' },
+            { sensor_id: 'sensor-uuid-2', valor: 20.4, timestamp: '2024-11-04 13:15:00', tipo: 1, location: '(38.9954, -0.1647)' },
 
             // Mediciones para sensorJavier
-            { sensor_id: 'sensorJavier', valor: 72.0, timestamp: '2024-12-04 09:30:00', tipo: 2, location: '(41.3879, 2.16992)' },
-            { sensor_id: 'sensorJavier', valor: 18.7, timestamp: '2024-12-04 10:30:00', tipo: 1, location: '(41.3880, 2.17000)' },
-            { sensor_id: 'sensorJavier', valor: 75.5, timestamp: '2024-12-04 11:30:00', tipo: 2, location: '(41.3885, 2.17010)' },
-            { sensor_id: 'sensorJavier', valor: 19.2, timestamp: '2024-12-04 12:30:00', tipo: 1, location: '(41.3890, 2.17020)' },
+            { sensor_id: 'sensorJavier', valor: 72.0, timestamp: '2024-10-04 09:30:00', tipo: 2, location: '(38.9962, -0.1656)' },
+            { sensor_id: 'sensorJavier', valor: 18.7, timestamp: '2024-12-04 10:30:00', tipo: 1, location: '(38.9963, -0.1657)' },
+            { sensor_id: 'sensorJavier', valor: 75.5, timestamp: '2020-10-04 11:30:00', tipo: 2, location: '(38.9964, -0.1658)' },
+            { sensor_id: 'sensorJavier', valor: 19.2, timestamp: '2024-9-04 12:30:00', tipo: 1, location: '(38.9965, -0.1659)' },
 
             // Mediciones para OFFICIAL
-            { sensor_id: 'OFFICIAL', valor: 18.0, timestamp: '2024-12-04 08:00:00', tipo: 1, location: '(37.7749, -122.4194)' },
-            { sensor_id: 'OFFICIAL', valor: 115.0, timestamp: '2024-12-04 09:00:00', tipo: 2, location: '(37.7750, -122.4196)' },
-            { sensor_id: 'OFFICIAL', valor: 19.5, timestamp: '2024-12-04 10:00:00', tipo: 1, location: '(37.7755, -122.4198)' },
-            { sensor_id: 'OFFICIAL', valor: 120.8, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(37.7760, -122.4200)' }
+            { sensor_id: 'OFFICIAL', valor: 18.0, timestamp: '2024-11-04 08:00:00', tipo: 1, location: '(38.9966, -0.1660)' },
+            { sensor_id: 'OFFICIAL', valor: 115.0, timestamp: '2024-12-04 09:00:00', tipo: 2, location: '(38.9967, -0.1661)' },
+            { sensor_id: 'OFFICIAL', valor: 19.5, timestamp: '2024-11-04 10:00:00', tipo: 1, location: '(38.9968, -0.1662)' },
+            { sensor_id: 'OFFICIAL', valor: 120.8, timestamp: '2024-10-04 11:00:00', tipo: 2, location: '(38.9969, -0.1663)' }
         ];
-
-        for (const medicion of medicionData) {
-            await pool.query(`
-                INSERT INTO mediciones (sensor_id, valor, timestamp, tipo, location)
-                VALUES ($1, $2, $3, $4, $5)
-            `, [medicion.sensor_id, medicion.valor, medicion.timestamp, medicion.tipo, medicion.location]);
-        }
 
         for (const medicion of medicionData) {
             await pool.query(`
