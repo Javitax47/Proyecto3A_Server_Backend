@@ -335,7 +335,7 @@ const infoUsers = async () => {
             SELECT 
                 u.username AS usuario, 
                 u.email AS correo,
-                u.activo AS activo,
+                u.active AS activo,
                 s.uuid AS sensor,
                 m.valor AS ultima_medicion,
                 m.timestamp AS fecha
@@ -354,7 +354,7 @@ const infoUsers = async () => {
         return result.rows;
     } catch (err) {
         console.log(err);
-        throw new Error("Error reseteando las tablas: " + err);
+        throw new Error("Error recogiendo los usuarios: " + err);
     }
 };
 

@@ -161,31 +161,539 @@ const resetTables = async () => {
                                             ('OFFICIAL');
         `);
 
-        // Insertando mediciones por defecto
         const medicionData = [
-            // Mediciones para sensor-uuid-1
-            { sensor_id: 'sensor-uuid-1', valor: 22.5, timestamp: '2024-9-04 10:00:00', tipo: 1, location: '(38.9958, -0.1651)' },
-            { sensor_id: 'sensor-uuid-1', valor: 23.1, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(38.9959, -0.1652)' },
-            { sensor_id: 'sensor-uuid-1', valor: 22.9, timestamp: '2024-11-04 12:00:00', tipo: 1, location: '(38.9960, -0.1653)' },
-            { sensor_id: 'sensor-uuid-1', valor: 121.3, timestamp: '2024-12-04 13:00:00', tipo: 2, location: '(38.9961, -0.1654)' },
-
-            // Mediciones para sensor-uuid-2
-            { sensor_id: 'sensor-uuid-2', valor: 110.0, timestamp: '2024-12-04 10:15:00', tipo: 2, location: '(38.9957, -0.1650)' },
-            { sensor_id: 'sensor-uuid-2', valor: 19.8, timestamp: '2024-10-04 11:15:00', tipo: 1, location: '(38.9956, -0.1649)' },
-            { sensor_id: 'sensor-uuid-2', valor: 112.5, timestamp: '2024-12-04 12:15:00', tipo: 2, location: '(38.9955, -0.1648)' },
-            { sensor_id: 'sensor-uuid-2', valor: 20.4, timestamp: '2024-11-04 13:15:00', tipo: 1, location: '(38.9954, -0.1647)' },
-
-            // Mediciones para sensorJavier
-            { sensor_id: 'sensorJavier', valor: 72.0, timestamp: '2024-10-04 09:30:00', tipo: 2, location: '(38.9962, -0.1656)' },
-            { sensor_id: 'sensorJavier', valor: 18.7, timestamp: '2024-12-04 10:30:00', tipo: 1, location: '(38.9963, -0.1657)' },
-            { sensor_id: 'sensorJavier', valor: 75.5, timestamp: '2020-10-04 11:30:00', tipo: 2, location: '(38.9964, -0.1658)' },
-            { sensor_id: 'sensorJavier', valor: 19.2, timestamp: '2024-9-04 12:30:00', tipo: 1, location: '(38.9965, -0.1659)' },
-
-            // Mediciones para OFFICIAL
-            { sensor_id: 'OFFICIAL', valor: 18.0, timestamp: '2024-11-04 08:00:00', tipo: 1, location: '(38.9966, -0.1660)' },
-            { sensor_id: 'OFFICIAL', valor: 115.0, timestamp: '2024-12-04 09:00:00', tipo: 2, location: '(38.9967, -0.1661)' },
-            { sensor_id: 'OFFICIAL', valor: 19.5, timestamp: '2024-11-04 10:00:00', tipo: 1, location: '(38.9968, -0.1662)' },
-            { sensor_id: 'OFFICIAL', valor: 120.8, timestamp: '2024-10-04 11:00:00', tipo: 2, location: '(38.9969, -0.1663)' }
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 72.6,
+                timestamp: '2025-01-17 08:00:00',
+                tipo: 2,
+                location: '(38.9900, -0.1633)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 21.3,
+                timestamp: '2025-01-17 08:03:00',
+                tipo: 1,
+                location: '(38.9905, -0.1614)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 22.6,
+                timestamp: '2025-01-17 08:07:00',
+                tipo: 1,
+                location: '(38.9911, -0.1588)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 37.4,
+                timestamp: '2025-01-17 08:14:00',
+                tipo: 2,
+                location: '(38.9922, -0.1650)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 9.9,
+                timestamp: '2025-01-17 08:21:00',
+                tipo: 1,
+                location: '(38.9975, -0.1692)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 88.1,
+                timestamp: '2025-01-17 08:28:00',
+                tipo: 2,
+                location: '(38.9897, -0.1721)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 79.1,
+                timestamp: '2025-01-17 08:31:30',
+                tipo: 2,
+                location: '(38.9944, -0.1661)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 0.2,
+                timestamp: '2025-01-17 08:35:00',
+                tipo: 1,
+                location: '(38.9991, -0.1600)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 67.2,
+                timestamp: '2025-01-17 08:42:00',
+                tipo: 2,
+                location: '(38.9933, -0.1579)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 19.2,
+                timestamp: '2025-01-17 08:49:00',
+                tipo: 1,
+                location: '(38.9901, -0.1684)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 27.9,
+                timestamp: '2025-01-17 08:56:00',
+                tipo: 1,
+                location: '(38.9999, -0.1678)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 11.7,
+                timestamp: '2025-01-17 09:03:00',
+                tipo: 2,
+                location: '(38.9915, -0.1744)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 86.7,
+                timestamp: '2025-01-17 09:00:00',
+                tipo: 2,
+                location: '(38.9988, -0.1589)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 14.1,
+                timestamp: '2025-01-17 09:03:00',
+                tipo: 1,
+                location: '(38.9969, -0.1675)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 9.2,
+                timestamp: '2025-01-17 09:06:00',
+                tipo: 1,
+                location: '(38.9950, -0.1760)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 50.8,
+                timestamp: '2025-01-17 09:12:00',
+                tipo: 2,
+                location: '(38.9906, -0.1677)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 17.7,
+                timestamp: '2025-01-17 09:18:00',
+                tipo: 1,
+                location: '(38.9933, -0.1651)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 74.2,
+                timestamp: '2025-01-17 09:24:00',
+                tipo: 2,
+                location: '(38.9972, -0.1708)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 5.5,
+                timestamp: '2025-01-17 09:30:00',
+                tipo: 1,
+                location: '(38.9901, -0.1598)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 54.8,
+                timestamp: '2025-01-17 09:33:00',
+                tipo: 2,
+                location: '(38.9915, -0.1669)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 3.2,
+                timestamp: '2025-01-17 09:36:00',
+                tipo: 2,
+                location: '(38.9928, -0.1739)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 26.7,
+                timestamp: '2025-01-17 09:42:00',
+                tipo: 1,
+                location: '(38.9955, -0.1742)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 88.0,
+                timestamp: '2025-01-17 09:48:00',
+                tipo: 2,
+                location: '(38.9944, -0.1690)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 7.4,
+                timestamp: '2025-01-17 09:54:00',
+                tipo: 1,
+                location: '(38.9987, -0.1644)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 23.2,
+                timestamp: '2025-01-17 10:00:00',
+                tipo: 1,
+                location: '(38.9902, -0.1633)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 61.2,
+                timestamp: '2025-01-17 10:03:00',
+                tipo: 2,
+                location: '(38.9938, -0.1617)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 83.7,
+                timestamp: '2025-01-17 10:06:00',
+                tipo: 2,
+                location: '(38.9973, -0.1601)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 0.7,
+                timestamp: '2025-01-17 10:12:00',
+                tipo: 1,
+                location: '(38.9914, -0.1599)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 33.7,
+                timestamp: '2025-01-17 10:18:00',
+                tipo: 2,
+                location: '(38.9899, -0.1733)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 67.1,
+                timestamp: '2025-01-17 10:24:00',
+                tipo: 2,
+                location: '(38.9964, -0.1721)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 18.7,
+                timestamp: '2025-01-17 10:30:00',
+                tipo: 1,
+                location: '(38.9944, -0.1676)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 85.2,
+                timestamp: '2025-01-17 10:33:00',
+                tipo: 2,
+                location: '(38.9933, -0.1721)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 24.9,
+                timestamp: '2025-01-17 10:36:00',
+                tipo: 1,
+                location: '(38.9922, -0.1766)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 88.2,
+                timestamp: '2025-01-17 10:42:00',
+                tipo: 2,
+                location: '(38.9983, -0.1661)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 47.2,
+                timestamp: '2025-01-17 10:48:00',
+                tipo: 2,
+                location: '(38.9957, -0.1589)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 0.1,
+                timestamp: '2025-01-17 10:54:00',
+                tipo: 1,
+                location: '(38.9905, -0.1699)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 70.8,
+                timestamp: '2025-01-17 08:10:00',
+                tipo: 2,
+                location: '(38.9981, -0.1742)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 10.9,
+                timestamp: '2025-01-17 08:20:00',
+                tipo: 1,
+                location: '(38.9956, -0.1676)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 1.8,
+                timestamp: '2025-01-17 08:30:00',
+                tipo: 1,
+                location: '(38.9930, -0.1611)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 7.6,
+                timestamp: '2025-01-17 08:50:00',
+                tipo: 1,
+                location: '(38.9974, -0.1701)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 88.8,
+                timestamp: '2025-01-17 09:10:00',
+                tipo: 2,
+                location: '(38.9898, -0.1645)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 5.0,
+                timestamp: '2025-01-17 09:20:00',
+                tipo: 1,
+                location: '(38.9900, -0.1627)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 42.0,
+                timestamp: '2025-01-17 09:30:00',
+                tipo: 2,
+                location: '(38.9901, -0.1609)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 25.2,
+                timestamp: '2025-01-17 09:50:00',
+                tipo: 1,
+                location: '(38.9917, -0.1672)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 60.3,
+                timestamp: '2025-01-17 10:10:00',
+                tipo: 2,
+                location: '(38.9921, -0.1719)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 19.6,
+                timestamp: '2025-01-17 10:30:00',
+                tipo: 1,
+                location: '(38.9950, -0.1698)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 27.4,
+                timestamp: '2025-01-17 10:40:00',
+                tipo: 1,
+                location: '(38.9939, -0.1611)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 50.1,
+                timestamp: '2025-01-17 10:50:00',
+                tipo: 2,
+                location: '(38.9966, -0.1584)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 72.6,
+                timestamp: '2025-01-17 09:06:30',
+                tipo: 2,
+                location: '(38.9930, -0.1700)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 12.9,
+                timestamp: '2025-01-17 09:10:00',
+                tipo: 1,
+                location: '(38.9945, -0.1697)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 71.8,
+                timestamp: '2025-01-17 09:57:00',
+                tipo: 2,
+                location: '(38.9978, -0.1633)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 10.2,
+                timestamp: '2025-01-17 09:59:30',
+                tipo: 1,
+                location: '(38.9982, -0.1615)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 72.7,
+                timestamp: '2025-01-17 10:57:00',
+                tipo: 2,
+                location: '(38.9930, -0.1683)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 15.9,
+                timestamp: '2025-01-17 10:55:00',
+                tipo: 1,
+                location: '(38.9952, -0.1603)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 68.1,
+                timestamp: '2025-01-17 09:13:00',
+                tipo: 2,
+                location: '(38.9947, -0.1689)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 14.8,
+                timestamp: '2025-01-17 09:16:00',
+                tipo: 1,
+                location: '(38.9955, -0.1693)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 24.6,
+                timestamp: '2025-01-17 11:00:00',
+                tipo: 1,
+                location: '(38.9924, -0.1670)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 47.5,
+                timestamp: '2025-01-17 11:07:00',
+                tipo: 2,
+                location: '(38.9931, -0.1692)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 20.9,
+                timestamp: '2025-01-17 11:14:00',
+                tipo: 1,
+                location: '(38.9980, -0.1610)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 50.0,
+                timestamp: '2025-01-17 10:05:00',
+                tipo: 2,
+                location: '(38.9962, -0.1601)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 9.0,
+                timestamp: '2025-01-17 10:10:00',
+                tipo: 1,
+                location: '(38.9957, -0.1662)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 80.0,
+                timestamp: '2025-01-17 10:15:00',
+                tipo: 2,
+                location: '(38.9995, -0.1720)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 12.7,
+                timestamp: '2025-01-17 10:22:00',
+                tipo: 1,
+                location: '(38.9905, -0.1604)'
+            },
+            {
+                sensor_id: 'sensor-uuid-2',
+                valor: 86.6,
+                timestamp: '2025-01-17 10:28:00',
+                tipo: 2,
+                location: '(38.9922, -0.1712)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 72.7,
+                timestamp: '2025-01-17 10:57:00',
+                tipo: 2,
+                location: '(38.9930, -0.1683)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 10.6,
+                timestamp: '2025-01-17 11:03:00',
+                tipo: 1,
+                location: '(38.9927, -0.1675)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 76.7,
+                timestamp: '2025-01-17 11:09:00',
+                tipo: 2,
+                location: '(38.9909, -0.1690)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 26.1,
+                timestamp: '2025-01-17 11:15:00',
+                tipo: 1,
+                location: '(38.9971, -0.1668)'
+            },
+            {
+                sensor_id: 'sensorJavier',
+                valor: 48.9,
+                timestamp: '2025-01-17 11:21:00',
+                tipo: 2,
+                location: '(38.9953, -0.1704)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 15.9,
+                timestamp: '2025-01-17 10:55:00',
+                tipo: 1,
+                location: '(38.9952, -0.1603)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 88.8,
+                timestamp: '2025-01-17 11:05:00',
+                tipo: 2,
+                location: '(38.9960, -0.1650)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 22.0,
+                timestamp: '2025-01-17 11:15:00',
+                tipo: 1,
+                location: '(38.9922, -0.1621)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 56.9,
+                timestamp: '2025-01-17 11:25:00',
+                tipo: 2,
+                location: '(38.9931, -0.1688)'
+            },
+            {
+                sensor_id: 'OFFICIAL',
+                valor: 13.6,
+                timestamp: '2025-01-17 11:35:00',
+                tipo: 1,
+                location: '(38.9909, -0.1602)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 86.6,
+                timestamp: '2025-01-17 12:00:00',
+                tipo: 2,
+                location: '(38.9898, -0.1750)'
+            },
+            {
+                sensor_id: 'sensor-uuid-1',
+                valor: 28.8,
+                timestamp: '2025-01-17 12:05:00',
+                tipo: 1,
+                location: '(38.9911, -0.1770)'
+            }
         ];
 
         for (const medicion of medicionData) {
