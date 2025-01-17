@@ -26,12 +26,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+<<<<<<< Updated upstream
 startAlertas();
 
 fetchAirQuality();
 official_data();
 
 resetTables();
+=======
+resetTables()
+startAlertas()
+official_data()
+>>>>>>> Stashed changes
 
 app.use('/', rutabbdd);
 app.use('/sensores', rutaSensores);

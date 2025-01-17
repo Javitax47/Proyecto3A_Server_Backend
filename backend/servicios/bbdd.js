@@ -161,6 +161,7 @@ const resetTables = async () => {
                                             ('OFFICIAL');
         `);
 
+<<<<<<< Updated upstream
         const medicionData = [
             {
                 sensor_id: 'sensor-uuid-1',
@@ -695,6 +696,37 @@ const resetTables = async () => {
                 location: '(38.9911, -0.1770)'
             }
         ];
+=======
+        
+                // Insertando mediciones con coordenadas ajustadas para cubrir Valencia
+                    const medicionData = [
+                        // Mediciones para sensor-uuid-1
+                        { sensor_id: 'sensor-uuid-1', valor: 22.5, timestamp: '2024-12-04 10:00:00', tipo: 1, location: '(39.4695, -0.3750)' },
+                        { sensor_id: 'sensor-uuid-1', valor: 23.1, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(39.4698, -0.3800)' },
+                        { sensor_id: 'sensor-uuid-1', valor: 22.9, timestamp: '2024-12-04 12:00:00', tipo: 1, location: '(39.4702, -0.3705)' },
+                        { sensor_id: 'sensor-uuid-1', valor: 121.3, timestamp: '2024-12-04 13:00:00', tipo: 2, location: '(39.4710, -0.3608)' },
+
+                        // Mediciones para sensor-uuid-2
+                        { sensor_id: 'sensor-uuid-2', valor: 110.0, timestamp: '2024-12-04 10:15:00', tipo: 2, location: '(39.4750, -0.3702)' },
+                        { sensor_id: 'sensor-uuid-2', valor: 19.8, timestamp: '2024-12-04 11:15:00', tipo: 1, location: '(39.4689, -0.3654)' },
+                        { sensor_id: 'sensor-uuid-2', valor: 112.5, timestamp: '2024-12-04 12:15:00', tipo: 2, location: '(39.4721, -0.3766)' },
+                        { sensor_id: 'sensor-uuid-2', valor: 20.4, timestamp: '2024-12-04 13:15:00', tipo: 1, location: '(39.4705, -0.3688)' },
+
+                        // Mediciones para sensorJavier
+                        { sensor_id: 'sensorJavier', valor: 72.0, timestamp: '2024-12-04 09:30:00', tipo: 2, location: '(39.4703, -0.3740)' },
+                        { sensor_id: 'sensorJavier', valor: 18.7, timestamp: '2024-12-04 10:30:00', tipo: 1, location: '(39.4677, -0.3725)' },
+                        { sensor_id: 'sensorJavier', valor: 75.5, timestamp: '2024-12-04 11:30:00', tipo: 2, location: '(39.4665, -0.3624)' },
+                        { sensor_id: 'sensorJavier', valor: 19.2, timestamp: '2024-12-04 12:30:00', tipo: 1, location: '(39.4723, -0.3559)' },
+
+                        // Mediciones para OFFICIAL
+                        { sensor_id: 'OFFICIAL', valor: 18.0, timestamp: '2024-12-04 08:00:00', tipo: 1, location: '(39.4742, -0.3666)' },
+                        { sensor_id: 'OFFICIAL', valor: 115.0, timestamp: '2024-12-04 09:00:00', tipo: 2, location: '(39.4735, -0.3698)' },
+                        { sensor_id: 'OFFICIAL', valor: 19.5, timestamp: '2024-12-04 10:00:00', tipo: 1, location: '(39.4658, -0.3744)' },
+                        { sensor_id: 'OFFICIAL', valor: 120.8, timestamp: '2024-12-04 11:00:00', tipo: 2, location: '(39.4715, -0.3717)' }
+                    ];
+
+
+>>>>>>> Stashed changes
 
         for (const medicion of medicionData) {
             await pool.query(`
