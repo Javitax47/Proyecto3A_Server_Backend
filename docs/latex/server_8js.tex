@@ -1,5 +1,5 @@
-\doxysection{Referencia del archivo docker-\/compose-\/example-\/main/server.js}
-\hypertarget{server_8js}{}\label{server_8js}\index{docker-\/compose-\/example-\/main/server.js@{docker-\/compose-\/example-\/main/server.js}}
+\doxysection{Referencia del archivo backend/server.js}
+\hypertarget{server_8js}{}\label{server_8js}\index{backend/server.js@{backend/server.js}}
 
 
 API para gestionar usuarios y sensores, incluyendo funcionalidades de creación, consulta, inserción y eliminación de datos.  
@@ -9,238 +9,210 @@ API para gestionar usuarios y sensores, incluyendo funcionalidades de creación,
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_af3729ef2340758cd7d2dbc4ccc451455}{use}} (\mbox{\hyperlink{server_8js_a2481c912250fa1495a111ba4e7a66d07}{cors}}())
-\begin{DoxyCompactList}\small\item\em Habilita CORS para permitir solicitudes desde diferentes dominios. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Habilita CORS para todas las rutas. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_abfd0671860b758693e8af1b7329092b3}{use}} (express.\+json())
-\begin{DoxyCompactList}\small\item\em Habilita el middleware para procesar JSON en las solicitudes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_af456caf07e1e5a2f26508522ebc3caa6}{get}} (\textquotesingle{}/setup\textquotesingle{}, async(req, res)=$>$ \{ try \{ await pool.\+query(\`{} CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});res.\+status(200).send(\{ message\+:"{}\+Successfully created users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para crear las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{} en la base de datos si no existen. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ad58102be9bcb7f1ff2b7c6f5046c49ac}{get}} (\textquotesingle{}/latest\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} temperature\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}temperature\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} co2\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}CO2\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ temperature\+:temperature\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null, co2\+:co2\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para obtener las últimas mediciones de temperatura y CO2. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ae07be55edee34cae9dc3696c6a351366}{get}} (\textquotesingle{}/\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} sensors\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM sensors\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} users\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ sensors\+:sensors\+Query.\+rows, users\+:users\+Query.\+rows \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta principal para obtener todos los sensores y usuarios. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ada627b72d50508e9ed4b456d3bf85e42}{post}} (\textquotesingle{}/\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ type, value, timestamp, user\+Id \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} user\+Exists=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users WHERE id=\$1\textquotesingle{}, \mbox{[}user\+Id\mbox{]});if(user\+Exists.\+rows.\+length===0) \{ return res.\+status(400).send(\{ message\+:"{}\+User does not exist"{} \});\} await pool.\+query(\textquotesingle{}INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4)\textquotesingle{}, \mbox{[}type, value, timestamp, user\+Id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added sensor data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para insertar datos de un sensor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a34dc36f4b2dfd9a9ab83ebb3cc288fde}{post}} (\textquotesingle{}/users\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ username \}=req.\+body;try \{ await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1)\textquotesingle{}, \mbox{[}username\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para insertar un nuevo usuario. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_ade31ab42dea1017a8d2d44e862caa91c}{delete}} (\textquotesingle{}/users/\+:id/measurements\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ id \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await pool.\+query(\textquotesingle{}DELETE FROM sensors WHERE user\+\_\+id=\$1\textquotesingle{}, \mbox{[}id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully deleted measurements for user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para eliminar todas las mediciones asociadas a un usuario. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_af640350ec6bd6015c65a7345cf2f179c}{delete}} (\textquotesingle{}/reset\textquotesingle{}, async(req, res)=$>$ \{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});await pool.\+query(\`{} CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1),(\$2)\textquotesingle{}, \mbox{[}\textquotesingle{}user1\textquotesingle{}, \textquotesingle{}user2\textquotesingle{}\mbox{]});await pool.\+query(\`{} INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4),(\$5, \$6, \$7, \$8) \`{}, \mbox{[}\textquotesingle{}temperature\textquotesingle{}, 25.\+5, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 1, \textquotesingle{}humidity\textquotesingle{}, 60.\+0, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 2\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables with default data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para reiniciar las tablas de la base de datos. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a01acdbc62169a3111492295809c917b9}{delete}} (\textquotesingle{}/erase\textquotesingle{}, async(req, res)=$>$ \{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \})
-\begin{DoxyCompactList}\small\item\em Ruta para borrar las tablas de la base de datos. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_add27db5a76d22d45112f78c61b51a0f2}{listen}} (\mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}},()=$>$ console.\+log(\`{}Server running on port\+:\$\{\mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}}\}\`{}))
-\begin{DoxyCompactList}\small\item\em Inicia el servidor en el puerto 3000. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Middleware para parsear cuerpos de solicitudes en formato JSON. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a827ca0814b64d10f61ec4db84c95ef5d}{start\+Alertas}} ()
+\begin{DoxyCompactList}\small\item\em Inicializa los módulos principales. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_af9d74bb74d9408d69fed71546a9b1236}{fetch\+Air\+Quality}} ()
+\begin{DoxyCompactList}\small\item\em Obtiene y registra la calidad del aire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a7b85cba8718d6eba65bb0bdfcf094b56}{official\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Configura el monitoreo de datos oficiales. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a057998f22f00129a447cb9de213bba38}{reset\+Tables}} ()
+\begin{DoxyCompactList}\small\item\em Reinicia las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_aa842239d2e21b0f4bc7a1e15567e9b79}{use}} (\textquotesingle{}/\textquotesingle{}, \mbox{\hyperlink{server_8js_af0de04eb1e3c2df6f1b04f09321bdb50}{rutabbdd}})
+\begin{DoxyCompactList}\small\item\em Configuración de rutas principales. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a51c13d48f10a126231911a5d9effae84}{use}} (\textquotesingle{}/sensores\textquotesingle{}, \mbox{\hyperlink{server_8js_ac59e1410fd551000f18aae6ba2bce5a5}{ruta\+Sensores}})
+\begin{DoxyCompactList}\small\item\em Rutas para operaciones con sensores. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a8e8f2ac2142aba7f7af4765de2cf7b31}{use}} (\textquotesingle{}/\textquotesingle{}, \mbox{\hyperlink{server_8js_adc9d8ef92c5dd2c899ece21eac16e899}{ruta\+Mediciones}})
+\begin{DoxyCompactList}\small\item\em Rutas para gestionar mediciones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a29bebd53ea294eca1e9ec2efa45303d5}{use}} (\textquotesingle{}/alertas\textquotesingle{}, \mbox{\hyperlink{server_8js_a08bff265364ea55ad6f4081f826116a4}{ruta\+Alertas}})
+\begin{DoxyCompactList}\small\item\em Rutas para gestionar alertas. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} \mbox{\hyperlink{server_8js_a491e337bfda9d0f2614de3c54453cb52}{use}} (\textquotesingle{}/\textquotesingle{}, \mbox{\hyperlink{server_8js_ab21078daee78ca0d2141a78e71651836}{ruta\+Usuarios}})
+\begin{DoxyCompactList}\small\item\em Rutas para gestionar usuarios. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a0a19c65298714aed6dcfe4d9bb71b36c}{if}} (require.\+main===module)
+\begin{DoxyCompactList}\small\item\em Inicia el servidor en el puerto especificado. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}} = require(\textquotesingle{}express\textquotesingle{})
-\item 
+\begin{DoxyCompactList}\small\item\em Framework para construir aplicaciones web y APIs. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a2481c912250fa1495a111ba4e7a66d07}{cors}} = require(\textquotesingle{}cors\textquotesingle{})
-\item 
-\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}./db\textquotesingle{})
-\item 
+\begin{DoxyCompactList}\small\item\em Middleware para habilitar el intercambio de recursos de origen cruzado. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{server_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ \mbox{\hyperlink{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1}{start\+Alertas}} \} = require(\textquotesingle{}./emitir\+Alertas\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Función para iniciar el sistema de alertas basado en mediciones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_af0de04eb1e3c2df6f1b04f09321bdb50}{rutabbdd}} = require(\textquotesingle{}./rutas/bbdd\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Rutas relacionadas con las operaciones generales de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_ac59e1410fd551000f18aae6ba2bce5a5}{ruta\+Sensores}} = require(\textquotesingle{}./rutas/sensores\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Rutas para gestionar los sensores. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_adc9d8ef92c5dd2c899ece21eac16e899}{ruta\+Mediciones}} = require(\textquotesingle{}./rutas/mediciones\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Rutas para registrar y obtener mediciones. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a08bff265364ea55ad6f4081f826116a4}{ruta\+Alertas}} = require(\textquotesingle{}./rutas/alertas\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Rutas para gestionar alertas relacionadas con sensores y usuarios. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_ab21078daee78ca0d2141a78e71651836}{ruta\+Usuarios}} = require(\textquotesingle{}./rutas/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Rutas para gestionar usuarios. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}} = 3000
-\item 
+\begin{DoxyCompactList}\small\item\em Puerto en el que el servidor escucha las solicitudes. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} = \mbox{\hyperlink{server_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}}()
-\item 
+\begin{DoxyCompactList}\small\item\em Instancia principal de la aplicación Express. \end{DoxyCompactList}\item 
 module \mbox{\hyperlink{server_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Exporta la aplicación Express para pruebas o reutilización. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Descripción detallada}
 API para gestionar usuarios y sensores, incluyendo funcionalidades de creación, consulta, inserción y eliminación de datos. 
 
-Este servidor Express gestiona las tablas de usuarios y sensores, proporcionando rutas para agregar datos de sensores, obtener los datos más recientes y reiniciar las tablas en una base de datos Postgre\+SQL. 
+Este servidor Express gestiona las tablas de usuarios y sensores en una base de datos Postgre\+SQL. Proporciona rutas para interactuar con las entidades de usuarios, sensores, mediciones, alertas y resetear las tablas. 
 
 \doxysubsection{Documentación de funciones}
-\Hypertarget{server_8js_a01acdbc62169a3111492295809c917b9}\index{server.js@{server.js}!delete@{delete}}
-\index{delete@{delete}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily \label{server_8js_a01acdbc62169a3111492295809c917b9} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/erase\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+\Hypertarget{server_8js_af9d74bb74d9408d69fed71546a9b1236}\index{server.js@{server.js}!fetchAirQuality@{fetchAirQuality}}
+\index{fetchAirQuality@{fetchAirQuality}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{fetchAirQuality()}{fetchAirQuality()}}
+{\footnotesize\ttfamily \label{server_8js_af9d74bb74d9408d69fed71546a9b1236} 
+fetch\+Air\+Quality (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Ruta para borrar las tablas de la base de datos. 
+Obtiene y registra la calidad del aire. 
 
-Borra las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{} si existen.
+Obtiene y registra la calidad del aire.
 
-@route DELETE /erase \begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Éxito al eliminar las tablas. 
-
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
-\Hypertarget{server_8js_af640350ec6bd6015c65a7345cf2f179c}\index{server.js@{server.js}!delete@{delete}}
-\index{delete@{delete}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily \label{server_8js_af640350ec6bd6015c65a7345cf2f179c} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/reset\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS sensors\textquotesingle{});await pool.\+query(\textquotesingle{}DROP TABLE IF EXISTS users\textquotesingle{});await pool.\+query(\`{} CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1),(\$2)\textquotesingle{}, \mbox{[}\textquotesingle{}user1\textquotesingle{}, \textquotesingle{}user2\textquotesingle{}\mbox{]});await pool.\+query(\`{} INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4),(\$5, \$6, \$7, \$8) \`{}, \mbox{[}\textquotesingle{}temperature\textquotesingle{}, 25.\+5, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 1, \textquotesingle{}humidity\textquotesingle{}, 60.\+0, \textquotesingle{}2024-\/09-\/22T12\+:00\+:00Z\textquotesingle{}, 2\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully reset users and sensors tables with default data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+Este método consulta los datos de ozono y temperatura de la API y los envía al servidor como mediciones oficiales. \Hypertarget{server_8js_a0a19c65298714aed6dcfe4d9bb71b36c}\index{server.js@{server.js}!if@{if}}
+\index{if@{if}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}}
+{\footnotesize\ttfamily \label{server_8js_a0a19c65298714aed6dcfe4d9bb71b36c} 
+if (\begin{DoxyParamCaption}\item[{require.}]{main}{ = {\ttfamily ==~module}}\end{DoxyParamCaption})}
 
 
 
-Ruta para reiniciar las tablas de la base de datos. 
+Inicia el servidor en el puerto especificado. 
 
-Borra las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{}, y las recrea con datos predeterminados.
-
-@route DELETE /reset \begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Éxito al reiniciar las tablas. 
-
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
-\Hypertarget{server_8js_ade31ab42dea1017a8d2d44e862caa91c}\index{server.js@{server.js}!delete@{delete}}
-\index{delete@{delete}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily \label{server_8js_ade31ab42dea1017a8d2d44e862caa91c} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/users/\+:id/measurements\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ id \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await pool.\+query(\textquotesingle{}DELETE FROM sensors WHERE user\+\_\+id=\$1\textquotesingle{}, \mbox{[}id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully deleted measurements for user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+Si este módulo es el principal, lanza el servidor en el puerto definido por port. Muestra un mensaje en la consola indicando que el servidor está en funcionamiento. \Hypertarget{server_8js_a7b85cba8718d6eba65bb0bdfcf094b56}\index{server.js@{server.js}!official\_data@{official\_data}}
+\index{official\_data@{official\_data}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{official\_data()}{official\_data()}}
+{\footnotesize\ttfamily \label{server_8js_a7b85cba8718d6eba65bb0bdfcf094b56} 
+official\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Ruta para eliminar todas las mediciones asociadas a un usuario. 
+Configura el monitoreo de datos oficiales. 
 
-Borra todas las entradas en la tabla \textquotesingle{}sensors\textquotesingle{} relacionadas con un usuario específico.
+\Hypertarget{server_8js_a057998f22f00129a447cb9de213bba38}\index{server.js@{server.js}!resetTables@{resetTables}}
+\index{resetTables@{resetTables}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{resetTables()}{resetTables()}}
+{\footnotesize\ttfamily \label{server_8js_a057998f22f00129a447cb9de213bba38} 
+reset\+Tables (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-@route DELETE /users/\+:id/measurements 
-\begin{DoxyParams}{Parámetros}
-{\em \{integer\}} & id -\/ ID del usuario. \\
-\hline
-\end{DoxyParams}
+
+
+Reinicia las tablas de la base de datos. 
+
+Reinicia las tablas de la base de datos.
+
 \begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Éxito al eliminar las mediciones del usuario. 
-
-\{object\} 500 -\/ Error interno del servidor. 
+\{Object\} Mensaje de éxito. 
 \end{DoxyReturn}
-\Hypertarget{server_8js_ae07be55edee34cae9dc3696c6a351366}\index{server.js@{server.js}!get@{get}}
-\index{get@{get}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily \label{server_8js_ae07be55edee34cae9dc3696c6a351366} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} sensors\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM sensors\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} users\+Query=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users\textquotesingle{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ sensors\+:sensors\+Query.\+rows, users\+:users\+Query.\+rows \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
 
-
-
-Ruta principal para obtener todos los sensores y usuarios. 
-
-Devuelve una lista de todos los sensores y usuarios registrados en la base de datos.
-
-@route GET / \begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Datos de todos los sensores y usuarios. 
-
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
-\Hypertarget{server_8js_ad58102be9bcb7f1ff2b7c6f5046c49ac}\index{server.js@{server.js}!get@{get}}
-\index{get@{get}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily \label{server_8js_ad58102be9bcb7f1ff2b7c6f5046c49ac} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/latest\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} temperature\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}temperature\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} co2\+Query=await pool.\+query(\`{} SELECT \texorpdfstring{$\ast$}{*}FROM sensors WHERE type=\textquotesingle{}CO2\textquotesingle{} ORDER BY timestamp DESC LIMIT 1 \`{});\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} response\+Data=\{ temperature\+:temperature\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null, co2\+:co2\+Query.\+rows\mbox{[}0\mbox{]}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}null \};res.\+status(200).send(response\+Data);\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
-
-
-
-Ruta para obtener las últimas mediciones de temperatura y CO2. 
-
-Retorna los valores más recientes de los sensores de tipo \textquotesingle{}temperature\textquotesingle{} y \textquotesingle{}CO2\textquotesingle{}.
-
-@route GET /latest \begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Datos de los sensores de temperatura y CO2. 
-
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
-\Hypertarget{server_8js_af456caf07e1e5a2f26508522ebc3caa6}\index{server.js@{server.js}!get@{get}}
-\index{get@{get}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily \label{server_8js_af456caf07e1e5a2f26508522ebc3caa6} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/setup\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ await pool.\+query(\`{} CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user\+\_\+id INTEGER REFERENCES users(id) ON DELETE CASCADE);\`{});res.\+status(200).send(\{ message\+:"{}\+Successfully created users and sensors tables"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
-
-
-
-Ruta para crear las tablas \textquotesingle{}users\textquotesingle{} y \textquotesingle{}sensors\textquotesingle{} en la base de datos si no existen. 
-
-Esta ruta se usa para inicializar las tablas necesarias en la base de datos.
-
-@route GET /setup \begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Éxito en la creación de las tablas. 
-
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
-\Hypertarget{server_8js_add27db5a76d22d45112f78c61b51a0f2}\index{server.js@{server.js}!listen@{listen}}
-\index{listen@{listen}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{listen()}{listen()}}
-{\footnotesize\ttfamily \label{server_8js_add27db5a76d22d45112f78c61b51a0f2} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} listen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{server_8js_a33d36bbc039be3c3264e5df64b13df7f}{port}}}]{}{, }\item[{()}]{}{, }\item[{console.}]{log}{\`{}\+Server running on port\+:\$\{port\}\`{}}\end{DoxyParamCaption})}
-
-
-
-Inicia el servidor en el puerto 3000. 
-
-Muestra un mensaje en la consola cuando el servidor está en funcionamiento. \Hypertarget{server_8js_ada627b72d50508e9ed4b456d3bf85e42}\index{server.js@{server.js}!post@{post}}
-\index{post@{post}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{post()}{post()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \label{server_8js_ada627b72d50508e9ed4b456d3bf85e42} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ type, value, timestamp, user\+Id \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} user\+Exists=await pool.\+query(\textquotesingle{}SELECT \texorpdfstring{$\ast$}{*}FROM users WHERE id=\$1\textquotesingle{}, \mbox{[}user\+Id\mbox{]});if(user\+Exists.\+rows.\+length===0) \{ return res.\+status(400).send(\{ message\+:"{}\+User does not exist"{} \});\} await pool.\+query(\textquotesingle{}INSERT INTO sensors(type, value, timestamp, user\+\_\+id) VALUES(\$1, \$2, \$3, \$4)\textquotesingle{}, \mbox{[}type, value, timestamp, user\+Id\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added sensor data"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
-
-
-
-Ruta para insertar datos de un sensor. 
-
-Inserta una nueva medición de sensor asociada a un usuario en la base de datos.
-
-@route POST / 
-\begin{DoxyParams}{Parámetros}
-{\em \{string\}} & type -\/ Tipo de sensor (ej\+: \textquotesingle{}temperature\textquotesingle{}, \textquotesingle{}CO2\textquotesingle{}). \\
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al reiniciar las tablas. \\
 \hline
-{\em \{float\}} & value -\/ Valor de la medición. \\
-\hline
-{\em \{string\}} & timestamp -\/ Marca de tiempo de la medición. \\
-\hline
-{\em \{integer\}} & user\+Id -\/ ID del usuario asociado. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Éxito al insertar la medición del sensor. 
-
-\{object\} 400 -\/ El usuario no existe. 
-
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
-\Hypertarget{server_8js_a34dc36f4b2dfd9a9ab83ebb3cc288fde}\index{server.js@{server.js}!post@{post}}
-\index{post@{post}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{post()}{post()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \label{server_8js_a34dc36f4b2dfd9a9ab83ebb3cc288fde} 
-\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/users\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ username \}=req.\+body;try \{ await pool.\+query(\textquotesingle{}INSERT INTO users(username) VALUES(\$1)\textquotesingle{}, \mbox{[}username\mbox{]});res.\+status(200).send(\{ message\+:"{}\+Successfully added user"{} \});\} catch(err) \{ console.\+log(err);res.\+send\+Status(500);\} \}}]{}{}\end{DoxyParamCaption})}
+\end{DoxyExceptions}
+Gráfico de llamadas a esta función\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{server_8js_a057998f22f00129a447cb9de213bba38_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{server_8js_a827ca0814b64d10f61ec4db84c95ef5d}\index{server.js@{server.js}!startAlertas@{startAlertas}}
+\index{startAlertas@{startAlertas}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{startAlertas()}{startAlertas()}}
+{\footnotesize\ttfamily \label{server_8js_a827ca0814b64d10f61ec4db84c95ef5d} 
+start\+Alertas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Ruta para insertar un nuevo usuario. 
+Inicializa los módulos principales. 
 
-Crea un nuevo usuario en la tabla \textquotesingle{}users\textquotesingle{}.
 
-@route POST /users 
-\begin{DoxyParams}{Parámetros}
-{\em \{string\}} & username -\/ Nombre de usuario. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Devuelve}
-\{object\} 200 -\/ Éxito al agregar el usuario. 
+\begin{DoxyItemize}
+\item start\+Alertas\+: Inicia el monitoreo de mediciones para emitir alertas.
+\item fetch\+Air\+Quality y official\+\_\+data\+: Obtienen y registran datos de calidad del aire.
+\item reset\+Tables\+: Resetea las tablas de la base de datos. Inicia el sistema de alertas.
+\end{DoxyItemize}
 
-\{object\} 500 -\/ Error interno del servidor. 
-\end{DoxyReturn}
+Inicializa los módulos principales.
+
+Supervisa periódicamente las mediciones de sensores y genera alertas si los valores están fuera de los límites definidos. Las alertas se registran en la base de datos y se gestionan por usuario y tipo de sensor. \Hypertarget{server_8js_aa842239d2e21b0f4bc7a1e15567e9b79}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{server_8js_aa842239d2e21b0f4bc7a1e15567e9b79} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{\mbox{\hyperlink{server_8js_af0de04eb1e3c2df6f1b04f09321bdb50}{rutabbdd}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Configuración de rutas principales. 
+
+Estas rutas conectan los controladores correspondientes para realizar las operaciones CRUD en las entidades de la base de datos. Rutas para operaciones generales de la base de datos. \Hypertarget{server_8js_a8e8f2ac2142aba7f7af4765de2cf7b31}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{server_8js_a8e8f2ac2142aba7f7af4765de2cf7b31} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{\mbox{\hyperlink{server_8js_adc9d8ef92c5dd2c899ece21eac16e899}{ruta\+Mediciones}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Rutas para gestionar mediciones. 
+
+\Hypertarget{server_8js_a491e337bfda9d0f2614de3c54453cb52}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{server_8js_a491e337bfda9d0f2614de3c54453cb52} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{\mbox{\hyperlink{server_8js_ab21078daee78ca0d2141a78e71651836}{ruta\+Usuarios}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Rutas para gestionar usuarios. 
+
+\Hypertarget{server_8js_a29bebd53ea294eca1e9ec2efa45303d5}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{server_8js_a29bebd53ea294eca1e9ec2efa45303d5} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\textquotesingle{}/alertas\textquotesingle{}}]{}{, }\item[{\mbox{\hyperlink{server_8js_a08bff265364ea55ad6f4081f826116a4}{ruta\+Alertas}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Rutas para gestionar alertas. 
+
+\Hypertarget{server_8js_a51c13d48f10a126231911a5d9effae84}\index{server.js@{server.js}!use@{use}}
+\index{use@{use}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{server_8js_a51c13d48f10a126231911a5d9effae84} 
+\mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\textquotesingle{}/sensores\textquotesingle{}}]{}{, }\item[{\mbox{\hyperlink{server_8js_ac59e1410fd551000f18aae6ba2bce5a5}{ruta\+Sensores}}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Rutas para operaciones con sensores. 
+
 \Hypertarget{server_8js_af3729ef2340758cd7d2dbc4ccc451455}\index{server.js@{server.js}!use@{use}}
 \index{use@{use}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
 {\footnotesize\ttfamily \label{server_8js_af3729ef2340758cd7d2dbc4ccc451455} 
 \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{server_8js_a2481c912250fa1495a111ba4e7a66d07}{cors}}()}]{}{}\end{DoxyParamCaption})}
 
 
 
-Habilita CORS para permitir solicitudes desde diferentes dominios. 
+Habilita CORS para todas las rutas. 
 
 \Hypertarget{server_8js_abfd0671860b758693e8af1b7329092b3}\index{server.js@{server.js}!use@{use}}
 \index{use@{use}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{use()}{use()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
 {\footnotesize\ttfamily \label{server_8js_abfd0671860b758693e8af1b7329092b3} 
 \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}} use (\begin{DoxyParamCaption}\item[{express.}]{json}{()}\end{DoxyParamCaption})}
 
 
 
-Habilita el middleware para procesar JSON en las solicitudes. 
+Middleware para parsear cuerpos de solicitudes en formato JSON. 
 
 
 
@@ -251,11 +223,31 @@ Habilita el middleware para procesar JSON en las solicitudes.
 {\footnotesize\ttfamily \label{server_8js_a61cd714f583f5ea8c02710a85ef32b9c} 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} app = \mbox{\hyperlink{server_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}}()}
 
-\Hypertarget{server_8js_a2481c912250fa1495a111ba4e7a66d07}\index{server.js@{server.js}!cors@{cors}}
+
+
+Instancia principal de la aplicación Express. 
+
+\Hypertarget{server_8js_a92b303b76a3f942ea819498907d5e83c}\index{server.js@{server.js}!const@{const}}
+\index{const@{const}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily \label{server_8js_a92b303b76a3f942ea819498907d5e83c} 
+const \{ \mbox{\hyperlink{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1}{start\+Alertas}} \} = require(\textquotesingle{}./emitir\+Alertas\textquotesingle{})}
+
+
+
+Función para iniciar el sistema de alertas basado en mediciones. 
+
+Función para reiniciar las tablas de la base de datos.
+
+Funciones para obtener y registrar datos oficiales. \Hypertarget{server_8js_a2481c912250fa1495a111ba4e7a66d07}\index{server.js@{server.js}!cors@{cors}}
 \index{cors@{cors}!server.js@{server.js}}
 \doxysubsubsection{\texorpdfstring{cors}{cors}}
 {\footnotesize\ttfamily \label{server_8js_a2481c912250fa1495a111ba4e7a66d07} 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} cors = require(\textquotesingle{}cors\textquotesingle{})}
+
+
+
+Middleware para habilitar el intercambio de recursos de origen cruzado. 
 
 \Hypertarget{server_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{server.js@{server.js}!exports@{exports}}
 \index{exports@{exports}!server.js@{server.js}}
@@ -263,21 +255,77 @@ Habilita el middleware para procesar JSON en las solicitudes.
 {\footnotesize\ttfamily \label{server_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
 module exports = \mbox{\hyperlink{server_8js_a61cd714f583f5ea8c02710a85ef32b9c}{app}}}
 
+
+
+Exporta la aplicación Express para pruebas o reutilización. 
+
 \Hypertarget{server_8js_a81e570c198204c57e1ebcace4f4e6dad}\index{server.js@{server.js}!express@{express}}
 \index{express@{express}!server.js@{server.js}}
 \doxysubsubsection{\texorpdfstring{express}{express}}
 {\footnotesize\ttfamily \label{server_8js_a81e570c198204c57e1ebcace4f4e6dad} 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} express = require(\textquotesingle{}express\textquotesingle{})}
 
-\Hypertarget{server_8js_ab7ab846d8317850d72512f720c6a05e2}\index{server.js@{server.js}!pool@{pool}}
-\index{pool@{pool}!server.js@{server.js}}
-\doxysubsubsection{\texorpdfstring{pool}{pool}}
-{\footnotesize\ttfamily \label{server_8js_ab7ab846d8317850d72512f720c6a05e2} 
-\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}./db\textquotesingle{})}
+
+
+Framework para construir aplicaciones web y APIs. 
 
 \Hypertarget{server_8js_a33d36bbc039be3c3264e5df64b13df7f}\index{server.js@{server.js}!port@{port}}
 \index{port@{port}!server.js@{server.js}}
 \doxysubsubsection{\texorpdfstring{port}{port}}
 {\footnotesize\ttfamily \label{server_8js_a33d36bbc039be3c3264e5df64b13df7f} 
 \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} port = 3000}
+
+
+
+Puerto en el que el servidor escucha las solicitudes. 
+
+\Hypertarget{server_8js_a08bff265364ea55ad6f4081f826116a4}\index{server.js@{server.js}!rutaAlertas@{rutaAlertas}}
+\index{rutaAlertas@{rutaAlertas}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{rutaAlertas}{rutaAlertas}}
+{\footnotesize\ttfamily \label{server_8js_a08bff265364ea55ad6f4081f826116a4} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} ruta\+Alertas = require(\textquotesingle{}./rutas/alertas\textquotesingle{})}
+
+
+
+Rutas para gestionar alertas relacionadas con sensores y usuarios. 
+
+\Hypertarget{server_8js_af0de04eb1e3c2df6f1b04f09321bdb50}\index{server.js@{server.js}!rutabbdd@{rutabbdd}}
+\index{rutabbdd@{rutabbdd}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{rutabbdd}{rutabbdd}}
+{\footnotesize\ttfamily \label{server_8js_af0de04eb1e3c2df6f1b04f09321bdb50} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} rutabbdd = require(\textquotesingle{}./rutas/bbdd\textquotesingle{})}
+
+
+
+Rutas relacionadas con las operaciones generales de la base de datos. 
+
+\Hypertarget{server_8js_adc9d8ef92c5dd2c899ece21eac16e899}\index{server.js@{server.js}!rutaMediciones@{rutaMediciones}}
+\index{rutaMediciones@{rutaMediciones}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{rutaMediciones}{rutaMediciones}}
+{\footnotesize\ttfamily \label{server_8js_adc9d8ef92c5dd2c899ece21eac16e899} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} ruta\+Mediciones = require(\textquotesingle{}./rutas/mediciones\textquotesingle{})}
+
+
+
+Rutas para registrar y obtener mediciones. 
+
+\Hypertarget{server_8js_ac59e1410fd551000f18aae6ba2bce5a5}\index{server.js@{server.js}!rutaSensores@{rutaSensores}}
+\index{rutaSensores@{rutaSensores}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{rutaSensores}{rutaSensores}}
+{\footnotesize\ttfamily \label{server_8js_ac59e1410fd551000f18aae6ba2bce5a5} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} ruta\+Sensores = require(\textquotesingle{}./rutas/sensores\textquotesingle{})}
+
+
+
+Rutas para gestionar los sensores. 
+
+\Hypertarget{server_8js_ab21078daee78ca0d2141a78e71651836}\index{server.js@{server.js}!rutaUsuarios@{rutaUsuarios}}
+\index{rutaUsuarios@{rutaUsuarios}!server.js@{server.js}}
+\doxysubsubsection{\texorpdfstring{rutaUsuarios}{rutaUsuarios}}
+{\footnotesize\ttfamily \label{server_8js_ab21078daee78ca0d2141a78e71651836} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} ruta\+Usuarios = require(\textquotesingle{}./rutas/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}\textquotesingle{})}
+
+
+
+Rutas para gestionar usuarios. 
 

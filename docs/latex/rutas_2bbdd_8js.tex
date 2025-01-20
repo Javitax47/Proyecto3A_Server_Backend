@@ -1,0 +1,155 @@
+\doxysection{Referencia del archivo backend/rutas/bbdd.js}
+\hypertarget{rutas_2bbdd_8js}{}\label{rutas_2bbdd_8js}\index{backend/rutas/bbdd.js@{backend/rutas/bbdd.js}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2bbdd_8js_a9b62dc31f6e92eb3070eb0eb59b11459}{post}} (\textquotesingle{}/tipos\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ tipo \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}(tipo);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Crea un nuevo tipo de sensor en la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2bbdd_8js_ac9ace148e8d4a10b71870e57c55fd715}{get}} (\textquotesingle{}/setup\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Configura las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2bbdd_8js_ad05bc45c9d722d5c1ec1630010318f08}{delete}} (\textquotesingle{}/reset\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Reinicia las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2bbdd_8js_a260e778a28ef391c3464ece4145c2398}{get}} (\textquotesingle{}/\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Obtiene información sobre las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2bbdd_8js_af659bfa6a4ee7e3480a0a4e5805b5a0d}{delete}} (\textquotesingle{}/erase\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Elimina las tablas de la base de datos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{rutas_2bbdd_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}} = require(\textquotesingle{}express\textquotesingle{})
+\item 
+\mbox{\hyperlink{rutas_2bbdd_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}, \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}} \} = require(\textquotesingle{}../servicios/bbdd\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{rutas_2bbdd_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} = express.\+Router()
+\item 
+module \mbox{\hyperlink{rutas_2bbdd_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}}
+\begin{DoxyCompactList}\small\item\em Exporta el router para ser utilizado en la aplicación principal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{rutas_2bbdd_8js_af659bfa6a4ee7e3480a0a4e5805b5a0d}\index{bbdd.js@{bbdd.js}!delete@{delete}}
+\index{delete@{delete}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_af659bfa6a4ee7e3480a0a4e5805b5a0d} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/erase\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Elimina las tablas de la base de datos. 
+
+@route DELETE /erase \begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2bbdd_8js_ad05bc45c9d722d5c1ec1630010318f08}\index{bbdd.js@{bbdd.js}!delete@{delete}}
+\index{delete@{delete}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_ad05bc45c9d722d5c1ec1630010318f08} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/reset\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Reinicia las tablas de la base de datos. 
+
+@route DELETE /reset \begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2bbdd_8js_a260e778a28ef391c3464ece4145c2398}\index{bbdd.js@{bbdd.js}!get@{get}}
+\index{get@{get}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_a260e778a28ef391c3464ece4145c2398} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene información sobre las tablas de la base de datos. 
+
+@route GET / \begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con los datos de las tablas. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2bbdd_8js_ac9ace148e8d4a10b71870e57c55fd715}\index{bbdd.js@{bbdd.js}!get@{get}}
+\index{get@{get}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_ac9ace148e8d4a10b71870e57c55fd715} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/setup\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Configura las tablas de la base de datos. 
+
+@route GET /setup \begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2bbdd_8js_a9b62dc31f6e92eb3070eb0eb59b11459}\index{bbdd.js@{bbdd.js}!post@{post}}
+\index{post@{post}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{post()}{post()}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_a9b62dc31f6e92eb3070eb0eb59b11459} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/tipos\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ tipo \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}(tipo);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Crea un nuevo tipo de sensor en la base de datos. 
+
+@route POST /tipos 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & tipo -\/ Nombre del tipo de sensor a crear. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{rutas_2bbdd_8js_a92b303b76a3f942ea819498907d5e83c}\index{bbdd.js@{bbdd.js}!const@{const}}
+\index{const@{const}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_a92b303b76a3f942ea819498907d5e83c} 
+const \{ \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}, \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}} \} = require(\textquotesingle{}../servicios/bbdd\textquotesingle{})}
+
+\Hypertarget{rutas_2bbdd_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{bbdd.js@{bbdd.js}!exports@{exports}}
+\index{exports@{exports}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}}}
+
+
+
+Exporta el router para ser utilizado en la aplicación principal. 
+
+\Hypertarget{rutas_2bbdd_8js_a81e570c198204c57e1ebcace4f4e6dad}\index{bbdd.js@{bbdd.js}!express@{express}}
+\index{express@{express}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{express}{express}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_a81e570c198204c57e1ebcace4f4e6dad} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} express = require(\textquotesingle{}express\textquotesingle{})}
+
+\Hypertarget{rutas_2bbdd_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}\index{bbdd.js@{bbdd.js}!router@{router}}
+\index{router@{router}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{rutas_2bbdd_8js_a7f43c2fdec3f5b2b2d8dc821db72c367} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} router = express.\+Router()}
+

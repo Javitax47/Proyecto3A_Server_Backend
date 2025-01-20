@@ -1,0 +1,57 @@
+\doxysection{Referencia del archivo backend/emitir\+Alertas.js}
+\hypertarget{emitir_alertas_8js}{}\label{emitir_alertas_8js}\index{backend/emitirAlertas.js@{backend/emitirAlertas.js}}
+
+
+Gestión de alertas basadas en los datos de sensores.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{emitir_alertas_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}./db\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Conexión al pool de la base de datos Postgre\+SQL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1}{start\+Alertas}}
+\begin{DoxyCompactList}\small\item\em Función principal para iniciar la supervisión y generación de alertas. \end{DoxyCompactList}\item 
+module \mbox{\hyperlink{emitir_alertas_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \{ \mbox{\hyperlink{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1}{start\+Alertas}} \}
+\begin{DoxyCompactList}\small\item\em Exporta la función para iniciar la supervisión de alertas. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Gestión de alertas basadas en los datos de sensores. 
+
+Este archivo contiene la lógica para supervisar las mediciones de sensores, verificar si están dentro de los límites normales y generar alertas para los usuarios afectados. 
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{emitir_alertas_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{emitirAlertas.js@{emitirAlertas.js}!exports@{exports}}
+\index{exports@{exports}!emitirAlertas.js@{emitirAlertas.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{emitir_alertas_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \{ \mbox{\hyperlink{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1}{start\+Alertas}} \}}
+
+
+
+Exporta la función para iniciar la supervisión de alertas. 
+
+\Hypertarget{emitir_alertas_8js_ab7ab846d8317850d72512f720c6a05e2}\index{emitirAlertas.js@{emitirAlertas.js}!pool@{pool}}
+\index{pool@{pool}!emitirAlertas.js@{emitirAlertas.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{emitir_alertas_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}./db\textquotesingle{})}
+
+
+
+Conexión al pool de la base de datos Postgre\+SQL. 
+
+\Hypertarget{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1}\index{emitirAlertas.js@{emitirAlertas.js}!startAlertas@{startAlertas}}
+\index{startAlertas@{startAlertas}!emitirAlertas.js@{emitirAlertas.js}}
+\doxysubsubsection{\texorpdfstring{startAlertas}{startAlertas}}
+{\footnotesize\ttfamily \label{emitir_alertas_8js_a5ca34ad963a30ead97e0bf93f68db9b1} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} start\+Alertas}
+
+
+
+Función principal para iniciar la supervisión y generación de alertas. 
+
+Inicializa los módulos principales.
+
+Supervisa periódicamente las mediciones de sensores y genera alertas si los valores están fuera de los límites definidos. Las alertas se registran en la base de datos y se gestionan por usuario y tipo de sensor. 

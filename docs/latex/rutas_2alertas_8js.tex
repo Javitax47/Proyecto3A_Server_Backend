@@ -1,0 +1,147 @@
+\doxysection{Referencia del archivo backend/rutas/alertas.js}
+\hypertarget{rutas_2alertas_8js}{}\label{rutas_2alertas_8js}\index{backend/rutas/alertas.js@{backend/rutas/alertas.js}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2alertas_8js_a7243a9ada36809a994f8ea833f9cf49b}{delete}} (\textquotesingle{}/\textquotesingle{}, async(req, res)=$>$ \{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await borrar\+Alertas();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Elimina todas las alertas del sistema. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2alertas_8js_a35bfe3e794bd873060fe9548492a8974}{delete}} (\textquotesingle{}/\+:email\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await borrar\+Alertas\+Usuarios(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Elimina todas las alertas asociadas a un usuario específico. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2alertas_8js_a1269601321b17fad8b8df4b27eeebdfb}{delete}} (\textquotesingle{}/\+:email/\+:alerta\+Id\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email, alerta\+Id \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await borrar\+Alertas\+Especificas\+Usuario(email, alerta\+Id);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Elimina una alerta específica asociada a un usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2alertas_8js_ab7a941b69310ead90299ff22563d3a0c}{get}} (\textquotesingle{}/\+:email\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await get\+Alertas\+Usuario(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Obtiene todas las alertas asociadas a un usuario específico. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{rutas_2alertas_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}} = require(\textquotesingle{}express\textquotesingle{})
+\item 
+\mbox{\hyperlink{rutas_2alertas_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ borrar\+Alertas, borrar\+Alertas\+Usuarios, borrar\+Alertas\+Especificas\+Usuario, get\+Alertas\+Usuario \} = require(\textquotesingle{}../servicios/alertas\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{rutas_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} = express.\+Router()
+\item 
+module \mbox{\hyperlink{rutas_2alertas_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}}
+\begin{DoxyCompactList}\small\item\em Exporta el router para ser utilizado en la aplicación principal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{rutas_2alertas_8js_a7243a9ada36809a994f8ea833f9cf49b}\index{alertas.js@{alertas.js}!delete@{delete}}
+\index{delete@{delete}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_a7243a9ada36809a994f8ea833f9cf49b} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await borrar\+Alertas();res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Elimina todas las alertas del sistema. 
+
+@route DELETE / \begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2alertas_8js_a35bfe3e794bd873060fe9548492a8974}\index{alertas.js@{alertas.js}!delete@{delete}}
+\index{delete@{delete}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_a35bfe3e794bd873060fe9548492a8974} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\+:email\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await borrar\+Alertas\+Usuarios(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Elimina todas las alertas asociadas a un usuario específico. 
+
+@route DELETE /\+:email 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario cuyas alertas serán eliminadas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2alertas_8js_a1269601321b17fad8b8df4b27eeebdfb}\index{alertas.js@{alertas.js}!delete@{delete}}
+\index{delete@{delete}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_a1269601321b17fad8b8df4b27eeebdfb} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} delete (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\+:email/\+:alerta\+Id\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email, alerta\+Id \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await borrar\+Alertas\+Especificas\+Usuario(email, alerta\+Id);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Elimina una alerta específica asociada a un usuario. 
+
+@route DELETE /\+:email/\+:alerta\+Id 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+{\em \{string\}} & alerta\+Id -\/ Identificador de la alerta a eliminar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2alertas_8js_ab7a941b69310ead90299ff22563d3a0c}\index{alertas.js@{alertas.js}!get@{get}}
+\index{get@{get}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_ab7a941b69310ead90299ff22563d3a0c} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\+:email\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await get\+Alertas\+Usuario(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene todas las alertas asociadas a un usuario específico. 
+
+@route GET /\+:email 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario cuyas alertas serán consultadas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con las alertas del usuario. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{rutas_2alertas_8js_a92b303b76a3f942ea819498907d5e83c}\index{alertas.js@{alertas.js}!const@{const}}
+\index{const@{const}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_a92b303b76a3f942ea819498907d5e83c} 
+const \{ borrar\+Alertas, borrar\+Alertas\+Usuarios, borrar\+Alertas\+Especificas\+Usuario, get\+Alertas\+Usuario \} = require(\textquotesingle{}../servicios/alertas\textquotesingle{})}
+
+\Hypertarget{rutas_2alertas_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{alertas.js@{alertas.js}!exports@{exports}}
+\index{exports@{exports}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}}}
+
+
+
+Exporta el router para ser utilizado en la aplicación principal. 
+
+\Hypertarget{rutas_2alertas_8js_a81e570c198204c57e1ebcace4f4e6dad}\index{alertas.js@{alertas.js}!express@{express}}
+\index{express@{express}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{express}{express}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_a81e570c198204c57e1ebcace4f4e6dad} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} express = require(\textquotesingle{}express\textquotesingle{})}
+
+\Hypertarget{rutas_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}\index{alertas.js@{alertas.js}!router@{router}}
+\index{router@{router}!alertas.js@{alertas.js}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{rutas_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} router = express.\+Router()}
+

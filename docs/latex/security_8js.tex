@@ -1,0 +1,63 @@
+\doxysection{Referencia del archivo backend/utilidades/security.js}
+\hypertarget{security_8js}{}\label{security_8js}\index{backend/utilidades/security.js@{backend/utilidades/security.js}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{security_8js_a2c16c9815be43824ba078bea5743faff}{bcrypt}} = require(\textquotesingle{}bcryptjs\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{security_8js_ac403e2d82ca923178a592238c6c78b47}{hash\+Password}}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{security_8js_a4dc19698b4a4dc210202990ae9c773b5}{verify\+Password}}
+\item 
+module \mbox{\hyperlink{security_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{security_8js_a2c16c9815be43824ba078bea5743faff}\index{security.js@{security.js}!bcrypt@{bcrypt}}
+\index{bcrypt@{bcrypt}!security.js@{security.js}}
+\doxysubsubsection{\texorpdfstring{bcrypt}{bcrypt}}
+{\footnotesize\ttfamily \label{security_8js_a2c16c9815be43824ba078bea5743faff} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} bcrypt = require(\textquotesingle{}bcryptjs\textquotesingle{})}
+
+\Hypertarget{security_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{security.js@{security.js}!exports@{exports}}
+\index{exports@{exports}!security.js@{security.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{security_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{security_8js_ac403e2d82ca923178a592238c6c78b47}{hashPassword}},}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{security_8js_a4dc19698b4a4dc210202990ae9c773b5}{verifyPassword}}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{security_8js_ac403e2d82ca923178a592238c6c78b47}\index{security.js@{security.js}!hashPassword@{hashPassword}}
+\index{hashPassword@{hashPassword}!security.js@{security.js}}
+\doxysubsubsection{\texorpdfstring{hashPassword}{hashPassword}}
+{\footnotesize\ttfamily \label{security_8js_ac403e2d82ca923178a592238c6c78b47} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} hash\+Password}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (password)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ saltRounds\ =\ 10;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ await\ \mbox{\hyperlink{security_8js_a2c16c9815be43824ba078bea5743faff}{bcrypt}}.hash(password,\ saltRounds);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{security_8js_a4dc19698b4a4dc210202990ae9c773b5}\index{security.js@{security.js}!verifyPassword@{verifyPassword}}
+\index{verifyPassword@{verifyPassword}!security.js@{security.js}}
+\doxysubsubsection{\texorpdfstring{verifyPassword}{verifyPassword}}
+{\footnotesize\ttfamily \label{security_8js_a4dc19698b4a4dc210202990ae9c773b5} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} verify\+Password}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (password,\ hashedPassword)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ await\ \mbox{\hyperlink{security_8js_a2c16c9815be43824ba078bea5743faff}{bcrypt}}.compare(password,\ hashedPassword);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}

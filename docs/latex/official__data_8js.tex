@@ -1,0 +1,95 @@
+\doxysection{Referencia del archivo backend/official\+\_\+data.js}
+\hypertarget{official__data_8js}{}\label{official__data_8js}\index{backend/official\_data.js@{backend/official\_data.js}}
+
+
+Integración con la API de calidad del aire para obtener y registrar mediciones oficiales.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{official__data_8js_af5db5f117eb11c93d27330fd2329dfd0}{axios}} = require(\textquotesingle{}axios\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Cliente HTTP para realizar solicitudes a la API. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{official__data_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}} \} = require(\textquotesingle{}./servicios/mediciones\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Servicio para registrar mediciones en la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{official__data_8js_aa9c3f00ad89212e52eb3139dbebbfc28}{API\+\_\+\+URL}}
+\begin{DoxyCompactList}\small\item\em URL de la API de calidad del aire. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{official__data_8js_a1517d23227b127726904eb01acb08be4}{fetch\+Air\+Quality}}
+\begin{DoxyCompactList}\small\item\em Realiza una solicitud a la API y registra los datos obtenidos en el servidor. \end{DoxyCompactList}\item 
+module \mbox{\hyperlink{official__data_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+Integración con la API de calidad del aire para obtener y registrar mediciones oficiales. 
+
+Este archivo realiza solicitudes periódicas a una API externa para recopilar datos de ozono y temperatura, y registra las mediciones en el servidor. 
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{official__data_8js_aa9c3f00ad89212e52eb3139dbebbfc28}\index{official\_data.js@{official\_data.js}!API\_URL@{API\_URL}}
+\index{API\_URL@{API\_URL}!official\_data.js@{official\_data.js}}
+\doxysubsubsection{\texorpdfstring{API\_URL}{API\_URL}}
+{\footnotesize\ttfamily \label{official__data_8js_aa9c3f00ad89212e52eb3139dbebbfc28} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} API\+\_\+\+URL}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \textcolor{stringliteral}{'https:}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{const\ official\_data\ =\ ()\ =>\ \{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ setInterval(fetchAirQuality,\ 30000);\ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\}}}
+
+\end{DoxyCode}
+
+
+URL de la API de calidad del aire. 
+
+Esta API proporciona datos de ozono (O3) y temperatura, junto con otras métricas ambientales. \Hypertarget{official__data_8js_af5db5f117eb11c93d27330fd2329dfd0}\index{official\_data.js@{official\_data.js}!axios@{axios}}
+\index{axios@{axios}!official\_data.js@{official\_data.js}}
+\doxysubsubsection{\texorpdfstring{axios}{axios}}
+{\footnotesize\ttfamily \label{official__data_8js_af5db5f117eb11c93d27330fd2329dfd0} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} axios = require(\textquotesingle{}axios\textquotesingle{})}
+
+
+
+Cliente HTTP para realizar solicitudes a la API. 
+
+\Hypertarget{official__data_8js_a92b303b76a3f942ea819498907d5e83c}\index{official\_data.js@{official\_data.js}!const@{const}}
+\index{const@{const}!official\_data.js@{official\_data.js}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily \label{official__data_8js_a92b303b76a3f942ea819498907d5e83c} 
+const \{ \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}} \} = require(\textquotesingle{}./servicios/mediciones\textquotesingle{})}
+
+
+
+Servicio para registrar mediciones en la base de datos. 
+
+\Hypertarget{official__data_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{official\_data.js@{official\_data.js}!exports@{exports}}
+\index{exports@{exports}!official\_data.js@{official\_data.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{official__data_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{\ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{server_8js_a7b85cba8718d6eba65bb0bdfcf094b56}{official\_data}},\ }
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{official__data_8js_a1517d23227b127726904eb01acb08be4}{fetchAirQuality}}\ }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{official__data_8js_a1517d23227b127726904eb01acb08be4}\index{official\_data.js@{official\_data.js}!fetchAirQuality@{fetchAirQuality}}
+\index{fetchAirQuality@{fetchAirQuality}!official\_data.js@{official\_data.js}}
+\doxysubsubsection{\texorpdfstring{fetchAirQuality}{fetchAirQuality}}
+{\footnotesize\ttfamily \label{official__data_8js_a1517d23227b127726904eb01acb08be4} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} fetch\+Air\+Quality}
+
+
+
+Realiza una solicitud a la API y registra los datos obtenidos en el servidor. 
+
+Obtiene y registra la calidad del aire.
+
+Este método consulta los datos de ozono y temperatura de la API y los envía al servidor como mediciones oficiales. 

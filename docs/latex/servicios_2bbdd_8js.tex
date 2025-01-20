@@ -1,0 +1,223 @@
+\doxysection{Referencia del archivo backend/servicios/bbdd.js}
+\hypertarget{servicios_2bbdd_8js}{}\label{servicios_2bbdd_8js}\index{backend/servicios/bbdd.js@{backend/servicios/bbdd.js}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}../db\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}
+\begin{DoxyCompactList}\small\item\em Crea un nuevo tipo de sensor en la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}
+\begin{DoxyCompactList}\small\item\em Crea las tablas necesarias en la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}
+\begin{DoxyCompactList}\small\item\em Reinicia las tablas de la base de datos y las llena con datos predeterminados. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}
+\begin{DoxyCompactList}\small\item\em Obtiene los datos de todas las tablas de la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}}
+\begin{DoxyCompactList}\small\item\em Elimina todas las tablas de la base de datos. \end{DoxyCompactList}\item 
+module \mbox{\hyperlink{servicios_2bbdd_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \{ \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}, \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}\index{bbdd.js@{bbdd.js}!createSensorType@{createSensorType}}
+\index{createSensorType@{createSensorType}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{createSensorType}{createSensorType}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} create\+Sensor\+Type}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (tipo)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'INSERT\ INTO\ tipos\ (tipo)\ VALUES\ (\$1)'},\ [tipo]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ message:\ \textcolor{stringliteral}{"{}Sensor\ type\ created\ successfully"{}}\ \};}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ creating\ sensor\ type"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Crea un nuevo tipo de sensor en la base de datos. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & tipo -\/ Nombre del tipo de sensor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al crear el tipo de sensor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}\index{bbdd.js@{bbdd.js}!eraseTables@{eraseTables}}
+\index{eraseTables@{eraseTables}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{eraseTables}{eraseTables}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} erase\+Tables}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\`{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ mediciones\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ usuario\_sensores\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ alertas\_usuarios\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ sensores\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ actividad\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ alertas\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ tipos\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \`{});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ message:\ \textcolor{stringliteral}{"{}Successfully\ erased\ all\ tables"{}}\ \};}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.log(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ al\ devolver\ las\ tablas:\ "{}}\ +\ err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Elimina todas las tablas de la base de datos. 
+
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al borrar las tablas. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2bbdd_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{bbdd.js@{bbdd.js}!exports@{exports}}
+\index{exports@{exports}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \{ \mbox{\hyperlink{servicios_2bbdd_8js_aaf25ffcfebed1c77fac0af13ade0c32f}{create\+Sensor\+Type}}, \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setup\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}{reset\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}{get\+Tables}}, \mbox{\hyperlink{servicios_2bbdd_8js_aede20e7d4203823cd4bdbdf6fa8f4b83}{erase\+Tables}} \}}
+
+\Hypertarget{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2}\index{bbdd.js@{bbdd.js}!getTables@{getTables}}
+\index{getTables@{getTables}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{getTables}{getTables}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_afb8ee819d44b59b2edfde01fa3e8beb2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} get\+Tables}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ tiposQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ tipos'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ medicionesQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ mediciones'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ sensoresQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ sensores'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ usuariosQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ usuarios'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ actividadQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ actividad'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ usrSensQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ usuario\_sensores'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ usrAlertsQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ alertas\_usuarios'});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ alertasQuery\ =\ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ alertas'});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ tipos:\ tiposQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ mediciones:\ medicionesQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ sensores:\ sensoresQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}:\ usuariosQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ actividad:\ actividadQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ usuario\_sensores:\ usrSensQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ alertas\_usuarios:\ usrAlertsQuery.rows,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ alertas:\ alertasQuery.rows}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.log(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ al\ devolver\ las\ tablas:\ "{}}\ +\ err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Obtiene los datos de todas las tablas de la base de datos. 
+
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Datos de las tablas. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al obtener los datos de las tablas. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}\index{bbdd.js@{bbdd.js}!pool@{pool}}
+\index{pool@{pool}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}../db\textquotesingle{})}
+
+\Hypertarget{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b}\index{bbdd.js@{bbdd.js}!resetTables@{resetTables}}
+\index{resetTables@{resetTables}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{resetTables}{resetTables}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_aa3d030dd0cde96e6b3e56aef849a576b} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} reset\+Tables}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\`{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ mediciones\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ usuario\_sensores\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ alertas\_usuarios\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ sensores\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ actividad\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ alertas\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DROP\ TABLE\ IF\ EXISTS\ tipos\ CASCADE;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \`{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}{setupTables}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\`{}INSERT\ INTO\ tipos\ (tipo)\ VALUES\ (\textcolor{stringliteral}{'temperature'}),\ (\textcolor{stringliteral}{'ozono'});\`{});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2bbdd_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\`{}INSERT\ INTO\ sensores\ (uuid)\ VALUES\ (\textcolor{stringliteral}{'sensor-\/uuid-\/1'}),\ (\textcolor{stringliteral}{'sensor-\/uuid-\/2'});\`{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ message:\ \textcolor{stringliteral}{"{}Successfully\ reset\ tables\ with\ default\ data"{}}\ \};}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.log(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ reseteando\ las\ tablas:\ "{}}\ +\ err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Reinicia las tablas de la base de datos y las llena con datos predeterminados. 
+
+Reinicia las tablas de la base de datos.
+
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al reiniciar las tablas. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c}\index{bbdd.js@{bbdd.js}!setupTables@{setupTables}}
+\index{setupTables@{setupTables}!bbdd.js@{bbdd.js}}
+\doxysubsubsection{\texorpdfstring{setupTables}{setupTables}}
+{\footnotesize\ttfamily \label{servicios_2bbdd_8js_ad80f37e3ae01e3525ec34906538bcf3c} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} setup\+Tables}
+
+
+
+Crea las tablas necesarias en la base de datos. 
+
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al crear las tablas. \\
+\hline
+\end{DoxyExceptions}

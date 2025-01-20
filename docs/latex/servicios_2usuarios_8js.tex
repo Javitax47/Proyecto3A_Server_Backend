@@ -1,0 +1,199 @@
+\doxysection{Referencia del archivo backend/servicios/usuarios.js}
+\hypertarget{servicios_2usuarios_8js}{}\label{servicios_2usuarios_8js}\index{backend/servicios/usuarios.js@{backend/servicios/usuarios.js}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2usuarios_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}../db\textquotesingle{})
+\item 
+\mbox{\hyperlink{servicios_2usuarios_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ \mbox{\hyperlink{security_8js_ac403e2d82ca923178a592238c6c78b47}{hash\+Password}}, \mbox{\hyperlink{security_8js_a4dc19698b4a4dc210202990ae9c773b5}{verify\+Password}} \} = require("{}../utilidades/security"{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2usuarios_8js_aec4ee031fc014ed8ba9dd16a77ef78b6}{nodemailer}} = require(\textquotesingle{}nodemailer\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}
+\begin{DoxyCompactList}\small\item\em Crea un nuevo usuario en la base de datos y envía un correo de verificación. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}
+\begin{DoxyCompactList}\small\item\em Obtiene los sensores asociados a un usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}
+\begin{DoxyCompactList}\small\item\em Autentica a un usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f}{actualizar\+Usuarios}}
+\begin{DoxyCompactList}\small\item\em Actualiza la información de un usuario y envía un correo de confirmación. \end{DoxyCompactList}\item 
+module \mbox{\hyperlink{servicios_2usuarios_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \{ \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}, \mbox{\hyperlink{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f}{actualizar\+Usuarios}} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f}\index{usuarios.js@{usuarios.js}!actualizarUsuarios@{actualizarUsuarios}}
+\index{actualizarUsuarios@{actualizarUsuarios}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{actualizarUsuarios}{actualizarUsuarios}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} actualizar\+Usuarios}
+
+
+
+Actualiza la información de un usuario y envía un correo de confirmación. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & username -\/ Nuevo nombre de usuario. \\
+\hline
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+{\em \{string\}} & password -\/ Nueva contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al actualizar la información del usuario o enviar el correo de confirmación. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2usuarios_8js_a92b303b76a3f942ea819498907d5e83c}\index{usuarios.js@{usuarios.js}!const@{const}}
+\index{const@{const}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_a92b303b76a3f942ea819498907d5e83c} 
+const \{ \mbox{\hyperlink{security_8js_ac403e2d82ca923178a592238c6c78b47}{hash\+Password}}, \mbox{\hyperlink{security_8js_a4dc19698b4a4dc210202990ae9c773b5}{verify\+Password}} \} = require("{}../utilidades/security"{})}
+
+\Hypertarget{servicios_2usuarios_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{usuarios.js@{usuarios.js}!exports@{exports}}
+\index{exports@{exports}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \{ \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}, \mbox{\hyperlink{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f}{actualizar\+Usuarios}} \}}
+
+\Hypertarget{servicios_2usuarios_8js_aec4ee031fc014ed8ba9dd16a77ef78b6}\index{usuarios.js@{usuarios.js}!nodemailer@{nodemailer}}
+\index{nodemailer@{nodemailer}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{nodemailer}{nodemailer}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_aec4ee031fc014ed8ba9dd16a77ef78b6} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} nodemailer = require(\textquotesingle{}nodemailer\textquotesingle{})}
+
+\Hypertarget{servicios_2usuarios_8js_ab7ab846d8317850d72512f720c6a05e2}\index{usuarios.js@{usuarios.js}!pool@{pool}}
+\index{pool@{pool}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}../db\textquotesingle{})}
+
+\Hypertarget{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}\index{usuarios.js@{usuarios.js}!sensoresDeUsuarios@{sensoresDeUsuarios}}
+\index{sensoresDeUsuarios@{sensoresDeUsuarios}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{sensoresDeUsuarios}{sensoresDeUsuarios}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} sensores\+De\+Usuarios}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (email)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ result\ =\ await\ \mbox{\hyperlink{servicios_2usuarios_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\`{}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ SELECT\ s.uuid,\ s.id\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ FROM\ sensores\ s}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ JOIN\ usuario\_sensores\ us\ ON\ s.uuid\ =\ us.sensor\_uuid}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ WHERE\ us.usuario\_email\ =\ \$1}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \`{},\ [email]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.rows.length\ ===\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Usuario\ no\ encontrado\ o\ sin\ sensores\ asignados"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result.rows;}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.error(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Obtiene los sensores asociados a un usuario. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Array\} Lista de sensores asociados al usuario. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al obtener los sensores o si el usuario no tiene sensores asignados. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}\index{usuarios.js@{usuarios.js}!usuarios@{usuarios}}
+\index{usuarios@{usuarios}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{usuarios}{usuarios}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} usuarios}
+
+
+
+Crea un nuevo usuario en la base de datos y envía un correo de verificación. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & username -\/ Nombre del usuario. \\
+\hline
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+{\em \{string\}} & password -\/ Contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al crear el usuario o enviar el correo de verificación. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}\index{usuarios.js@{usuarios.js}!usuariosAutent@{usuariosAutent}}
+\index{usuariosAutent@{usuariosAutent}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{usuariosAutent}{usuariosAutent}}
+{\footnotesize\ttfamily \label{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} usuarios\+Autent}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (email,\ password)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ userResult\ =\ await\ \mbox{\hyperlink{servicios_2usuarios_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ usuarios\ WHERE\ email\ =\ \$1'},\ [email]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (userResult.rows.length\ ===\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Email\ o\ contraseña\ incorrectos"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ user\ =\ userResult.rows[0];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!user.is\_verified)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Please\ verify\ your\ account\ to\ log\ in"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ isPasswordValid\ =\ await\ \mbox{\hyperlink{security_8js_a4dc19698b4a4dc210202990ae9c773b5}{verifyPassword}}(password,\ user.password);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!isPasswordValid)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Email\ o\ contraseña\ incorrectos"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ user;}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.error(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Autentica a un usuario. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+{\em \{string\}} & password -\/ Contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Datos del usuario autenticado. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error si las credenciales son incorrectas o la cuenta no está verificada. \\
+\hline
+\end{DoxyExceptions}

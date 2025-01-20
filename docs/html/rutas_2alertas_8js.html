@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto3A_Server_Backend: Referencia del archivo backend/rutas/alertas.js</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Proyecto3A_Server_Backend
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li><li class="navelem"><a class="el" href="dir_f59b1cf5c6e2ae71cdc52e4ab5a83638.html">rutas</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo alertas.js</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a7243a9ada36809a994f8ea833f9cf49b" id="r_a7243a9ada36809a994f8ea833f9cf49b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7243a9ada36809a994f8ea833f9cf49b">delete</a> ('/', async(req, res)=&gt; { try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await borrarAlertas();res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} })</td></tr>
+<tr class="memdesc:a7243a9ada36809a994f8ea833f9cf49b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elimina todas las alertas del sistema.  <br /></td></tr>
+<tr class="separator:a7243a9ada36809a994f8ea833f9cf49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35bfe3e794bd873060fe9548492a8974" id="r_a35bfe3e794bd873060fe9548492a8974"><td class="memItemLeft" align="right" valign="top"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35bfe3e794bd873060fe9548492a8974">delete</a> ('/:email', async(req, res)=&gt; { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { email }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await borrarAlertasUsuarios(email);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} })</td></tr>
+<tr class="memdesc:a35bfe3e794bd873060fe9548492a8974"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elimina todas las alertas asociadas a un usuario específico.  <br /></td></tr>
+<tr class="separator:a35bfe3e794bd873060fe9548492a8974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1269601321b17fad8b8df4b27eeebdfb" id="r_a1269601321b17fad8b8df4b27eeebdfb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1269601321b17fad8b8df4b27eeebdfb">delete</a> ('/:email/:alertaId', async(req, res)=&gt; { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { email, alertaId }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await borrarAlertasEspecificasUsuario(email, alertaId);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} })</td></tr>
+<tr class="memdesc:a1269601321b17fad8b8df4b27eeebdfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elimina una alerta específica asociada a un usuario.  <br /></td></tr>
+<tr class="separator:a1269601321b17fad8b8df4b27eeebdfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a941b69310ead90299ff22563d3a0c" id="r_ab7a941b69310ead90299ff22563d3a0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7a941b69310ead90299ff22563d3a0c">get</a> ('/:email', async(req, res)=&gt; { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { email }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await getAlertasUsuario(email);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} })</td></tr>
+<tr class="memdesc:ab7a941b69310ead90299ff22563d3a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene todas las alertas asociadas a un usuario específico.  <br /></td></tr>
+<tr class="separator:ab7a941b69310ead90299ff22563d3a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a81e570c198204c57e1ebcace4f4e6dad" id="r_a81e570c198204c57e1ebcace4f4e6dad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81e570c198204c57e1ebcace4f4e6dad">express</a> = require('express')</td></tr>
+<tr class="separator:a81e570c198204c57e1ebcace4f4e6dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b303b76a3f942ea819498907d5e83c" id="r_a92b303b76a3f942ea819498907d5e83c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b303b76a3f942ea819498907d5e83c">const</a> { borrarAlertas, borrarAlertasUsuarios, borrarAlertasEspecificasUsuario, getAlertasUsuario } = require('../servicios/alertas')</td></tr>
+<tr class="separator:a92b303b76a3f942ea819498907d5e83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f43c2fdec3f5b2b2d8dc821db72c367" id="r_a7f43c2fdec3f5b2b2d8dc821db72c367"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a> = express.Router()</td></tr>
+<tr class="separator:a7f43c2fdec3f5b2b2d8dc821db72c367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4072ba4b6b56b0fb6f4801f17ab2b34" id="r_aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memItemLeft" align="right" valign="top">module&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">exports</a> = <a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a></td></tr>
+<tr class="memdesc:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exporta el router para ser utilizado en la aplicación principal.  <br /></td></tr>
+<tr class="separator:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="a7243a9ada36809a994f8ea833f9cf49b" name="a7243a9ada36809a994f8ea833f9cf49b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7243a9ada36809a994f8ea833f9cf49b">&#9670;&#160;</a></span>delete() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a> delete </td>
+          <td>(</td>
+          <td class="paramtype">'/'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">{ try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await borrarAlertas();res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Elimina todas las alertas del sistema. </p>
+<p>@route DELETE / </p><dl class="section return"><dt>Devuelve</dt><dd>{Object} Respuesta con el resultado de la operación. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error interno del servidor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a35bfe3e794bd873060fe9548492a8974" name="a35bfe3e794bd873060fe9548492a8974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35bfe3e794bd873060fe9548492a8974">&#9670;&#160;</a></span>delete() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a> delete </td>
+          <td>(</td>
+          <td class="paramtype">'/:email'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">{ <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { email }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await borrarAlertasUsuarios(email);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Elimina todas las alertas asociadas a un usuario específico. </p>
+<p>@route DELETE /:email </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario cuyas alertas serán eliminadas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Respuesta con el resultado de la operación. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error interno del servidor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1269601321b17fad8b8df4b27eeebdfb" name="a1269601321b17fad8b8df4b27eeebdfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1269601321b17fad8b8df4b27eeebdfb">&#9670;&#160;</a></span>delete() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a> delete </td>
+          <td>(</td>
+          <td class="paramtype">'/:email/:alertaId'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">{ <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { email, alertaId }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await borrarAlertasEspecificasUsuario(email, alertaId);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Elimina una alerta específica asociada a un usuario. </p>
+<p>@route DELETE /:email/:alertaId </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario. </td></tr>
+    <tr><td class="paramname">{string}</td><td>alertaId - Identificador de la alerta a eliminar. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Respuesta con el resultado de la operación. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error interno del servidor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab7a941b69310ead90299ff22563d3a0c" name="ab7a941b69310ead90299ff22563d3a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a941b69310ead90299ff22563d3a0c">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a> get </td>
+          <td>(</td>
+          <td class="paramtype">'/:email'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">{ <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { email }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await getAlertasUsuario(email);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtiene todas las alertas asociadas a un usuario específico. </p>
+<p>@route GET /:email </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario cuyas alertas serán consultadas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Respuesta con las alertas del usuario. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error interno del servidor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="a92b303b76a3f942ea819498907d5e83c" name="a92b303b76a3f942ea819498907d5e83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b303b76a3f942ea819498907d5e83c">&#9670;&#160;</a></span>const</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const { borrarAlertas, borrarAlertasUsuarios, borrarAlertasEspecificasUsuario, getAlertasUsuario } = require('../servicios/alertas')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4072ba4b6b56b0fb6f4801f17ab2b34" name="aa4072ba4b6b56b0fb6f4801f17ab2b34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">&#9670;&#160;</a></span>exports</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">module exports = <a class="el" href="servicios_2alertas_8js.html#a7f43c2fdec3f5b2b2d8dc821db72c367">router</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Exporta el router para ser utilizado en la aplicación principal. </p>
+
+</div>
+</div>
+<a id="a81e570c198204c57e1ebcace4f4e6dad" name="a81e570c198204c57e1ebcace4f4e6dad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e570c198204c57e1ebcace4f4e6dad">&#9670;&#160;</a></span>express</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> express = require('express')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f43c2fdec3f5b2b2d8dc821db72c367" name="a7f43c2fdec3f5b2b2d8dc821db72c367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f43c2fdec3f5b2b2d8dc821db72c367">&#9670;&#160;</a></span>router</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> router = express.Router()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

@@ -1,0 +1,206 @@
+\doxysection{Referencia del archivo backend/rutas/usuarios.js}
+\hypertarget{rutas_2usuarios_8js}{}\label{rutas_2usuarios_8js}\index{backend/rutas/usuarios.js@{backend/rutas/usuarios.js}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2usuarios_8js_a65d03e46921fbf84f91b88ffe7a60718}{post}} (\textquotesingle{}/mediciones\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ sensor\+Id, valor, timestamp, tipo, location \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}(sensor\+Id, valor, timestamp, tipo, location);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Crea una nueva medición en la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2usuarios_8js_a3695bf2559fcc5813c47fec9b86259c9}{get}} (\textquotesingle{}/latest\+By\+Email/\+:email\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Obtiene la última medición de un usuario por correo electrónico. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2usuarios_8js_a696641fbb2c8fa174b13d0ff95576d75}{get}} (\textquotesingle{}/mediciones/\+:fecha\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ fecha \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}}(fecha);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Obtiene las mediciones realizadas en una fecha específica. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2usuarios_8js_aea604ac3b39b452d0046c3d6de59c58d}{post}} (\textquotesingle{}/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ username, email, password \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}(username, email, password);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Gestión de usuarios y autenticación. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2usuarios_8js_a2f4ba083e09845d155120a9bcc2b396c}{get}} (\textquotesingle{}/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}/\+:email/sensores\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Obtiene sensores asociados a un usuario específico. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} \mbox{\hyperlink{rutas_2usuarios_8js_a4f24a4c12ffca6525b3b7380f99c29c3}{get}} (\textquotesingle{}/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}/login/\+:email/\+:password\textquotesingle{}, async(req, res)=$>$ \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email, password \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}(email, password);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \})
+\begin{DoxyCompactList}\small\item\em Autentica un usuario mediante correo electrónico y contraseña. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{rutas_2usuarios_8js_a81e570c198204c57e1ebcace4f4e6dad}{express}} = require(\textquotesingle{}express\textquotesingle{})
+\item 
+\mbox{\hyperlink{rutas_2usuarios_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}, \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}, \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}}, \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}, \mbox{\hyperlink{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f}{actualizar\+Usuarios}}, verificar\+Token, verificar\+Actualizacion, actualizar\+Contrasena, usuario\+Admin, info\+Users \} = require(\textquotesingle{}../servicios/mediciones\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{rutas_2usuarios_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} = express.\+Router()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de funciones}
+\Hypertarget{rutas_2usuarios_8js_a3695bf2559fcc5813c47fec9b86259c9}\index{usuarios.js@{usuarios.js}!get@{get}}
+\index{get@{get}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a3695bf2559fcc5813c47fec9b86259c9} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/latest\+By\+Email/\+:email\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene la última medición de un usuario por correo electrónico. 
+
+@route GET /latest\+By\+Email/\+:email 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con la última medición del usuario. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2usuarios_8js_a696641fbb2c8fa174b13d0ff95576d75}\index{usuarios.js@{usuarios.js}!get@{get}}
+\index{get@{get}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a696641fbb2c8fa174b13d0ff95576d75} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/mediciones/\+:fecha\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ fecha \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}}(fecha);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene las mediciones realizadas en una fecha específica. 
+
+@route GET /mediciones/\+:fecha 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & fecha -\/ Fecha para consultar las mediciones. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con las mediciones realizadas en la fecha. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2usuarios_8js_a2f4ba083e09845d155120a9bcc2b396c}\index{usuarios.js@{usuarios.js}!get@{get}}
+\index{get@{get}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a2f4ba083e09845d155120a9bcc2b396c} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}/\+:email/sensores\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}(email);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Obtiene sensores asociados a un usuario específico. 
+
+@route GET /usuarios/\+:email/sensores 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con los sensores asociados al usuario. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2usuarios_8js_a4f24a4c12ffca6525b3b7380f99c29c3}\index{usuarios.js@{usuarios.js}!get@{get}}
+\index{get@{get}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a4f24a4c12ffca6525b3b7380f99c29c3} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} get (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}/login/\+:email/\+:password\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ email, password \}=req.\+params;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}(email, password);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Autentica un usuario mediante correo electrónico y contraseña. 
+
+@route GET /usuarios/login/\+:email/\+:password 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+{\em \{string\}} & password -\/ Contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con los datos de autenticación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2usuarios_8js_a65d03e46921fbf84f91b88ffe7a60718}\index{usuarios.js@{usuarios.js}!post@{post}}
+\index{post@{post}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{post()}{post()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a65d03e46921fbf84f91b88ffe7a60718} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/mediciones\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ sensor\+Id, valor, timestamp, tipo, location \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}(sensor\+Id, valor, timestamp, tipo, location);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Crea una nueva medición en la base de datos. 
+
+@route POST /mediciones 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & sensor\+Id -\/ Identificador del sensor. \\
+\hline
+{\em \{number\}} & valor -\/ Valor medido por el sensor. \\
+\hline
+{\em \{string\}} & timestamp -\/ Marca de tiempo de la medición. \\
+\hline
+{\em \{string\}} & tipo -\/ Tipo de medición. \\
+\hline
+{\em \{\+Object\}} & location -\/ Ubicación de la medición. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{rutas_2usuarios_8js_aea604ac3b39b452d0046c3d6de59c58d}\index{usuarios.js@{usuarios.js}!post@{post}}
+\index{post@{post}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{post()}{post()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_aea604ac3b39b452d0046c3d6de59c58d} 
+\mbox{\hyperlink{servicios_2alertas_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}{router}} post (\begin{DoxyParamCaption}\item[{\textquotesingle{}/\mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}\textquotesingle{}}]{}{, }\item[{async(req, res)}]{}{, }\item[{\{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \{ username, email, password \}=req.\+body;try \{ \mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} result=await \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}(username, email, password);res.\+status(200).send(result);\} catch(err) \{ console.\+error(err);res.\+status(500).send(\{ error\+:err.\+message \});\} \}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Gestión de usuarios y autenticación. 
+
+Este módulo contiene rutas para registrar usuarios, autenticar, gestionar sensores asociados, actualizar información y administrar estados de usuarios.
+
+Registra un nuevo usuario en la base de datos.
+
+@route POST /usuarios 
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & username -\/ Nombre del usuario. \\
+\hline
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+{\em \{string\}} & password -\/ Contraseña del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Respuesta con el resultado de la operación. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error interno del servidor. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{rutas_2usuarios_8js_a92b303b76a3f942ea819498907d5e83c}\index{usuarios.js@{usuarios.js}!const@{const}}
+\index{const@{const}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a92b303b76a3f942ea819498907d5e83c} 
+const \{ \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}, \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}, \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}}, \mbox{\hyperlink{servicios_2usuarios_8js_a56516998c8304fc4f6003202b78aceb3}{usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_abfcf1ca00f328c576079baaf47d6f4db}{sensores\+De\+Usuarios}}, \mbox{\hyperlink{servicios_2usuarios_8js_ade0314919db92c333079553fd77dc631}{usuarios\+Autent}}, \mbox{\hyperlink{servicios_2usuarios_8js_a1c406df4a2c74dfbd69ec96cefb85e0f}{actualizar\+Usuarios}}, verificar\+Token, verificar\+Actualizacion, actualizar\+Contrasena, usuario\+Admin, info\+Users \} = require(\textquotesingle{}../servicios/mediciones\textquotesingle{})}
+
+\Hypertarget{rutas_2usuarios_8js_a81e570c198204c57e1ebcace4f4e6dad}\index{usuarios.js@{usuarios.js}!express@{express}}
+\index{express@{express}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{express}{express}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a81e570c198204c57e1ebcace4f4e6dad} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} express = require(\textquotesingle{}express\textquotesingle{})}
+
+\Hypertarget{rutas_2usuarios_8js_a7f43c2fdec3f5b2b2d8dc821db72c367}\index{usuarios.js@{usuarios.js}!router@{router}}
+\index{router@{router}!usuarios.js@{usuarios.js}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{rutas_2usuarios_8js_a7f43c2fdec3f5b2b2d8dc821db72c367} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} router = express.\+Router()}
+

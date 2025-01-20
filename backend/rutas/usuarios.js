@@ -1,11 +1,95 @@
-const express = require('express');
-const { usuarios, sensoresDeUsuarios, usuariosAutent, actualizarUsuarios, verificarToken, verificarActualizacion, actualizarContrasena, usuarioAdmin, infoUsers } = require('../servicios/usuarios');
+/**
+ * @file usuariosRouter.js
+ * @brief Gestión de rutas relacionadas con las mediciones en el servidor.
+ * 
+ * Este archivo define las rutas para gestionar mediciones de sensores, obtener las últimas mediciones
+ * de un usuario por correo y consultar mediciones por fecha específica.
+ */
 
+const express = require('express');
+const { medicion, latest, getMediciones, usuarios, sensoresDeUsuarios, usuariosAutent, actualizarUsuarios, verificarToken, verificarActualizacion, actualizarContrasena, usuarioAdmin, infoUsers } = require('../servicios/mediciones');
 const router = express.Router();
 
+/**
+ * @brief Crea una nueva medición en la base de datos.
+ * 
+ * @route POST /mediciones
+ * @param {string} sensorId - Identificador del sensor.
+ * @param {number} valor - Valor medido por el sensor.
+ * @param {string} timestamp - Marca de tiempo de la medición.
+ * @param {string} tipo - Tipo de medición.
+ * @param {Object} location - Ubicación de la medición.
+ * @returns {Object} Respuesta con el resultado de la operación.
+ * @throws {Error} Error interno del servidor.
+ */
+router.post('/mediciones', async (req, res) => {
+    const { sensorId, valor, timestamp, tipo, location } = req.body;
+    try {
+        const result = await medicion(sensorId, valor, timestamp, tipo, location);
+        res.status(200).send(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: err.message });
+    }
+});
+
+/**
+ * @brief Obtiene la última medición de un usuario por correo electrónico.
+ * 
+ * @route GET /latestByEmail/:email
+ * @param {string} email - Correo electrónico del usuario.
+ * @returns {Object} Respuesta con la última medición del usuario.
+ * @throws {Error} Error interno del servidor.
+ */
+router.get('/latestByEmail/:email', async (req, res) => {
+    const { email } = req.params;
+    try {
+        const result = await latest(email);
+        res.status(200).send(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: err.message });
+    }
+});
+
+/**
+ * @brief Obtiene las mediciones realizadas en una fecha específica.
+ * 
+ * @route GET /mediciones/:fecha
+ * @param {string} fecha - Fecha para consultar las mediciones.
+ * @returns {Object} Respuesta con las mediciones realizadas en la fecha.
+ * @throws {Error} Error interno del servidor.
+ */
+router.get('/mediciones/:fecha', async (req, res) => {
+    const { fecha } = req.params;
+    try {
+        const result = await getMediciones(fecha);
+        res.status(200).send(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: err.message });
+    }
+});
+
+/**
+ * @brief Gestión de usuarios y autenticación.
+ * 
+ * Este módulo contiene rutas para registrar usuarios, autenticar, gestionar sensores asociados,
+ * actualizar información y administrar estados de usuarios.
+ */
+
+/**
+ * @brief Registra un nuevo usuario en la base de datos.
+ * 
+ * @route POST /usuarios
+ * @param {string} username - Nombre del usuario.
+ * @param {string} email - Correo electrónico del usuario.
+ * @param {string} password - Contraseña del usuario.
+ * @returns {Object} Respuesta con el resultado de la operación.
+ * @throws {Error} Error interno del servidor.
+ */
 router.post('/usuarios', async (req, res) => {
     const { username, email, password } = req.body;
-
     try {
         const result = await usuarios(username, email, password);
         res.status(200).send(result);
@@ -15,6 +99,14 @@ router.post('/usuarios', async (req, res) => {
     }
 });
 
+/**
+ * @brief Obtiene sensores asociados a un usuario específico.
+ * 
+ * @route GET /usuarios/:email/sensores
+ * @param {string} email - Correo electrónico del usuario.
+ * @returns {Object} Respuesta con los sensores asociados al usuario.
+ * @throws {Error} Error interno del servidor.
+ */
 router.get('/usuarios/:email/sensores', async (req, res) => {
     const { email } = req.params;
     try {
@@ -26,6 +118,15 @@ router.get('/usuarios/:email/sensores', async (req, res) => {
     }
 });
 
+/**
+ * @brief Autentica un usuario mediante correo electrónico y contraseña.
+ * 
+ * @route GET /usuarios/login/:email/:password
+ * @param {string} email - Correo electrónico del usuario.
+ * @param {string} password - Contraseña del usuario.
+ * @returns {Object} Respuesta con los datos de autenticación.
+ * @throws {Error} Error interno del servidor.
+ */
 router.get('/usuarios/login/:email/:password', async (req, res) => {
     const { email, password } = req.params;
     try {
@@ -36,119 +137,3 @@ router.get('/usuarios/login/:email/:password', async (req, res) => {
         res.status(500).send({ error: err.message });
     }
 });
-
-router.put('/users/update', async (req, res) => {
-    const { username, email, password } = req.body;
-    try {
-        const result = await actualizarUsuarios(username, email, password);
-        res.status(200).send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: err.message });
-    }
-});
-
-router.put('/users/updatePass', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const result = await actualizarContrasena(email, password);
-        res.status(200).send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: err.message });
-    }
-});
-
-router.get('/token/:token', async (req, res) => {
-    const { token } = req.params;
-    try {
-        const result = await verificarToken(token);
-        res.status(200).send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: err.message });
-    }
-});
-
-router.get('/verificar-actualizacion/:token', async (req, res) => {
-    const { token } = req.params;
-    try {
-        const result = await verificarActualizacion(token);
-        res.status(200).send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: err.message });
-    }
-});
-
-router.get('/esAdmin/:email', async (req, res) => {
-    const { email } = req.params;
-    try {
-        const result = await usuarioAdmin(email);
-        res.status(200).send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: err.message });
-    }
-});
-
-router.get('/infoUsers', async (req, res) => {
-    try {
-        const result = await infoUsers();
-        res.status(200).send(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: err.message });
-    }
-});
-
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        // Verificar si el usuario existe y obtener el estado (habilitado/deshabilitado)
-        const result = await pool.query(
-            'SELECT email, password, activo FROM usuarios WHERE email = $1',
-            [email]
-        );
-
-        if (result.rows.length === 0) {
-            return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
-        }
-
-        const user = result.rows[0];
-
-        // Verificar si la cuenta está deshabilitada
-        if (!user.activo) {
-            return res.status(403).json({ error: 'La cuenta está deshabilitada. Contacta al administrador.' });
-        }
-
-        // Verificar contraseña (usando bcrypt o similar)
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
-        }
-
-        // Generar y devolver un token JWT (si lo usas)
-        const token = generateJWT(user.email);
-        return res.status(200).json({ token });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Error interno del servidor' });
-    }
-});
-
-router.post('/toggleUserStatus', async (req, res) => {
-    const { email, activo } = req.body;
-
-    try {
-        // Actualizar el estado del usuario en la base de datos
-        await pool.query('UPDATE usuarios SET activo = $1 WHERE email = $2', [activo, email]);
-        return res.status(200).send({ message: 'Estado del usuario actualizado correctamente.' });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).send({ error: 'Error al actualizar el estado del usuario.' });
-    }
-});
-
-module.exports = router;

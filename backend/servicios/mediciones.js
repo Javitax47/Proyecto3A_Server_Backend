@@ -1,13 +1,30 @@
+/**
+ * @file medicionesService.js
+ * @brief Funciones para gestionar mediciones en la base de datos.
+ * 
+ * Este módulo contiene funciones para agregar mediciones, obtener las últimas mediciones
+ * y consultar mediciones por fecha específica.
+ */
+
 const pool = require('../db');
 
+/**
+ * @brief Agrega una nueva medición a la base de datos.
+ * 
+ * @param {string} sensorId - Identificador único del sensor.
+ * @param {number} valor - Valor medido por el sensor.
+ * @param {string} timestamp - Fecha y hora de la medición.
+ * @param {number} tipo - Tipo de medición (1: temperatura, 2: ozono).
+ * @param {string} location - Ubicación de la medición en formato POINT (latitud, longitud).
+ * @returns {Object} Mensaje de éxito.
+ * @throws {Error} Error si faltan parámetros o al insertar la medición.
+ */
 const medicion = async (sensorId, valor, timestamp, tipo, location) => {
-    // Validar el cuerpo de la solicitud
     if (!sensorId || !valor || !timestamp || !tipo || !location) {
         throw new Error("Faltan parámetros necesarios");
     }
 
     try {
-        // Verificar si el sensor existe
         const sensorResult = await pool.query('SELECT * FROM sensores WHERE uuid = $1', [sensorId]);
         if (sensorResult.rows.length === 0) {
             throw new Error("Sensor no encontrado");
@@ -18,30 +35,33 @@ const medicion = async (sensorId, valor, timestamp, tipo, location) => {
             [sensorId, valor, timestamp, tipo, location]
         );
 
-
         return { message: "Medición agregada exitosamente" };
     } catch (err) {
-        console.error('Error al insertar la medición:', err); // Mensaje más descriptivo en el servidor
+        console.error('Error al insertar la medición:', err);
         throw new Error("Error al insertar la medición: " + err);
     }
 };
 
+/**
+ * @brief Obtiene las últimas mediciones de temperatura y ozono para un usuario.
+ * 
+ * @param {string} email - Correo electrónico del usuario.
+ * @returns {Object} Últimas mediciones de temperatura y ozono.
+ * @throws {Error} Error si no se encuentran mediciones o al ejecutar la consulta.
+ */
 const latest = async (email) => {
     try {
-        // Obtener el UUID del usuario basado en el correo electrónico
         const userQuery = await pool.query('SELECT sensor_uuid FROM usuario_sensores WHERE usuario_email = $1', [email]);
 
         if (userQuery.rows.length === 0) {
-            return res.status(404).send({ message: "User not found" });
+            throw new Error("User not found");
         }
 
-        // Inicializar objeto para almacenar las mediciones
         const latestData = {
             ozono: null,
             temperature: null
         };
 
-        // Crear una consulta para obtener las últimas mediciones de temperatura y ozono
         const sensorUUIDs = userQuery.rows.map(row => row.sensor_uuid);
 
         if (sensorUUIDs.length > 0) {
@@ -52,30 +72,29 @@ const latest = async (email) => {
                 ORDER BY timestamp DESC
             `, [sensorUUIDs]);
 
-            // Procesar las mediciones obtenidas
             for (const measurement of latestMeasurements.rows) {
-                if (measurement.tipo === 1 && !latestData.temperature) { // 1 para temperatura
+                if (measurement.tipo === 1 && !latestData.temperature) {
                     latestData.temperature = {
                         value: measurement.valor,
                         timestamp: measurement.timestamp
                     };
-                } else if (measurement.tipo === 2 && !latestData.ozono) { // 2 para ozono
+                } else if (measurement.tipo === 2 && !latestData.ozono) {
                     latestData.ozono = {
                         value: measurement.valor,
                         timestamp: measurement.timestamp
                     };
                 }
-                // Salir del bucle si ambas mediciones han sido encontradas
+
                 if (latestData.temperature && latestData.ozono) {
                     break;
                 }
             }
         }
 
-        // Verifica si se encontraron las mediciones
         if (!latestData.temperature && !latestData.ozono) {
             throw new Error("No measurements found for this user");
         }
+
         return latestData;
     } catch (err) {
         console.log(err);
@@ -83,12 +102,16 @@ const latest = async (email) => {
     }
 };
 
+/**
+ * @brief Obtiene mediciones realizadas en una fecha específica.
+ * 
+ * @param {string} fecha - Fecha en formato YYYY-MM-DD.
+ * @returns {Array} Lista de mediciones realizadas en la fecha proporcionada.
+ * @throws {Error} Error al obtener las mediciones.
+ */
 const getMediciones = async (fecha) => {
     try {
-        // Filtra las mediciones por el mismo día (ignora la hora)
         const query = 'SELECT * FROM mediciones WHERE CAST(timestamp AS DATE) = CAST($1 AS DATE)';
-
-        // Ejecuta la consulta con la fecha como parámetro
         const medicionesQuery = await pool.query(query, [fecha]);
 
         return medicionesQuery.rows;
@@ -97,7 +120,5 @@ const getMediciones = async (fecha) => {
         throw new Error("Error al devolver las tablas: " + err);
     }
 };
-
-
 
 module.exports = { medicion, latest, getMediciones };

@@ -1,0 +1,69 @@
+\doxysection{Referencia del archivo backend/servicios/sensores.js}
+\hypertarget{servicios_2sensores_8js}{}\label{servicios_2sensores_8js}\index{backend/servicios/sensores.js@{backend/servicios/sensores.js}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2sensores_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}../db\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2sensores_8js_a2153e582b5069ff975abb47d088c1323}{create\+Sensor}}
+\begin{DoxyCompactList}\small\item\em Crea un nuevo sensor y lo asocia a un usuario en la base de datos. \end{DoxyCompactList}\item 
+module \mbox{\hyperlink{servicios_2sensores_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \{ \mbox{\hyperlink{servicios_2sensores_8js_a2153e582b5069ff975abb47d088c1323}{create\+Sensor}} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{servicios_2sensores_8js_a2153e582b5069ff975abb47d088c1323}\index{sensores.js@{sensores.js}!createSensor@{createSensor}}
+\index{createSensor@{createSensor}!sensores.js@{sensores.js}}
+\doxysubsubsection{\texorpdfstring{createSensor}{createSensor}}
+{\footnotesize\ttfamily \label{servicios_2sensores_8js_a2153e582b5069ff975abb47d088c1323} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} create\+Sensor}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (uuid,\ email)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2sensores_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'INSERT\ INTO\ sensores\ (uuid)\ VALUES\ (\$1)'},\ [uuid]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2sensores_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'INSERT\ INTO\ usuario\_sensores\ (usuario\_email,\ sensor\_uuid)\ VALUES\ (\$1,\ \$2)'},\ [email,\ uuid]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ message:\ \textcolor{stringliteral}{"{}Sensor\ created\ successfully"{}}\ \};}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.log(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ creating\ sensor:\ "{}}\ +\ err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Crea un nuevo sensor y lo asocia a un usuario en la base de datos. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & uuid -\/ Identificador único del sensor. \\
+\hline
+{\em \{string\}} & email -\/ Correo electrónico del usuario al que se asociará el sensor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al crear el sensor o asociarlo al usuario. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2sensores_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{sensores.js@{sensores.js}!exports@{exports}}
+\index{exports@{exports}!sensores.js@{sensores.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{servicios_2sensores_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \{ \mbox{\hyperlink{servicios_2sensores_8js_a2153e582b5069ff975abb47d088c1323}{create\+Sensor}} \}}
+
+\Hypertarget{servicios_2sensores_8js_ab7ab846d8317850d72512f720c6a05e2}\index{sensores.js@{sensores.js}!pool@{pool}}
+\index{pool@{pool}!sensores.js@{sensores.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{servicios_2sensores_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}../db\textquotesingle{})}
+

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proyecto3A_Server_Backend: Referencia del archivo docker-compose-example-main/server.js</title>
+<title>Proyecto3A_Server_Backend: Referencia del archivo backend/server.js</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_8ce5d9f016b89220610f3a265c3835d9.html">docker-compose-example-main</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -101,368 +101,318 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funciones</h2></td></tr>
 <tr class="memitem:af3729ef2340758cd7d2dbc4ccc451455" id="r_af3729ef2340758cd7d2dbc4ccc451455"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af3729ef2340758cd7d2dbc4ccc451455">use</a> (<a class="el" href="#a2481c912250fa1495a111ba4e7a66d07">cors</a>())</td></tr>
-<tr class="memdesc:af3729ef2340758cd7d2dbc4ccc451455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita CORS para permitir solicitudes desde diferentes dominios.  <br /></td></tr>
+<tr class="memdesc:af3729ef2340758cd7d2dbc4ccc451455"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita CORS para todas las rutas.  <br /></td></tr>
 <tr class="separator:af3729ef2340758cd7d2dbc4ccc451455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfd0671860b758693e8af1b7329092b3" id="r_abfd0671860b758693e8af1b7329092b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfd0671860b758693e8af1b7329092b3">use</a> (express.json())</td></tr>
-<tr class="memdesc:abfd0671860b758693e8af1b7329092b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Habilita el middleware para procesar JSON en las solicitudes.  <br /></td></tr>
+<tr class="memdesc:abfd0671860b758693e8af1b7329092b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Middleware para parsear cuerpos de solicitudes en formato JSON.  <br /></td></tr>
 <tr class="separator:abfd0671860b758693e8af1b7329092b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af456caf07e1e5a2f26508522ebc3caa6" id="r_af456caf07e1e5a2f26508522ebc3caa6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af456caf07e1e5a2f26508522ebc3caa6">get</a> ('/setup', async(req, res)=&gt; { try { await pool.query(` CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user_id INTEGER REFERENCES users(id) ON DELETE CASCADE);`);res.status(200).send({ message:&quot;Successfully created users and sensors tables&quot; });} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:af456caf07e1e5a2f26508522ebc3caa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para crear las tablas 'users' y 'sensors' en la base de datos si no existen.  <br /></td></tr>
-<tr class="separator:af456caf07e1e5a2f26508522ebc3caa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad58102be9bcb7f1ff2b7c6f5046c49ac" id="r_ad58102be9bcb7f1ff2b7c6f5046c49ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad58102be9bcb7f1ff2b7c6f5046c49ac">get</a> ('/latest', async(req, res)=&gt; { try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> temperatureQuery=await pool.query(` SELECT *FROM sensors WHERE type='temperature' ORDER BY timestamp DESC LIMIT 1 `);<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> co2Query=await pool.query(` SELECT *FROM sensors WHERE type='CO2' ORDER BY timestamp DESC LIMIT 1 `);<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> responseData={ temperature:temperatureQuery.rows[0]||null, co2:co2Query.rows[0]||null };res.status(200).send(responseData);} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:ad58102be9bcb7f1ff2b7c6f5046c49ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para obtener las últimas mediciones de temperatura y CO2.  <br /></td></tr>
-<tr class="separator:ad58102be9bcb7f1ff2b7c6f5046c49ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae07be55edee34cae9dc3696c6a351366" id="r_ae07be55edee34cae9dc3696c6a351366"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae07be55edee34cae9dc3696c6a351366">get</a> ('/', async(req, res)=&gt; { try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> sensorsQuery=await pool.query('SELECT *FROM sensors');<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> usersQuery=await pool.query('SELECT *FROM users');<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> responseData={ sensors:sensorsQuery.rows, users:usersQuery.rows };res.status(200).send(responseData);} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:ae07be55edee34cae9dc3696c6a351366"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta principal para obtener todos los sensores y usuarios.  <br /></td></tr>
-<tr class="separator:ae07be55edee34cae9dc3696c6a351366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada627b72d50508e9ed4b456d3bf85e42" id="r_ada627b72d50508e9ed4b456d3bf85e42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada627b72d50508e9ed4b456d3bf85e42">post</a> ('/', async(req, res)=&gt; { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { type, value, timestamp, userId }=req.body;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> userExists=await pool.query('SELECT *FROM users WHERE id=$1', [userId]);if(userExists.rows.length===0) { return res.status(400).send({ message:&quot;User does not exist&quot; });} await pool.query('INSERT INTO sensors(type, value, timestamp, user_id) VALUES($1, $2, $3, $4)', [type, value, timestamp, userId]);res.status(200).send({ message:&quot;Successfully added sensor data&quot; });} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:ada627b72d50508e9ed4b456d3bf85e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para insertar datos de un sensor.  <br /></td></tr>
-<tr class="separator:ada627b72d50508e9ed4b456d3bf85e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34dc36f4b2dfd9a9ab83ebb3cc288fde" id="r_a34dc36f4b2dfd9a9ab83ebb3cc288fde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34dc36f4b2dfd9a9ab83ebb3cc288fde">post</a> ('/users', async(req, res)=&gt; { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { username }=req.body;try { await pool.query('INSERT INTO users(username) VALUES($1)', [username]);res.status(200).send({ message:&quot;Successfully added user&quot; });} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:a34dc36f4b2dfd9a9ab83ebb3cc288fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para insertar un nuevo usuario.  <br /></td></tr>
-<tr class="separator:a34dc36f4b2dfd9a9ab83ebb3cc288fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade31ab42dea1017a8d2d44e862caa91c" id="r_ade31ab42dea1017a8d2d44e862caa91c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade31ab42dea1017a8d2d44e862caa91c">delete</a> ('/users/:id/measurements', async(req, res)=&gt; { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { id }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await pool.query('DELETE FROM sensors WHERE user_id=$1', [id]);res.status(200).send({ message:&quot;Successfully deleted measurements for user&quot; });} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:ade31ab42dea1017a8d2d44e862caa91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para eliminar todas las mediciones asociadas a un usuario.  <br /></td></tr>
-<tr class="separator:ade31ab42dea1017a8d2d44e862caa91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af640350ec6bd6015c65a7345cf2f179c" id="r_af640350ec6bd6015c65a7345cf2f179c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af640350ec6bd6015c65a7345cf2f179c">delete</a> ('/reset', async(req, res)=&gt; { try { await pool.query('DROP TABLE IF EXISTS sensors');await pool.query('DROP TABLE IF EXISTS users');await pool.query(` CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user_id INTEGER REFERENCES users(id) ON DELETE CASCADE);`);await pool.query('INSERT INTO users(username) VALUES($1),($2)', ['user1', 'user2']);await pool.query(` INSERT INTO sensors(type, value, timestamp, user_id) VALUES($1, $2, $3, $4),($5, $6, $7, $8) `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'humidity', 60.0, '2024-09-22T12:00:00Z', 2]);res.status(200).send({ message:&quot;Successfully reset users and sensors tables with default data&quot; });} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:af640350ec6bd6015c65a7345cf2f179c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para reiniciar las tablas de la base de datos.  <br /></td></tr>
-<tr class="separator:af640350ec6bd6015c65a7345cf2f179c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01acdbc62169a3111492295809c917b9" id="r_a01acdbc62169a3111492295809c917b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01acdbc62169a3111492295809c917b9">delete</a> ('/erase', async(req, res)=&gt; { try { await pool.query('DROP TABLE IF EXISTS sensors');await pool.query('DROP TABLE IF EXISTS users');res.status(200).send({ message:&quot;Successfully reset users and sensors tables&quot; });} catch(err) { console.log(err);res.sendStatus(500);} })</td></tr>
-<tr class="memdesc:a01acdbc62169a3111492295809c917b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruta para borrar las tablas de la base de datos.  <br /></td></tr>
-<tr class="separator:a01acdbc62169a3111492295809c917b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add27db5a76d22d45112f78c61b51a0f2" id="r_add27db5a76d22d45112f78c61b51a0f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add27db5a76d22d45112f78c61b51a0f2">listen</a> (<a class="el" href="#a33d36bbc039be3c3264e5df64b13df7f">port</a>,()=&gt; console.log(`Server running on port:${<a class="el" href="#a33d36bbc039be3c3264e5df64b13df7f">port</a>}`))</td></tr>
-<tr class="memdesc:add27db5a76d22d45112f78c61b51a0f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia el servidor en el puerto 3000.  <br /></td></tr>
-<tr class="separator:add27db5a76d22d45112f78c61b51a0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a827ca0814b64d10f61ec4db84c95ef5d" id="r_a827ca0814b64d10f61ec4db84c95ef5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a827ca0814b64d10f61ec4db84c95ef5d">startAlertas</a> ()</td></tr>
+<tr class="memdesc:a827ca0814b64d10f61ec4db84c95ef5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa los módulos principales.  <br /></td></tr>
+<tr class="separator:a827ca0814b64d10f61ec4db84c95ef5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9d74bb74d9408d69fed71546a9b1236" id="r_af9d74bb74d9408d69fed71546a9b1236"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9d74bb74d9408d69fed71546a9b1236">fetchAirQuality</a> ()</td></tr>
+<tr class="memdesc:af9d74bb74d9408d69fed71546a9b1236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene y registra la calidad del aire.  <br /></td></tr>
+<tr class="separator:af9d74bb74d9408d69fed71546a9b1236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b85cba8718d6eba65bb0bdfcf094b56" id="r_a7b85cba8718d6eba65bb0bdfcf094b56"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b85cba8718d6eba65bb0bdfcf094b56">official_data</a> ()</td></tr>
+<tr class="memdesc:a7b85cba8718d6eba65bb0bdfcf094b56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura el monitoreo de datos oficiales.  <br /></td></tr>
+<tr class="separator:a7b85cba8718d6eba65bb0bdfcf094b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a057998f22f00129a447cb9de213bba38" id="r_a057998f22f00129a447cb9de213bba38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a057998f22f00129a447cb9de213bba38">resetTables</a> ()</td></tr>
+<tr class="memdesc:a057998f22f00129a447cb9de213bba38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reinicia las tablas de la base de datos.  <br /></td></tr>
+<tr class="separator:a057998f22f00129a447cb9de213bba38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa842239d2e21b0f4bc7a1e15567e9b79" id="r_aa842239d2e21b0f4bc7a1e15567e9b79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa842239d2e21b0f4bc7a1e15567e9b79">use</a> ('/', <a class="el" href="#af0de04eb1e3c2df6f1b04f09321bdb50">rutabbdd</a>)</td></tr>
+<tr class="memdesc:aa842239d2e21b0f4bc7a1e15567e9b79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuración de rutas principales.  <br /></td></tr>
+<tr class="separator:aa842239d2e21b0f4bc7a1e15567e9b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c13d48f10a126231911a5d9effae84" id="r_a51c13d48f10a126231911a5d9effae84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51c13d48f10a126231911a5d9effae84">use</a> ('/sensores', <a class="el" href="#ac59e1410fd551000f18aae6ba2bce5a5">rutaSensores</a>)</td></tr>
+<tr class="memdesc:a51c13d48f10a126231911a5d9effae84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para operaciones con sensores.  <br /></td></tr>
+<tr class="separator:a51c13d48f10a126231911a5d9effae84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e8f2ac2142aba7f7af4765de2cf7b31" id="r_a8e8f2ac2142aba7f7af4765de2cf7b31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e8f2ac2142aba7f7af4765de2cf7b31">use</a> ('/', <a class="el" href="#adc9d8ef92c5dd2c899ece21eac16e899">rutaMediciones</a>)</td></tr>
+<tr class="memdesc:a8e8f2ac2142aba7f7af4765de2cf7b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para gestionar mediciones.  <br /></td></tr>
+<tr class="separator:a8e8f2ac2142aba7f7af4765de2cf7b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bebd53ea294eca1e9ec2efa45303d5" id="r_a29bebd53ea294eca1e9ec2efa45303d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29bebd53ea294eca1e9ec2efa45303d5">use</a> ('/alertas', <a class="el" href="#a08bff265364ea55ad6f4081f826116a4">rutaAlertas</a>)</td></tr>
+<tr class="memdesc:a29bebd53ea294eca1e9ec2efa45303d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para gestionar alertas.  <br /></td></tr>
+<tr class="separator:a29bebd53ea294eca1e9ec2efa45303d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491e337bfda9d0f2614de3c54453cb52" id="r_a491e337bfda9d0f2614de3c54453cb52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a491e337bfda9d0f2614de3c54453cb52">use</a> ('/', <a class="el" href="#ab21078daee78ca0d2141a78e71651836">rutaUsuarios</a>)</td></tr>
+<tr class="memdesc:a491e337bfda9d0f2614de3c54453cb52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para gestionar usuarios.  <br /></td></tr>
+<tr class="separator:a491e337bfda9d0f2614de3c54453cb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a19c65298714aed6dcfe4d9bb71b36c" id="r_a0a19c65298714aed6dcfe4d9bb71b36c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a19c65298714aed6dcfe4d9bb71b36c">if</a> (require.main===module)</td></tr>
+<tr class="memdesc:a0a19c65298714aed6dcfe4d9bb71b36c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia el servidor en el puerto especificado.  <br /></td></tr>
+<tr class="separator:a0a19c65298714aed6dcfe4d9bb71b36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a81e570c198204c57e1ebcace4f4e6dad" id="r_a81e570c198204c57e1ebcace4f4e6dad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81e570c198204c57e1ebcace4f4e6dad">express</a> = require('express')</td></tr>
+<tr class="memdesc:a81e570c198204c57e1ebcace4f4e6dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Framework para construir aplicaciones web y APIs.  <br /></td></tr>
 <tr class="separator:a81e570c198204c57e1ebcace4f4e6dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2481c912250fa1495a111ba4e7a66d07" id="r_a2481c912250fa1495a111ba4e7a66d07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2481c912250fa1495a111ba4e7a66d07">cors</a> = require('cors')</td></tr>
+<tr class="memdesc:a2481c912250fa1495a111ba4e7a66d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Middleware para habilitar el intercambio de recursos de origen cruzado.  <br /></td></tr>
 <tr class="separator:a2481c912250fa1495a111ba4e7a66d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7ab846d8317850d72512f720c6a05e2" id="r_ab7ab846d8317850d72512f720c6a05e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a> = require('./db')</td></tr>
-<tr class="separator:ab7ab846d8317850d72512f720c6a05e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b303b76a3f942ea819498907d5e83c" id="r_a92b303b76a3f942ea819498907d5e83c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b303b76a3f942ea819498907d5e83c">const</a> { <a class="el" href="emitir_alertas_8js.html#a5ca34ad963a30ead97e0bf93f68db9b1">startAlertas</a> } = require('./emitirAlertas')</td></tr>
+<tr class="memdesc:a92b303b76a3f942ea819498907d5e83c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función para iniciar el sistema de alertas basado en mediciones.  <br /></td></tr>
+<tr class="separator:a92b303b76a3f942ea819498907d5e83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0de04eb1e3c2df6f1b04f09321bdb50" id="r_af0de04eb1e3c2df6f1b04f09321bdb50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0de04eb1e3c2df6f1b04f09321bdb50">rutabbdd</a> = require('./rutas/bbdd')</td></tr>
+<tr class="memdesc:af0de04eb1e3c2df6f1b04f09321bdb50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas relacionadas con las operaciones generales de la base de datos.  <br /></td></tr>
+<tr class="separator:af0de04eb1e3c2df6f1b04f09321bdb50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac59e1410fd551000f18aae6ba2bce5a5" id="r_ac59e1410fd551000f18aae6ba2bce5a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac59e1410fd551000f18aae6ba2bce5a5">rutaSensores</a> = require('./rutas/sensores')</td></tr>
+<tr class="memdesc:ac59e1410fd551000f18aae6ba2bce5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para gestionar los sensores.  <br /></td></tr>
+<tr class="separator:ac59e1410fd551000f18aae6ba2bce5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc9d8ef92c5dd2c899ece21eac16e899" id="r_adc9d8ef92c5dd2c899ece21eac16e899"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc9d8ef92c5dd2c899ece21eac16e899">rutaMediciones</a> = require('./rutas/mediciones')</td></tr>
+<tr class="memdesc:adc9d8ef92c5dd2c899ece21eac16e899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para registrar y obtener mediciones.  <br /></td></tr>
+<tr class="separator:adc9d8ef92c5dd2c899ece21eac16e899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08bff265364ea55ad6f4081f826116a4" id="r_a08bff265364ea55ad6f4081f826116a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08bff265364ea55ad6f4081f826116a4">rutaAlertas</a> = require('./rutas/alertas')</td></tr>
+<tr class="memdesc:a08bff265364ea55ad6f4081f826116a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para gestionar alertas relacionadas con sensores y usuarios.  <br /></td></tr>
+<tr class="separator:a08bff265364ea55ad6f4081f826116a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab21078daee78ca0d2141a78e71651836" id="r_ab21078daee78ca0d2141a78e71651836"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab21078daee78ca0d2141a78e71651836">rutaUsuarios</a> = require('./rutas/<a class="el" href="servicios_2usuarios_8js.html#a56516998c8304fc4f6003202b78aceb3">usuarios</a>')</td></tr>
+<tr class="memdesc:ab21078daee78ca0d2141a78e71651836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutas para gestionar usuarios.  <br /></td></tr>
+<tr class="separator:ab21078daee78ca0d2141a78e71651836"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33d36bbc039be3c3264e5df64b13df7f" id="r_a33d36bbc039be3c3264e5df64b13df7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33d36bbc039be3c3264e5df64b13df7f">port</a> = 3000</td></tr>
+<tr class="memdesc:a33d36bbc039be3c3264e5df64b13df7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puerto en el que el servidor escucha las solicitudes.  <br /></td></tr>
 <tr class="separator:a33d36bbc039be3c3264e5df64b13df7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61cd714f583f5ea8c02710a85ef32b9c" id="r_a61cd714f583f5ea8c02710a85ef32b9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> = <a class="el" href="#a81e570c198204c57e1ebcace4f4e6dad">express</a>()</td></tr>
+<tr class="memdesc:a61cd714f583f5ea8c02710a85ef32b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancia principal de la aplicación Express.  <br /></td></tr>
 <tr class="separator:a61cd714f583f5ea8c02710a85ef32b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4072ba4b6b56b0fb6f4801f17ab2b34" id="r_aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memItemLeft" align="right" valign="top">module&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">exports</a> = <a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a></td></tr>
+<tr class="memdesc:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exporta la aplicación Express para pruebas o reutilización.  <br /></td></tr>
 <tr class="separator:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
 <div class="textblock"><p>API para gestionar usuarios y sensores, incluyendo funcionalidades de creación, consulta, inserción y eliminación de datos. </p>
-<p>Este servidor Express gestiona las tablas de usuarios y sensores, proporcionando rutas para agregar datos de sensores, obtener los datos más recientes y reiniciar las tablas en una base de datos PostgreSQL. </p>
+<p>Este servidor Express gestiona las tablas de usuarios y sensores en una base de datos PostgreSQL. Proporciona rutas para interactuar con las entidades de usuarios, sensores, mediciones, alertas y resetear las tablas. </p>
 </div><h2 class="groupheader">Documentación de funciones</h2>
-<a id="a01acdbc62169a3111492295809c917b9" name="a01acdbc62169a3111492295809c917b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01acdbc62169a3111492295809c917b9">&#9670;&#160;</a></span>delete() <span class="overload">[1/3]</span></h2>
+<a id="af9d74bb74d9408d69fed71546a9b1236" name="af9d74bb74d9408d69fed71546a9b1236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9d74bb74d9408d69fed71546a9b1236">&#9670;&#160;</a></span>fetchAirQuality()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> delete </td>
+          <td class="memname">fetchAirQuality </td>
           <td>(</td>
-          <td class="paramtype">'/erase'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ try { await pool.query('DROP TABLE IF EXISTS sensors');await pool.query('DROP TABLE IF EXISTS users');res.status(200).send({ message:&quot;Successfully reset users and sensors tables&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ruta para borrar las tablas de la base de datos. </p>
-<p>Borra las tablas 'users' y 'sensors' si existen.</p>
-<p>@route DELETE /erase </p><dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Éxito al eliminar las tablas. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
+<p>Obtiene y registra la calidad del aire. </p>
+<p>Obtiene y registra la calidad del aire.</p>
+<p>Este método consulta los datos de ozono y temperatura de la API y los envía al servidor como mediciones oficiales. </p>
 
 </div>
 </div>
-<a id="af640350ec6bd6015c65a7345cf2f179c" name="af640350ec6bd6015c65a7345cf2f179c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af640350ec6bd6015c65a7345cf2f179c">&#9670;&#160;</a></span>delete() <span class="overload">[2/3]</span></h2>
+<a id="a0a19c65298714aed6dcfe4d9bb71b36c" name="a0a19c65298714aed6dcfe4d9bb71b36c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a19c65298714aed6dcfe4d9bb71b36c">&#9670;&#160;</a></span>if()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> delete </td>
+          <td class="memname">if </td>
           <td>(</td>
-          <td class="paramtype">'/reset'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">require.</td>          <td class="paramname"><span class="paramname"><em>main</em></span><span class="paramdefsep"> = </span><span class="paramdefval">==&#160;module</span></td><td>)</td>
           <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ try { await pool.query('DROP TABLE IF EXISTS sensors');await pool.query('DROP TABLE IF EXISTS users');await pool.query(` CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user_id INTEGER REFERENCES users(id) ON DELETE CASCADE);`);await pool.query('INSERT INTO users(username) VALUES($1),($2)', ['user1', 'user2']);await pool.query(` INSERT INTO sensors(type, value, timestamp, user_id) VALUES($1, $2, $3, $4),($5, $6, $7, $8) `, ['temperature', 25.5, '2024-09-22T12:00:00Z', 1, 'humidity', 60.0, '2024-09-22T12:00:00Z', 2]);res.status(200).send({ message:&quot;Successfully reset users and sensors tables with default data&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ruta para reiniciar las tablas de la base de datos. </p>
-<p>Borra las tablas 'users' y 'sensors', y las recrea con datos predeterminados.</p>
-<p>@route DELETE /reset </p><dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Éxito al reiniciar las tablas. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
+<p>Inicia el servidor en el puerto especificado. </p>
+<p>Si este módulo es el principal, lanza el servidor en el puerto definido por port. Muestra un mensaje en la consola indicando que el servidor está en funcionamiento. </p>
 
 </div>
 </div>
-<a id="ade31ab42dea1017a8d2d44e862caa91c" name="ade31ab42dea1017a8d2d44e862caa91c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade31ab42dea1017a8d2d44e862caa91c">&#9670;&#160;</a></span>delete() <span class="overload">[3/3]</span></h2>
+<a id="a7b85cba8718d6eba65bb0bdfcf094b56" name="a7b85cba8718d6eba65bb0bdfcf094b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b85cba8718d6eba65bb0bdfcf094b56">&#9670;&#160;</a></span>official_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> delete </td>
+          <td class="memname">official_data </td>
           <td>(</td>
-          <td class="paramtype">'/users/:id/measurements'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { id }=req.params;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> result=await pool.query('DELETE FROM sensors WHERE user_id=$1', [id]);res.status(200).send({ message:&quot;Successfully deleted measurements for user&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ruta para eliminar todas las mediciones asociadas a un usuario. </p>
-<p>Borra todas las entradas en la tabla 'sensors' relacionadas con un usuario específico.</p>
-<p>@route DELETE /users/:id/measurements </p><dl class="params"><dt>Parámetros</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">{integer}</td><td>id - ID del usuario. </td></tr>
+<p>Configura el monitoreo de datos oficiales. </p>
+
+</div>
+</div>
+<a id="a057998f22f00129a447cb9de213bba38" name="a057998f22f00129a447cb9de213bba38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a057998f22f00129a447cb9de213bba38">&#9670;&#160;</a></span>resetTables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">resetTables </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reinicia las tablas de la base de datos. </p>
+<p>Reinicia las tablas de la base de datos.</p>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Mensaje de éxito. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error al reiniciar las tablas. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Éxito al eliminar las mediciones del usuario. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
+<div class="dynheader">
+Gráfico de llamadas a esta función:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="server_8js_a057998f22f00129a447cb9de213bba38_icgraph.svg" width="204" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
-<a id="ae07be55edee34cae9dc3696c6a351366" name="ae07be55edee34cae9dc3696c6a351366"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae07be55edee34cae9dc3696c6a351366">&#9670;&#160;</a></span>get() <span class="overload">[1/3]</span></h2>
+<a id="a827ca0814b64d10f61ec4db84c95ef5d" name="a827ca0814b64d10f61ec4db84c95ef5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a827ca0814b64d10f61ec4db84c95ef5d">&#9670;&#160;</a></span>startAlertas()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> get </td>
+          <td class="memname">startAlertas </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicializa los módulos principales. </p>
+<ul>
+<li>startAlertas: Inicia el monitoreo de mediciones para emitir alertas.</li>
+<li>fetchAirQuality y official_data: Obtienen y registran datos de calidad del aire.</li>
+<li>resetTables: Resetea las tablas de la base de datos. Inicia el sistema de alertas.</li>
+</ul>
+<p>Inicializa los módulos principales.</p>
+<p>Supervisa periódicamente las mediciones de sensores y genera alertas si los valores están fuera de los límites definidos. Las alertas se registran en la base de datos y se gestionan por usuario y tipo de sensor. </p>
+
+</div>
+</div>
+<a id="aa842239d2e21b0f4bc7a1e15567e9b79" name="aa842239d2e21b0f4bc7a1e15567e9b79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa842239d2e21b0f4bc7a1e15567e9b79">&#9670;&#160;</a></span>use() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> use </td>
           <td>(</td>
           <td class="paramtype">'/'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> sensorsQuery=await pool.query('SELECT *FROM sensors');<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> usersQuery=await pool.query('SELECT *FROM users');<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> responseData={ sensors:sensorsQuery.rows, users:usersQuery.rows };res.status(200).send(responseData);} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#af0de04eb1e3c2df6f1b04f09321bdb50">rutabbdd</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ruta principal para obtener todos los sensores y usuarios. </p>
-<p>Devuelve una lista de todos los sensores y usuarios registrados en la base de datos.</p>
-<p>@route GET / </p><dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Datos de todos los sensores y usuarios. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
+<p>Configuración de rutas principales. </p>
+<p>Estas rutas conectan los controladores correspondientes para realizar las operaciones CRUD en las entidades de la base de datos. Rutas para operaciones generales de la base de datos. </p>
 
 </div>
 </div>
-<a id="ad58102be9bcb7f1ff2b7c6f5046c49ac" name="ad58102be9bcb7f1ff2b7c6f5046c49ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad58102be9bcb7f1ff2b7c6f5046c49ac">&#9670;&#160;</a></span>get() <span class="overload">[2/3]</span></h2>
+<a id="a8e8f2ac2142aba7f7af4765de2cf7b31" name="a8e8f2ac2142aba7f7af4765de2cf7b31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e8f2ac2142aba7f7af4765de2cf7b31">&#9670;&#160;</a></span>use() <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> get </td>
-          <td>(</td>
-          <td class="paramtype">'/latest'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> temperatureQuery=await pool.query(` SELECT *FROM sensors WHERE type='temperature' ORDER BY timestamp DESC LIMIT 1 `);<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> co2Query=await pool.query(` SELECT *FROM sensors WHERE type='CO2' ORDER BY timestamp DESC LIMIT 1 `);<a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> responseData={ temperature:temperatureQuery.rows[0]||null, co2:co2Query.rows[0]||null };res.status(200).send(responseData);} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Ruta para obtener las últimas mediciones de temperatura y CO2. </p>
-<p>Retorna los valores más recientes de los sensores de tipo 'temperature' y 'CO2'.</p>
-<p>@route GET /latest </p><dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Datos de los sensores de temperatura y CO2. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
-
-</div>
-</div>
-<a id="af456caf07e1e5a2f26508522ebc3caa6" name="af456caf07e1e5a2f26508522ebc3caa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af456caf07e1e5a2f26508522ebc3caa6">&#9670;&#160;</a></span>get() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> get </td>
-          <td>(</td>
-          <td class="paramtype">'/setup'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ try { await pool.query(` CREATE TABLE IF NOT EXISTS users(id SERIAL PRIMARY KEY, username VARCHAR(100) NOT NULL);CREATE TABLE IF NOT EXISTS sensors(id SERIAL PRIMARY KEY, type VARCHAR(100), value FLOAT, timestamp TIMESTAMP, user_id INTEGER REFERENCES users(id) ON DELETE CASCADE);`);res.status(200).send({ message:&quot;Successfully created users and sensors tables&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Ruta para crear las tablas 'users' y 'sensors' en la base de datos si no existen. </p>
-<p>Esta ruta se usa para inicializar las tablas necesarias en la base de datos.</p>
-<p>@route GET /setup </p><dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Éxito en la creación de las tablas. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
-
-</div>
-</div>
-<a id="add27db5a76d22d45112f78c61b51a0f2" name="add27db5a76d22d45112f78c61b51a0f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add27db5a76d22d45112f78c61b51a0f2">&#9670;&#160;</a></span>listen()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> listen </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="#a33d36bbc039be3c3264e5df64b13df7f">port</a></td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">()</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">console.</td>          <td class="paramname"><span class="paramname"><em>log</em></span>`Server running on port:${port}`&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Inicia el servidor en el puerto 3000. </p>
-<p>Muestra un mensaje en la consola cuando el servidor está en funcionamiento. </p>
-
-</div>
-</div>
-<a id="ada627b72d50508e9ed4b456d3bf85e42" name="ada627b72d50508e9ed4b456d3bf85e42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada627b72d50508e9ed4b456d3bf85e42">&#9670;&#160;</a></span>post() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> post </td>
+          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> use </td>
           <td>(</td>
           <td class="paramtype">'/'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { type, value, timestamp, userId }=req.body;try { <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> userExists=await pool.query('SELECT *FROM users WHERE id=$1', [userId]);if(userExists.rows.length===0) { return res.status(400).send({ message:&quot;User does not exist&quot; });} await pool.query('INSERT INTO sensors(type, value, timestamp, user_id) VALUES($1, $2, $3, $4)', [type, value, timestamp, userId]);res.status(200).send({ message:&quot;Successfully added sensor data&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#adc9d8ef92c5dd2c899ece21eac16e899">rutaMediciones</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ruta para insertar datos de un sensor. </p>
-<p>Inserta una nueva medición de sensor asociada a un usuario en la base de datos.</p>
-<p>@route POST / </p><dl class="params"><dt>Parámetros</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">{string}</td><td>type - Tipo de sensor (ej: 'temperature', 'CO2'). </td></tr>
-    <tr><td class="paramname">{float}</td><td>value - Valor de la medición. </td></tr>
-    <tr><td class="paramname">{string}</td><td>timestamp - Marca de tiempo de la medición. </td></tr>
-    <tr><td class="paramname">{integer}</td><td>userId - ID del usuario asociado. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Éxito al insertar la medición del sensor. </dd>
-<dd>
-{object} 400 - El usuario no existe. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
+<p>Rutas para gestionar mediciones. </p>
 
 </div>
 </div>
-<a id="a34dc36f4b2dfd9a9ab83ebb3cc288fde" name="a34dc36f4b2dfd9a9ab83ebb3cc288fde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34dc36f4b2dfd9a9ab83ebb3cc288fde">&#9670;&#160;</a></span>post() <span class="overload">[2/2]</span></h2>
+<a id="a491e337bfda9d0f2614de3c54453cb52" name="a491e337bfda9d0f2614de3c54453cb52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a491e337bfda9d0f2614de3c54453cb52">&#9670;&#160;</a></span>use() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> post </td>
+          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> use </td>
           <td>(</td>
-          <td class="paramtype">'/users'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">'/'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">async(req, res)</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">{ <a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> { username }=req.body;try { await pool.query('INSERT INTO users(username) VALUES($1)', [username]);res.status(200).send({ message:&quot;Successfully added user&quot; });} catch(err) { console.log(err);res.sendStatus(500);} }</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#ab21078daee78ca0d2141a78e71651836">rutaUsuarios</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Ruta para insertar un nuevo usuario. </p>
-<p>Crea un nuevo usuario en la tabla 'users'.</p>
-<p>@route POST /users </p><dl class="params"><dt>Parámetros</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">{string}</td><td>username - Nombre de usuario. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Devuelve</dt><dd>{object} 200 - Éxito al agregar el usuario. </dd>
-<dd>
-{object} 500 - Error interno del servidor. </dd></dl>
+<p>Rutas para gestionar usuarios. </p>
+
+</div>
+</div>
+<a id="a29bebd53ea294eca1e9ec2efa45303d5" name="a29bebd53ea294eca1e9ec2efa45303d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29bebd53ea294eca1e9ec2efa45303d5">&#9670;&#160;</a></span>use() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> use </td>
+          <td>(</td>
+          <td class="paramtype">'/alertas'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a08bff265364ea55ad6f4081f826116a4">rutaAlertas</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas para gestionar alertas. </p>
+
+</div>
+</div>
+<a id="a51c13d48f10a126231911a5d9effae84" name="a51c13d48f10a126231911a5d9effae84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c13d48f10a126231911a5d9effae84">&#9670;&#160;</a></span>use() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a61cd714f583f5ea8c02710a85ef32b9c">app</a> use </td>
+          <td>(</td>
+          <td class="paramtype">'/sensores'</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ac59e1410fd551000f18aae6ba2bce5a5">rutaSensores</a></td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas para operaciones con sensores. </p>
 
 </div>
 </div>
 <a id="af3729ef2340758cd7d2dbc4ccc451455" name="af3729ef2340758cd7d2dbc4ccc451455"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3729ef2340758cd7d2dbc4ccc451455">&#9670;&#160;</a></span>use() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af3729ef2340758cd7d2dbc4ccc451455">&#9670;&#160;</a></span>use() <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -476,12 +426,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Habilita CORS para permitir solicitudes desde diferentes dominios. </p>
+<p>Habilita CORS para todas las rutas. </p>
 
 </div>
 </div>
 <a id="abfd0671860b758693e8af1b7329092b3" name="abfd0671860b758693e8af1b7329092b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfd0671860b758693e8af1b7329092b3">&#9670;&#160;</a></span>use() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abfd0671860b758693e8af1b7329092b3">&#9670;&#160;</a></span>use() <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -495,7 +445,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Habilita el middleware para procesar JSON en las solicitudes. </p>
+<p>Middleware para parsear cuerpos de solicitudes en formato JSON. </p>
 
 </div>
 </div>
@@ -512,6 +462,26 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instancia principal de la aplicación Express. </p>
+
+</div>
+</div>
+<a id="a92b303b76a3f942ea819498907d5e83c" name="a92b303b76a3f942ea819498907d5e83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b303b76a3f942ea819498907d5e83c">&#9670;&#160;</a></span>const</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const { <a class="el" href="emitir_alertas_8js.html#a5ca34ad963a30ead97e0bf93f68db9b1">startAlertas</a> } = require('./emitirAlertas')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función para iniciar el sistema de alertas basado en mediciones. </p>
+<p>Función para reiniciar las tablas de la base de datos.</p>
+<p>Funciones para obtener y registrar datos oficiales. </p>
+
 </div>
 </div>
 <a id="a2481c912250fa1495a111ba4e7a66d07" name="a2481c912250fa1495a111ba4e7a66d07"></a>
@@ -525,6 +495,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Middleware para habilitar el intercambio de recursos de origen cruzado. </p>
 
 </div>
 </div>
@@ -540,6 +512,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Exporta la aplicación Express para pruebas o reutilización. </p>
+
 </div>
 </div>
 <a id="a81e570c198204c57e1ebcace4f4e6dad" name="a81e570c198204c57e1ebcace4f4e6dad"></a>
@@ -554,19 +528,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="ab7ab846d8317850d72512f720c6a05e2" name="ab7ab846d8317850d72512f720c6a05e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7ab846d8317850d72512f720c6a05e2">&#9670;&#160;</a></span>pool</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> pool = require('./db')</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Framework para construir aplicaciones web y APIs. </p>
 
 </div>
 </div>
@@ -581,6 +543,88 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Puerto en el que el servidor escucha las solicitudes. </p>
+
+</div>
+</div>
+<a id="a08bff265364ea55ad6f4081f826116a4" name="a08bff265364ea55ad6f4081f826116a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08bff265364ea55ad6f4081f826116a4">&#9670;&#160;</a></span>rutaAlertas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> rutaAlertas = require('./rutas/alertas')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas para gestionar alertas relacionadas con sensores y usuarios. </p>
+
+</div>
+</div>
+<a id="af0de04eb1e3c2df6f1b04f09321bdb50" name="af0de04eb1e3c2df6f1b04f09321bdb50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0de04eb1e3c2df6f1b04f09321bdb50">&#9670;&#160;</a></span>rutabbdd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> rutabbdd = require('./rutas/bbdd')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas relacionadas con las operaciones generales de la base de datos. </p>
+
+</div>
+</div>
+<a id="adc9d8ef92c5dd2c899ece21eac16e899" name="adc9d8ef92c5dd2c899ece21eac16e899"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc9d8ef92c5dd2c899ece21eac16e899">&#9670;&#160;</a></span>rutaMediciones</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> rutaMediciones = require('./rutas/mediciones')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas para registrar y obtener mediciones. </p>
+
+</div>
+</div>
+<a id="ac59e1410fd551000f18aae6ba2bce5a5" name="ac59e1410fd551000f18aae6ba2bce5a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac59e1410fd551000f18aae6ba2bce5a5">&#9670;&#160;</a></span>rutaSensores</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> rutaSensores = require('./rutas/sensores')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas para gestionar los sensores. </p>
+
+</div>
+</div>
+<a id="ab21078daee78ca0d2141a78e71651836" name="ab21078daee78ca0d2141a78e71651836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21078daee78ca0d2141a78e71651836">&#9670;&#160;</a></span>rutaUsuarios</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> rutaUsuarios = require('./rutas/<a class="el" href="servicios_2usuarios_8js.html#a56516998c8304fc4f6003202b78aceb3">usuarios</a>')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutas para gestionar usuarios. </p>
 
 </div>
 </div>

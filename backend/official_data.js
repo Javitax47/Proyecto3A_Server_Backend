@@ -1,15 +1,36 @@
-const axios = require('axios');
-const { medicion } = require('./servicios/mediciones');
+/**
+ * @file official_data.js
+ * @brief Integración con la API de calidad del aire para obtener y registrar mediciones oficiales.
+ *
+ * Este archivo realiza solicitudes periódicas a una API externa para recopilar datos de ozono
+ * y temperatura, y registra las mediciones en el servidor.
+ */
 
-// Configuración de la API
+const axios = require('axios'); ///< @brief Cliente HTTP para realizar solicitudes a la API.
+const { medicion } = require('./servicios/mediciones'); ///< @brief Servicio para registrar mediciones en la base de datos.
+
+/**
+ * @brief URL de la API de calidad del aire.
+ * 
+ * Esta API proporciona datos de ozono (O3) y temperatura, junto con otras métricas ambientales.
+ */
 const API_URL = 'https://api.waqi.info/feed/here/?token=e30e80ec8de604abfaa0689bac8eb50e8c772706';
 
+/**
+ * @brief Configura la consulta periódica a la API.
+ *
+ * Esta función inicia un intervalo para llamar a la API de calidad del aire cada 30 segundos.
+ */
 const official_data = () => {
-    // Llamar periódicamente a la API
-    setInterval(fetchAirQuality, 30000);
+    setInterval(fetchAirQuality, 30000); ///< @brief Intervalo de 30 segundos para consultar la API.
 };
 
-// Función para consultar la API y enviar datos al servidor
+/**
+ * @brief Realiza una solicitud a la API y registra los datos obtenidos en el servidor.
+ *
+ * Este método consulta los datos de ozono y temperatura de la API y los envía al servidor
+ * como mediciones oficiales.
+ */
 const fetchAirQuality = async () => {
     try {
         // Solicitar datos de la API
@@ -17,15 +38,19 @@ const fetchAirQuality = async () => {
         const data = response.data;
 
         if (data.status === 'ok') {
-            const { aqi, iaqi, city, time } = data.data;
+            const { aqi, iaqi, city, time } = data.data; ///< @brief Datos principales de la respuesta de la API.
 
-            // Medición de ozono
+            /**
+             * @brief Objeto de medición de ozono.
+             *
+             * Incluye información sobre el sensor, el valor de ozono, la ubicación y el tiempo de la medición.
+             */
             const medicion_ozono = {
-                sensor_id: 'OFFICIAL', // Cambia al UUID real si aplica
-                valor: iaqi.o3?.v || 0, // Valor de ozono, default 0 si no está presente
-                timestamp: time.iso,
-                tipo: 2, // ID del tipo 'ozono'
-                location: `(${city.geo[0]}, ${city.geo[1]})`
+                sensor_id: 'OFFICIAL', ///< @brief Identificador único del sensor.
+                valor: iaqi.o3?.v || 0, ///< @brief Valor de ozono en ppm, predeterminado 0 si no está presente.
+                timestamp: time.iso, ///< @brief Marca de tiempo de la medición.
+                tipo: 2, ///< @brief ID del tipo de medición (2 para ozono).
+                location: (${city.geo[0]}, ${city.geo[1]}) ///< @brief Coordenadas geográficas del sensor.
             };
 
             // Enviar medición de ozono al servidor
@@ -38,14 +63,19 @@ const fetchAirQuality = async () => {
             );
             console.log('Medición de ozono enviada:', medicion_ozono);
 
-            // Medición de temperatura
-            if (iaqi.t) { // Verifica si el valor de temperatura está presente
+            /**
+             * @brief Verifica y procesa los datos de temperatura.
+             *
+             * Comprueba si los datos de temperatura están disponibles en la respuesta de la API
+             * y los envía al servidor.
+             */
+            if (iaqi.t) {
                 const medicion_temperatura = {
-                    sensor_id: 'OFFICIAL', // Cambia al UUID real si aplica
-                    valor: iaqi.t.v, // Valor de temperatura
+                    sensor_id: 'OFFICIAL',
+                    valor: iaqi.t.v, ///< @brief Valor de temperatura en °C.
                     timestamp: time.iso,
-                    tipo: 1, // ID del tipo 'temperatura'
-                    location: `(${city.geo[0]}, ${city.geo[1]})`
+                    tipo: 1, ///< @brief ID del tipo de medición (1 para temperatura).
+                    location: (${city.geo[0]}, ${city.geo[1]})
                 };
 
                 // Enviar medición de temperatura al servidor
@@ -68,5 +98,7 @@ const fetchAirQuality = async () => {
     }
 };
 
-// Exportar la función para iniciar las mediciones oficiales
-module.exports = { official_data, fetchAirQuality};
+module.exports = { 
+    official_data, ///< @brief Función para iniciar la recopilación de datos oficiales.
+    fetchAirQuality ///< @brief Función para consultar la API y registrar las mediciones.
+};

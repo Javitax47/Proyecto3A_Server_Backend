@@ -3,10 +3,10 @@
  * @brief Configuración de la conexión a la base de datos PostgreSQL.
  *
  * Este archivo configura y exporta un pool de conexiones a PostgreSQL
- * utilizando el módulo `pg` para gestionar las interacciones con la base de datos.
+ * utilizando el módulo pg para gestionar las interacciones con la base de datos.
  */
 
-const { Pool } = require('pg');
+const { Pool } = require('pg'); ///< Importa el módulo pg para manejar conexiones a PostgreSQL.
 
 /**
  * @brief Instancia de conexión a la base de datos PostgreSQL.
@@ -29,4 +29,7 @@ const pool = new Pool({
     database: 'db123' ///< @brief Nombre de la base de datos que se utilizará.
 });
 
-module.exports = pool; ///< @brief Exporta el pool de conexiones para que otros módulos lo utilicen.
+/**
+ * @brief Exporta el pool de conexiones para que otros módulos lo utilicen.
+ */
+module.exports = pool;

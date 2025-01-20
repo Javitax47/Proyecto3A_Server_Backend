@@ -1,0 +1,148 @@
+\doxysection{Referencia del archivo backend/servicios/mediciones.js}
+\hypertarget{servicios_2mediciones_8js}{}\label{servicios_2mediciones_8js}\index{backend/servicios/mediciones.js@{backend/servicios/mediciones.js}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2mediciones_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}} = require(\textquotesingle{}../db\textquotesingle{})
+\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}
+\begin{DoxyCompactList}\small\item\em Agrega una nueva medición a la base de datos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}
+\begin{DoxyCompactList}\small\item\em Obtiene las últimas mediciones de temperatura y ozono para un usuario. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}}
+\begin{DoxyCompactList}\small\item\em Obtiene mediciones realizadas en una fecha específica. \end{DoxyCompactList}\item 
+module \mbox{\hyperlink{servicios_2mediciones_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}{exports}} = \{ \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}, \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}, \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Documentación de variables}
+\Hypertarget{servicios_2mediciones_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34}\index{mediciones.js@{mediciones.js}!exports@{exports}}
+\index{exports@{exports}!mediciones.js@{mediciones.js}}
+\doxysubsubsection{\texorpdfstring{exports}{exports}}
+{\footnotesize\ttfamily \label{servicios_2mediciones_8js_aa4072ba4b6b56b0fb6f4801f17ab2b34} 
+module exports = \{ \mbox{\hyperlink{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}{medicion}}, \mbox{\hyperlink{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}{latest}}, \mbox{\hyperlink{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}{get\+Mediciones}} \}}
+
+\Hypertarget{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527}\index{mediciones.js@{mediciones.js}!getMediciones@{getMediciones}}
+\index{getMediciones@{getMediciones}!mediciones.js@{mediciones.js}}
+\doxysubsubsection{\texorpdfstring{getMediciones}{getMediciones}}
+{\footnotesize\ttfamily \label{servicios_2mediciones_8js_adf41fd97344cbf81977308ae9afbb527} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} get\+Mediciones}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (fecha)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ query\ =\ \textcolor{stringliteral}{'SELECT\ *\ FROM\ mediciones\ WHERE\ CAST(timestamp\ AS\ DATE)\ =\ CAST(\$1\ AS\ DATE)'};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ medicionesQuery\ =\ await\ \mbox{\hyperlink{servicios_2mediciones_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(query,\ [fecha]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ medicionesQuery.rows;}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.log(err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ al\ devolver\ las\ tablas:\ "{}}\ +\ err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Obtiene mediciones realizadas en una fecha específica. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & fecha -\/ Fecha en formato YYYY-\/\+MM-\/\+DD. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Array\} Lista de mediciones realizadas en la fecha proporcionada. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error al obtener las mediciones. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f}\index{mediciones.js@{mediciones.js}!latest@{latest}}
+\index{latest@{latest}!mediciones.js@{mediciones.js}}
+\doxysubsubsection{\texorpdfstring{latest}{latest}}
+{\footnotesize\ttfamily \label{servicios_2mediciones_8js_a8eca8e00491ab76e5d1df02cf8dfb08f} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} latest}
+
+
+
+Obtiene las últimas mediciones de temperatura y ozono para un usuario. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & email -\/ Correo electrónico del usuario. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Últimas mediciones de temperatura y ozono. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error si no se encuentran mediciones o al ejecutar la consulta. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710}\index{mediciones.js@{mediciones.js}!medicion@{medicion}}
+\index{medicion@{medicion}!mediciones.js@{mediciones.js}}
+\doxysubsubsection{\texorpdfstring{medicion}{medicion}}
+{\footnotesize\ttfamily \label{servicios_2mediciones_8js_a4aa3785da9c166b2a7b3860189123710} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} medicion}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ async\ (sensorId,\ valor,\ timestamp,\ tipo,\ location)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!sensorId\ ||\ !valor\ ||\ !timestamp\ ||\ !tipo\ ||\ !location)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Faltan\ parámetros\ necesarios"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ sensorResult\ =\ await\ \mbox{\hyperlink{servicios_2mediciones_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(\textcolor{stringliteral}{'SELECT\ *\ FROM\ sensores\ WHERE\ uuid\ =\ \$1'},\ [sensorId]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sensorResult.rows.length\ ===\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Sensor\ no\ encontrado"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ await\ \mbox{\hyperlink{servicios_2mediciones_8js_ab7ab846d8317850d72512f720c6a05e2}{pool}}.query(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'INSERT\ INTO\ mediciones\ (sensor\_id,\ valor,\ timestamp,\ tipo,\ location)\ VALUES\ (\$1,\ \$2,\ \$3,\ \$4,\ \$5)'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [sensorId,\ valor,\ timestamp,\ tipo,\ location]}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\ message:\ \textcolor{stringliteral}{"{}Medición\ agregada\ exitosamente"{}}\ \};}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (err)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ console.error(\textcolor{stringliteral}{'Error\ al\ insertar\ la\ medición:'},\ err);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \textcolor{keyword}{new}\ Error(\textcolor{stringliteral}{"{}Error\ al\ insertar\ la\ medición:\ "{}}\ +\ err);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Agrega una nueva medición a la base de datos. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em \{string\}} & sensor\+Id -\/ Identificador único del sensor. \\
+\hline
+{\em \{number\}} & valor -\/ Valor medido por el sensor. \\
+\hline
+{\em \{string\}} & timestamp -\/ Fecha y hora de la medición. \\
+\hline
+{\em \{number\}} & tipo -\/ Tipo de medición (1\+: temperatura, 2\+: ozono). \\
+\hline
+{\em \{string\}} & location -\/ Ubicación de la medición en formato POINT (latitud, longitud). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+\{Object\} Mensaje de éxito. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em \{\+Error\}} & Error si faltan parámetros o al insertar la medición. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{servicios_2mediciones_8js_ab7ab846d8317850d72512f720c6a05e2}\index{mediciones.js@{mediciones.js}!pool@{pool}}
+\index{pool@{pool}!mediciones.js@{mediciones.js}}
+\doxysubsubsection{\texorpdfstring{pool}{pool}}
+{\footnotesize\ttfamily \label{servicios_2mediciones_8js_ab7ab846d8317850d72512f720c6a05e2} 
+\mbox{\hyperlink{db_8js_a92b303b76a3f942ea819498907d5e83c}{const}} pool = require(\textquotesingle{}../db\textquotesingle{})}
+

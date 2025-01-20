@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.12.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto3A_Server_Backend: Referencia del archivo backend/servicios/usuarios.js</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Proyecto3A_Server_Backend
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.12.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li><li class="navelem"><a class="el" href="dir_ffc53d974f41e9928c0519428ac6c651.html">servicios</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo usuarios.js</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab7ab846d8317850d72512f720c6a05e2" id="r_ab7ab846d8317850d72512f720c6a05e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a> = require('../db')</td></tr>
+<tr class="separator:ab7ab846d8317850d72512f720c6a05e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b303b76a3f942ea819498907d5e83c" id="r_a92b303b76a3f942ea819498907d5e83c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b303b76a3f942ea819498907d5e83c">const</a> { <a class="el" href="security_8js.html#ac403e2d82ca923178a592238c6c78b47">hashPassword</a>, <a class="el" href="security_8js.html#a4dc19698b4a4dc210202990ae9c773b5">verifyPassword</a> } = require(&quot;../utilidades/security&quot;)</td></tr>
+<tr class="separator:a92b303b76a3f942ea819498907d5e83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec4ee031fc014ed8ba9dd16a77ef78b6" id="r_aec4ee031fc014ed8ba9dd16a77ef78b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec4ee031fc014ed8ba9dd16a77ef78b6">nodemailer</a> = require('nodemailer')</td></tr>
+<tr class="separator:aec4ee031fc014ed8ba9dd16a77ef78b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56516998c8304fc4f6003202b78aceb3" id="r_a56516998c8304fc4f6003202b78aceb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56516998c8304fc4f6003202b78aceb3">usuarios</a></td></tr>
+<tr class="memdesc:a56516998c8304fc4f6003202b78aceb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea un nuevo usuario en la base de datos y envía un correo de verificación.  <br /></td></tr>
+<tr class="separator:a56516998c8304fc4f6003202b78aceb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfcf1ca00f328c576079baaf47d6f4db" id="r_abfcf1ca00f328c576079baaf47d6f4db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abfcf1ca00f328c576079baaf47d6f4db">sensoresDeUsuarios</a></td></tr>
+<tr class="memdesc:abfcf1ca00f328c576079baaf47d6f4db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtiene los sensores asociados a un usuario.  <br /></td></tr>
+<tr class="separator:abfcf1ca00f328c576079baaf47d6f4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade0314919db92c333079553fd77dc631" id="r_ade0314919db92c333079553fd77dc631"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade0314919db92c333079553fd77dc631">usuariosAutent</a></td></tr>
+<tr class="memdesc:ade0314919db92c333079553fd77dc631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Autentica a un usuario.  <br /></td></tr>
+<tr class="separator:ade0314919db92c333079553fd77dc631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c406df4a2c74dfbd69ec96cefb85e0f" id="r_a1c406df4a2c74dfbd69ec96cefb85e0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c406df4a2c74dfbd69ec96cefb85e0f">actualizarUsuarios</a></td></tr>
+<tr class="memdesc:a1c406df4a2c74dfbd69ec96cefb85e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualiza la información de un usuario y envía un correo de confirmación.  <br /></td></tr>
+<tr class="separator:a1c406df4a2c74dfbd69ec96cefb85e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4072ba4b6b56b0fb6f4801f17ab2b34" id="r_aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memItemLeft" align="right" valign="top">module&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">exports</a> = { <a class="el" href="#a56516998c8304fc4f6003202b78aceb3">usuarios</a>, <a class="el" href="#abfcf1ca00f328c576079baaf47d6f4db">sensoresDeUsuarios</a>, <a class="el" href="#ade0314919db92c333079553fd77dc631">usuariosAutent</a>, <a class="el" href="#a1c406df4a2c74dfbd69ec96cefb85e0f">actualizarUsuarios</a> }</td></tr>
+<tr class="separator:aa4072ba4b6b56b0fb6f4801f17ab2b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="a1c406df4a2c74dfbd69ec96cefb85e0f" name="a1c406df4a2c74dfbd69ec96cefb85e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c406df4a2c74dfbd69ec96cefb85e0f">&#9670;&#160;</a></span>actualizarUsuarios</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> actualizarUsuarios</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actualiza la información de un usuario y envía un correo de confirmación. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>username - Nuevo nombre de usuario. </td></tr>
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario. </td></tr>
+    <tr><td class="paramname">{string}</td><td>password - Nueva contraseña del usuario. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Mensaje de éxito. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error al actualizar la información del usuario o enviar el correo de confirmación. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a92b303b76a3f942ea819498907d5e83c" name="a92b303b76a3f942ea819498907d5e83c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b303b76a3f942ea819498907d5e83c">&#9670;&#160;</a></span>const</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const { <a class="el" href="security_8js.html#ac403e2d82ca923178a592238c6c78b47">hashPassword</a>, <a class="el" href="security_8js.html#a4dc19698b4a4dc210202990ae9c773b5">verifyPassword</a> } = require(&quot;../utilidades/security&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4072ba4b6b56b0fb6f4801f17ab2b34" name="aa4072ba4b6b56b0fb6f4801f17ab2b34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4072ba4b6b56b0fb6f4801f17ab2b34">&#9670;&#160;</a></span>exports</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">module exports = { <a class="el" href="#a56516998c8304fc4f6003202b78aceb3">usuarios</a>, <a class="el" href="#abfcf1ca00f328c576079baaf47d6f4db">sensoresDeUsuarios</a>, <a class="el" href="#ade0314919db92c333079553fd77dc631">usuariosAutent</a>, <a class="el" href="#a1c406df4a2c74dfbd69ec96cefb85e0f">actualizarUsuarios</a> }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec4ee031fc014ed8ba9dd16a77ef78b6" name="aec4ee031fc014ed8ba9dd16a77ef78b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec4ee031fc014ed8ba9dd16a77ef78b6">&#9670;&#160;</a></span>nodemailer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> nodemailer = require('nodemailer')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7ab846d8317850d72512f720c6a05e2" name="ab7ab846d8317850d72512f720c6a05e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7ab846d8317850d72512f720c6a05e2">&#9670;&#160;</a></span>pool</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> pool = require('../db')</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abfcf1ca00f328c576079baaf47d6f4db" name="abfcf1ca00f328c576079baaf47d6f4db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfcf1ca00f328c576079baaf47d6f4db">&#9670;&#160;</a></span>sensoresDeUsuarios</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> sensoresDeUsuarios</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line">= async (email) =&gt; {</div>
+<div class="line">    <span class="keywordflow">try</span> {</div>
+<div class="line">        <span class="keyword">const</span> result = await <a class="code hl_variable" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a>.query(`</div>
+<div class="line">            SELECT s.uuid, s.id </div>
+<div class="line">            FROM sensores s</div>
+<div class="line">            JOIN usuario_sensores us ON s.uuid = us.sensor_uuid</div>
+<div class="line">            WHERE us.usuario_email = $1</div>
+<div class="line">        `, [email]);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (result.rows.length === 0) {</div>
+<div class="line">            <span class="keywordflow">throw</span> <span class="keyword">new</span> Error(<span class="stringliteral">&quot;Usuario no encontrado o sin sensores asignados&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> result.rows;</div>
+<div class="line">    } <span class="keywordflow">catch</span> (err) {</div>
+<div class="line">        console.error(err);</div>
+<div class="line">        <span class="keywordflow">throw</span> <span class="keyword">new</span> Error(err);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aservicios_2usuarios_8js_html_ab7ab846d8317850d72512f720c6a05e2"><div class="ttname"><a href="#ab7ab846d8317850d72512f720c6a05e2">pool</a></div><div class="ttdeci">const pool</div><div class="ttdef"><b>Definition</b> usuarios.js:9</div></div>
+</div><!-- fragment -->
+<p>Obtiene los sensores asociados a un usuario. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Array} Lista de sensores asociados al usuario. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error al obtener los sensores o si el usuario no tiene sensores asignados. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a56516998c8304fc4f6003202b78aceb3" name="a56516998c8304fc4f6003202b78aceb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56516998c8304fc4f6003202b78aceb3">&#9670;&#160;</a></span>usuarios</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> usuarios</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea un nuevo usuario en la base de datos y envía un correo de verificación. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>username - Nombre del usuario. </td></tr>
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario. </td></tr>
+    <tr><td class="paramname">{string}</td><td>password - Contraseña del usuario. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Mensaje de éxito. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error al crear el usuario o enviar el correo de verificación. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ade0314919db92c333079553fd77dc631" name="ade0314919db92c333079553fd77dc631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0314919db92c333079553fd77dc631">&#9670;&#160;</a></span>usuariosAutent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="db_8js.html#a92b303b76a3f942ea819498907d5e83c">const</a> usuariosAutent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line">= async (email, password) =&gt; {</div>
+<div class="line">    <span class="keywordflow">try</span> {</div>
+<div class="line">        <span class="keyword">const</span> userResult = await <a class="code hl_variable" href="#ab7ab846d8317850d72512f720c6a05e2">pool</a>.query(<span class="stringliteral">&#39;SELECT * FROM usuarios WHERE email = $1&#39;</span>, [email]);</div>
+<div class="line">        <span class="keywordflow">if</span> (userResult.rows.length === 0) {</div>
+<div class="line">            <span class="keywordflow">throw</span> <span class="keyword">new</span> Error(<span class="stringliteral">&quot;Email o contraseña incorrectos&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keyword">const</span> user = userResult.rows[0];</div>
+<div class="line">        <span class="keywordflow">if</span> (!user.is_verified) {</div>
+<div class="line">            <span class="keywordflow">throw</span> <span class="keyword">new</span> Error(<span class="stringliteral">&quot;Please verify your account to log in&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">const</span> isPasswordValid = await <a class="code hl_variable" href="security_8js.html#a4dc19698b4a4dc210202990ae9c773b5">verifyPassword</a>(password, user.password);</div>
+<div class="line">        <span class="keywordflow">if</span> (!isPasswordValid) {</div>
+<div class="line">            <span class="keywordflow">throw</span> <span class="keyword">new</span> Error(<span class="stringliteral">&quot;Email o contraseña incorrectos&quot;</span>);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> user;</div>
+<div class="line">    } <span class="keywordflow">catch</span> (err) {</div>
+<div class="line">        console.error(err);</div>
+<div class="line">        <span class="keywordflow">throw</span> <span class="keyword">new</span> Error(err);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="asecurity_8js_html_a4dc19698b4a4dc210202990ae9c773b5"><div class="ttname"><a href="security_8js.html#a4dc19698b4a4dc210202990ae9c773b5">verifyPassword</a></div><div class="ttdeci">const verifyPassword</div><div class="ttdef"><b>Definition</b> security.js:8</div></div>
+</div><!-- fragment -->
+<p>Autentica a un usuario. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">{string}</td><td>email - Correo electrónico del usuario. </td></tr>
+    <tr><td class="paramname">{string}</td><td>password - Contraseña del usuario. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>{Object} Datos del usuario autenticado. </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">{Error}</td><td>Error si las credenciales son incorrectas o la cuenta no está verificada. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

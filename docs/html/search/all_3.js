@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['endpoints_0',['API Endpoints',['../index.html#autotoc_md8',1,'']]],
-  ['entorno_1',['Configuración del Entorno',['../index.html#autotoc_md6',1,'']]],
-  ['estructura_20del_20proyecto_2',['Estructura del Proyecto',['../index.html#autotoc_md4',1,'']]]
+  ['db_2ejs_0',['db.js',['../db_8js.html',1,'']]],
+  ['de_20contenidos_1',['Tabla de Contenidos',['../index.html#autotoc_md1',1,'']]],
+  ['del_20entorno_2',['Configuración del Entorno',['../index.html#autotoc_md6',1,'']]],
+  ['del_20proyecto_3',['Estructura del Proyecto',['../index.html#autotoc_md4',1,'']]],
+  ['delete_4',['delete',['../rutas_2alertas_8js.html#a7243a9ada36809a994f8ea833f9cf49b',1,'delete(&apos;/&apos;, async(req, res)=&gt; { try { const result=await borrarAlertas();res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }):&#160;alertas.js'],['../rutas_2alertas_8js.html#a35bfe3e794bd873060fe9548492a8974',1,'delete(&apos;/:email&apos;, async(req, res)=&gt; { const { email }=req.params;try { const result=await borrarAlertasUsuarios(email);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }):&#160;alertas.js'],['../rutas_2alertas_8js.html#a1269601321b17fad8b8df4b27eeebdfb',1,'delete(&apos;/:email/:alertaId&apos;, async(req, res)=&gt; { const { email, alertaId }=req.params;try { const result=await borrarAlertasEspecificasUsuario(email, alertaId);res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }):&#160;alertas.js'],['../rutas_2bbdd_8js.html#ad05bc45c9d722d5c1ec1630010318f08',1,'delete(&apos;/reset&apos;, async(req, res)=&gt; { try { const result=await resetTables();res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }):&#160;bbdd.js'],['../rutas_2bbdd_8js.html#af659bfa6a4ee7e3480a0a4e5805b5a0d',1,'delete(&apos;/erase&apos;, async(req, res)=&gt; { try { const result=await eraseTables();res.status(200).send(result);} catch(err) { console.error(err);res.status(500).send({ error:err.message });} }):&#160;bbdd.js']]]
 ];

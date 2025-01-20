@@ -1,12 +1,23 @@
-version: "3"
+# @file docker-compose.yaml
+# @brief Configuración de servicios para Docker Compose.
+#
+# Este archivo define los servicios necesarios para ejecutar la aplicación,
+# incluyendo la base de datos PostgreSQL y el servidor de la aplicación.
+# Utiliza la versión 3 de Docker Compose.
+
+version: "3" # @brief Versión de Docker Compose utilizada para este archivo.
+
 services: 
+  # @brief Servicio de base de datos PostgreSQL.
   db:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: password123
-      POSTGRES_USER: user123
-      POSTGRES_DB: db123
+    image: postgres # @brief Imagen oficial de PostgreSQL utilizada para el servicio.
+    environment: # @brief Variables de entorno necesarias para configurar PostgreSQL.
+      POSTGRES_PASSWORD: password123 # @brief Contraseña del usuario de PostgreSQL.
+      POSTGRES_USER: user123 # @brief Nombre de usuario de PostgreSQL.
+      POSTGRES_DB: db123 # @brief Nombre de la base de datos que se inicializará.
+
+  # @brief Servicio de la aplicación principal (backend).
   app:
-    image: server
-    ports:
-      - 13000:3000
+    image: server # @brief Imagen Docker utilizada para el servicio del servidor.
+    ports: 
+      - 13000:3000 # @brief Mapea el puerto 3000 del contenedor al puerto 13000 en el host.

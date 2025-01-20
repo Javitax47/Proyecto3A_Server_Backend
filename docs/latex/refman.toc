@@ -11,4 +11,159 @@
 \contentsline {section}{\numberline {1.8}API Endpoints}{3}{section.1.8}%
 \contentsline {section}{\numberline {1.9}Contribuciones}{3}{section.1.9}%
 \contentsline {section}{\numberline {1.10}Licencia}{3}{section.1.10}%
-\contentsline {chapter}{\'{I}ndice alfab\'{e}tico}{5}{section*.1}%
+\contentsline {chapter}{\numberline {2}Índice de archivos}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lista de archivos}{5}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Documentación de archivos}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Referencia del archivo backend/db.js}{7}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Descripción detallada}{7}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Documentación de variables}{7}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}const}{7}{subsubsection.3.1.2.1}%
+\contentsline {subsubsection}{\numberline {3.1.2.2}exports}{7}{subsubsection.3.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.3}pool}{8}{subsubsection.3.1.2.3}%
+\contentsline {section}{\numberline {3.2}Referencia del archivo backend/emitir\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Alertas.js}{8}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Descripción detallada}{8}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Documentación de variables}{8}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}exports}{8}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}pool}{9}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}startAlertas}{9}{subsubsection.3.2.2.3}%
+\contentsline {section}{\numberline {3.3}Referencia del archivo backend/official\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}data.js}{9}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Descripción detallada}{9}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Documentación de variables}{10}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}API\_URL}{10}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}axios}{10}{subsubsection.3.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.3}const}{10}{subsubsection.3.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.3.2.4}exports}{10}{subsubsection.3.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.3.2.5}fetchAirQuality}{10}{subsubsection.3.3.2.5}%
+\contentsline {section}{\numberline {3.4}Referencia del archivo backend/server.js}{11}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Descripción detallada}{12}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Documentación de funciones}{12}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}fetchAirQuality()}{12}{subsubsection.3.4.2.1}%
+\contentsline {subsubsection}{\numberline {3.4.2.2}if()}{12}{subsubsection.3.4.2.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.3}official\_data()}{12}{subsubsection.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.2.4}resetTables()}{12}{subsubsection.3.4.2.4}%
+\contentsline {subsubsection}{\numberline {3.4.2.5}startAlertas()}{13}{subsubsection.3.4.2.5}%
+\contentsline {subsubsection}{\numberline {3.4.2.6}use()\hspace {0.1cm}{\footnotesize \ttfamily [1/7]}}{13}{subsubsection.3.4.2.6}%
+\contentsline {subsubsection}{\numberline {3.4.2.7}use()\hspace {0.1cm}{\footnotesize \ttfamily [2/7]}}{13}{subsubsection.3.4.2.7}%
+\contentsline {subsubsection}{\numberline {3.4.2.8}use()\hspace {0.1cm}{\footnotesize \ttfamily [3/7]}}{14}{subsubsection.3.4.2.8}%
+\contentsline {subsubsection}{\numberline {3.4.2.9}use()\hspace {0.1cm}{\footnotesize \ttfamily [4/7]}}{14}{subsubsection.3.4.2.9}%
+\contentsline {subsubsection}{\numberline {3.4.2.10}use()\hspace {0.1cm}{\footnotesize \ttfamily [5/7]}}{14}{subsubsection.3.4.2.10}%
+\contentsline {subsubsection}{\numberline {3.4.2.11}use()\hspace {0.1cm}{\footnotesize \ttfamily [6/7]}}{14}{subsubsection.3.4.2.11}%
+\contentsline {subsubsection}{\numberline {3.4.2.12}use()\hspace {0.1cm}{\footnotesize \ttfamily [7/7]}}{14}{subsubsection.3.4.2.12}%
+\contentsline {subsection}{\numberline {3.4.3}Documentación de variables}{14}{subsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.3.1}app}{14}{subsubsection.3.4.3.1}%
+\contentsline {subsubsection}{\numberline {3.4.3.2}const}{15}{subsubsection.3.4.3.2}%
+\contentsline {subsubsection}{\numberline {3.4.3.3}cors}{15}{subsubsection.3.4.3.3}%
+\contentsline {subsubsection}{\numberline {3.4.3.4}exports}{15}{subsubsection.3.4.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.3.5}express}{15}{subsubsection.3.4.3.5}%
+\contentsline {subsubsection}{\numberline {3.4.3.6}port}{15}{subsubsection.3.4.3.6}%
+\contentsline {subsubsection}{\numberline {3.4.3.7}rutaAlertas}{15}{subsubsection.3.4.3.7}%
+\contentsline {subsubsection}{\numberline {3.4.3.8}rutabbdd}{15}{subsubsection.3.4.3.8}%
+\contentsline {subsubsection}{\numberline {3.4.3.9}rutaMediciones}{16}{subsubsection.3.4.3.9}%
+\contentsline {subsubsection}{\numberline {3.4.3.10}rutaSensores}{16}{subsubsection.3.4.3.10}%
+\contentsline {subsubsection}{\numberline {3.4.3.11}rutaUsuarios}{16}{subsubsection.3.4.3.11}%
+\contentsline {section}{\numberline {3.5}Referencia del archivo backend/rutas/alertas.js}{16}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Documentación de funciones}{17}{subsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.1}delete()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{17}{subsubsection.3.5.1.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.2}delete()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{17}{subsubsection.3.5.1.2}%
+\contentsline {subsubsection}{\numberline {3.5.1.3}delete()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{17}{subsubsection.3.5.1.3}%
+\contentsline {subsubsection}{\numberline {3.5.1.4}get()}{18}{subsubsection.3.5.1.4}%
+\contentsline {subsection}{\numberline {3.5.2}Documentación de variables}{18}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}const}{18}{subsubsection.3.5.2.1}%
+\contentsline {subsubsection}{\numberline {3.5.2.2}exports}{19}{subsubsection.3.5.2.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.3}express}{19}{subsubsection.3.5.2.3}%
+\contentsline {subsubsection}{\numberline {3.5.2.4}router}{19}{subsubsection.3.5.2.4}%
+\contentsline {section}{\numberline {3.6}Referencia del archivo backend/servicios/alertas.js}{19}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Documentación de funciones}{20}{subsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.1.1}get()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{20}{subsubsection.3.6.1.1}%
+\contentsline {subsubsection}{\numberline {3.6.1.2}get()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{20}{subsubsection.3.6.1.2}%
+\contentsline {subsubsection}{\numberline {3.6.1.3}get()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{21}{subsubsection.3.6.1.3}%
+\contentsline {subsubsection}{\numberline {3.6.1.4}post()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{21}{subsubsection.3.6.1.4}%
+\contentsline {subsubsection}{\numberline {3.6.1.5}post()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{22}{subsubsection.3.6.1.5}%
+\contentsline {subsubsection}{\numberline {3.6.1.6}post()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{22}{subsubsection.3.6.1.6}%
+\contentsline {subsection}{\numberline {3.6.2}Documentación de variables}{23}{subsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.2.1}const}{23}{subsubsection.3.6.2.1}%
+\contentsline {subsubsection}{\numberline {3.6.2.2}express}{23}{subsubsection.3.6.2.2}%
+\contentsline {subsubsection}{\numberline {3.6.2.3}router}{23}{subsubsection.3.6.2.3}%
+\contentsline {section}{\numberline {3.7}Referencia del archivo backend/rutas/bbdd.js}{23}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Documentación de funciones}{24}{subsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.1.1}delete()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{24}{subsubsection.3.7.1.1}%
+\contentsline {subsubsection}{\numberline {3.7.1.2}delete()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{24}{subsubsection.3.7.1.2}%
+\contentsline {subsubsection}{\numberline {3.7.1.3}get()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{25}{subsubsection.3.7.1.3}%
+\contentsline {subsubsection}{\numberline {3.7.1.4}get()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{25}{subsubsection.3.7.1.4}%
+\contentsline {subsubsection}{\numberline {3.7.1.5}post()}{25}{subsubsection.3.7.1.5}%
+\contentsline {subsection}{\numberline {3.7.2}Documentación de variables}{26}{subsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.2.1}const}{26}{subsubsection.3.7.2.1}%
+\contentsline {subsubsection}{\numberline {3.7.2.2}exports}{26}{subsubsection.3.7.2.2}%
+\contentsline {subsubsection}{\numberline {3.7.2.3}express}{26}{subsubsection.3.7.2.3}%
+\contentsline {subsubsection}{\numberline {3.7.2.4}router}{26}{subsubsection.3.7.2.4}%
+\contentsline {section}{\numberline {3.8}Referencia del archivo backend/servicios/bbdd.js}{26}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Documentación de variables}{27}{subsection.3.8.1}%
+\contentsline {subsubsection}{\numberline {3.8.1.1}createSensorType}{27}{subsubsection.3.8.1.1}%
+\contentsline {subsubsection}{\numberline {3.8.1.2}eraseTables}{27}{subsubsection.3.8.1.2}%
+\contentsline {subsubsection}{\numberline {3.8.1.3}exports}{28}{subsubsection.3.8.1.3}%
+\contentsline {subsubsection}{\numberline {3.8.1.4}getTables}{28}{subsubsection.3.8.1.4}%
+\contentsline {subsubsection}{\numberline {3.8.1.5}pool}{28}{subsubsection.3.8.1.5}%
+\contentsline {subsubsection}{\numberline {3.8.1.6}resetTables}{29}{subsubsection.3.8.1.6}%
+\contentsline {subsubsection}{\numberline {3.8.1.7}setupTables}{29}{subsubsection.3.8.1.7}%
+\contentsline {section}{\numberline {3.9}Referencia del archivo backend/rutas/mediciones.js}{30}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Documentación de funciones}{30}{subsection.3.9.1}%
+\contentsline {subsubsection}{\numberline {3.9.1.1}get()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{30}{subsubsection.3.9.1.1}%
+\contentsline {subsubsection}{\numberline {3.9.1.2}get()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{31}{subsubsection.3.9.1.2}%
+\contentsline {subsubsection}{\numberline {3.9.1.3}post()}{31}{subsubsection.3.9.1.3}%
+\contentsline {subsection}{\numberline {3.9.2}Documentación de variables}{32}{subsection.3.9.2}%
+\contentsline {subsubsection}{\numberline {3.9.2.1}const}{32}{subsubsection.3.9.2.1}%
+\contentsline {subsubsection}{\numberline {3.9.2.2}exports}{32}{subsubsection.3.9.2.2}%
+\contentsline {subsubsection}{\numberline {3.9.2.3}express}{32}{subsubsection.3.9.2.3}%
+\contentsline {subsubsection}{\numberline {3.9.2.4}router}{32}{subsubsection.3.9.2.4}%
+\contentsline {section}{\numberline {3.10}Referencia del archivo backend/servicios/mediciones.js}{32}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Documentación de variables}{32}{subsection.3.10.1}%
+\contentsline {subsubsection}{\numberline {3.10.1.1}exports}{32}{subsubsection.3.10.1.1}%
+\contentsline {subsubsection}{\numberline {3.10.1.2}getMediciones}{33}{subsubsection.3.10.1.2}%
+\contentsline {subsubsection}{\numberline {3.10.1.3}latest}{33}{subsubsection.3.10.1.3}%
+\contentsline {subsubsection}{\numberline {3.10.1.4}medicion}{34}{subsubsection.3.10.1.4}%
+\contentsline {subsubsection}{\numberline {3.10.1.5}pool}{34}{subsubsection.3.10.1.5}%
+\contentsline {section}{\numberline {3.11}Referencia del archivo backend/rutas/sensores.js}{35}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}Documentación de funciones}{35}{subsection.3.11.1}%
+\contentsline {subsubsection}{\numberline {3.11.1.1}get()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{35}{subsubsection.3.11.1.1}%
+\contentsline {subsubsection}{\numberline {3.11.1.2}get()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{36}{subsubsection.3.11.1.2}%
+\contentsline {subsubsection}{\numberline {3.11.1.3}post()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{36}{subsubsection.3.11.1.3}%
+\contentsline {subsubsection}{\numberline {3.11.1.4}post()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{37}{subsubsection.3.11.1.4}%
+\contentsline {subsection}{\numberline {3.11.2}Documentación de variables}{37}{subsection.3.11.2}%
+\contentsline {subsubsection}{\numberline {3.11.2.1}const}{37}{subsubsection.3.11.2.1}%
+\contentsline {subsubsection}{\numberline {3.11.2.2}exports}{37}{subsubsection.3.11.2.2}%
+\contentsline {subsubsection}{\numberline {3.11.2.3}express}{38}{subsubsection.3.11.2.3}%
+\contentsline {subsubsection}{\numberline {3.11.2.4}router}{38}{subsubsection.3.11.2.4}%
+\contentsline {section}{\numberline {3.12}Referencia del archivo backend/servicios/sensores.js}{38}{section.3.12}%
+\contentsline {subsection}{\numberline {3.12.1}Documentación de variables}{38}{subsection.3.12.1}%
+\contentsline {subsubsection}{\numberline {3.12.1.1}createSensor}{38}{subsubsection.3.12.1.1}%
+\contentsline {subsubsection}{\numberline {3.12.1.2}exports}{39}{subsubsection.3.12.1.2}%
+\contentsline {subsubsection}{\numberline {3.12.1.3}pool}{39}{subsubsection.3.12.1.3}%
+\contentsline {section}{\numberline {3.13}Referencia del archivo backend/rutas/usuarios.js}{39}{section.3.13}%
+\contentsline {subsection}{\numberline {3.13.1}Documentación de funciones}{40}{subsection.3.13.1}%
+\contentsline {subsubsection}{\numberline {3.13.1.1}get()\hspace {0.1cm}{\footnotesize \ttfamily [1/4]}}{40}{subsubsection.3.13.1.1}%
+\contentsline {subsubsection}{\numberline {3.13.1.2}get()\hspace {0.1cm}{\footnotesize \ttfamily [2/4]}}{40}{subsubsection.3.13.1.2}%
+\contentsline {subsubsection}{\numberline {3.13.1.3}get()\hspace {0.1cm}{\footnotesize \ttfamily [3/4]}}{41}{subsubsection.3.13.1.3}%
+\contentsline {subsubsection}{\numberline {3.13.1.4}get()\hspace {0.1cm}{\footnotesize \ttfamily [4/4]}}{41}{subsubsection.3.13.1.4}%
+\contentsline {subsubsection}{\numberline {3.13.1.5}post()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{42}{subsubsection.3.13.1.5}%
+\contentsline {subsubsection}{\numberline {3.13.1.6}post()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{42}{subsubsection.3.13.1.6}%
+\contentsline {subsection}{\numberline {3.13.2}Documentación de variables}{43}{subsection.3.13.2}%
+\contentsline {subsubsection}{\numberline {3.13.2.1}const}{43}{subsubsection.3.13.2.1}%
+\contentsline {subsubsection}{\numberline {3.13.2.2}express}{43}{subsubsection.3.13.2.2}%
+\contentsline {subsubsection}{\numberline {3.13.2.3}router}{43}{subsubsection.3.13.2.3}%
+\contentsline {section}{\numberline {3.14}Referencia del archivo backend/servicios/usuarios.js}{43}{section.3.14}%
+\contentsline {subsection}{\numberline {3.14.1}Documentación de variables}{44}{subsection.3.14.1}%
+\contentsline {subsubsection}{\numberline {3.14.1.1}actualizarUsuarios}{44}{subsubsection.3.14.1.1}%
+\contentsline {subsubsection}{\numberline {3.14.1.2}const}{45}{subsubsection.3.14.1.2}%
+\contentsline {subsubsection}{\numberline {3.14.1.3}exports}{45}{subsubsection.3.14.1.3}%
+\contentsline {subsubsection}{\numberline {3.14.1.4}nodemailer}{45}{subsubsection.3.14.1.4}%
+\contentsline {subsubsection}{\numberline {3.14.1.5}pool}{45}{subsubsection.3.14.1.5}%
+\contentsline {subsubsection}{\numberline {3.14.1.6}sensoresDeUsuarios}{45}{subsubsection.3.14.1.6}%
+\contentsline {subsubsection}{\numberline {3.14.1.7}usuarios}{46}{subsubsection.3.14.1.7}%
+\contentsline {subsubsection}{\numberline {3.14.1.8}usuariosAutent}{46}{subsubsection.3.14.1.8}%
+\contentsline {section}{\numberline {3.15}Referencia del archivo backend/utilidades/security.js}{47}{section.3.15}%
+\contentsline {subsection}{\numberline {3.15.1}Documentación de variables}{47}{subsection.3.15.1}%
+\contentsline {subsubsection}{\numberline {3.15.1.1}bcrypt}{47}{subsubsection.3.15.1.1}%
+\contentsline {subsubsection}{\numberline {3.15.1.2}exports}{47}{subsubsection.3.15.1.2}%
+\contentsline {subsubsection}{\numberline {3.15.1.3}hashPassword}{47}{subsubsection.3.15.1.3}%
+\contentsline {subsubsection}{\numberline {3.15.1.4}verifyPassword}{48}{subsubsection.3.15.1.4}%
+\contentsline {section}{\numberline {3.16}Referencia del archivo README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md}{48}{section.3.16}%
